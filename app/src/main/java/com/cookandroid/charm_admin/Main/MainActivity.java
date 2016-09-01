@@ -18,6 +18,9 @@ import com.cookandroid.charm_admin.Reservation.ReservationActivity;
 
 import java.util.ArrayList;
 
+/**
+ * 테스트용 주석
+ */
 public class MainActivity extends AppCompatActivity {
     private Intent reservationIntent;
     Button btnReservation;
