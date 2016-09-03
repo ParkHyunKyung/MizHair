@@ -21,6 +21,7 @@
         <activity android:name=".Notice.NoticeActivity"/>
         <activity android:name=".Notice.NoticeListActivity" android:label="NoticeActivity"/>
         <activity android:name=".PriceList.PriceListActivity" android:label="PriceListActivity"/>
+        <activity android:name=".ReservationList.ReservationListActivity"/>
     </application>
 
 </manifest>

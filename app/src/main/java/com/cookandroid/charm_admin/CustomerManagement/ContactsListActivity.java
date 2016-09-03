@@ -39,9 +39,9 @@ public class ContactsListActivity extends ListActivity {
 	 * 
 	 * @return
 	 */
-	private List<Contact> getContactsList() throws Exception {
+	private List<CustomerAdapter> getContactsList() throws Exception {
 
-		List<Contact> contactsList = new ArrayList<Contact>();
+		List<CustomerAdapter> contactsList = new ArrayList<CustomerAdapter>();
 
 		/*고객의 정보*/
 		addContact(contactsList, "김창민", "010-1234-1234", "1월 1일");
@@ -55,8 +55,8 @@ public class ContactsListActivity extends ListActivity {
 
 
 	/*고객의 정보 리스트 추가*/
-	private void addContact(List<Contact> contactsList, String name,
-			String number, String date) throws Exception {
+	private void addContact(List<CustomerAdapter> contactsList, String name,
+							String number, String date) throws Exception {
 
 		if (contactsList == null) {
 			throw new NullPointerException("contactList가 null 입니다.");
@@ -78,7 +78,7 @@ public class ContactsListActivity extends ListActivity {
 		}
 
 		if (isAdd) {
-			contactsList.add(new Contact(name, number, date));
+			contactsList.add(new CustomerAdapter(name, number, date));
 		}
 	}
 
@@ -86,12 +86,12 @@ public class ContactsListActivity extends ListActivity {
 	커스텀된 리스트뷰를 통해 전달되어 화면에 보여줌*/
 	private void displayList() throws Exception {
 
-		List<Contact> contactsList = null;
+		List<CustomerAdapter> contactsList = null;
 
 		contactsList = getContactsList();
 
-		ContactsListAdapter<Contact> adapter = new ContactsListAdapter<Contact>(
-				this, R.layout.contacts_list_row, contactsList);
+		ContactsListAdapter<CustomerAdapter> adapter = new ContactsListAdapter<CustomerAdapter>(
+				this, R.layout.customer_management_list_row, contactsList);
 		setListAdapter(adapter);
 	}
 
@@ -99,7 +99,7 @@ public class ContactsListActivity extends ListActivity {
 	* 입력되는 값들(이름, 전화번호, 날짜)을
 	* contacts_list_row의 형태로 커스텀
 	* */
-	private class ContactsListAdapter<T extends Contact> extends
+	private class ContactsListAdapter<T extends CustomerAdapter> extends
 			ArrayAdapter<T> {
 
 		private List<T> contactsList;
@@ -115,7 +115,7 @@ public class ContactsListActivity extends ListActivity {
 			View view = convertView;
 			if (view == null) {
 				LayoutInflater vi = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-				view = vi.inflate(R.layout.contacts_list_row, null);
+				view = vi.inflate(R.layout.customer_management_list_row, null);
 			}
 
 			final T contacts = contactsList.get(position);

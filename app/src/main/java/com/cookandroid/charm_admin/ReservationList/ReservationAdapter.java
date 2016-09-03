@@ -5,20 +5,20 @@
  *
  * Copyright (c) 2009 ziofront.com. All Rights Reserved.
  */
-package com.cookandroid.charm_admin.CustomerManagement;
+package com.cookandroid.charm_admin.ReservationList;
 
 /**
  * @author Jiho Park
  * 
  */
-public class Contact {
+public class ReservationAdapter {
 	private String name;
-	private String number;
+	private String item;
 	private String date;
 
-	public Contact(String name, String number, String date) {
+	public ReservationAdapter(String name, String item, String date) {
 		this.name = name;
-		this.number = number;
+		this.item = item;
 		this.date = date;
 	}
 
@@ -26,14 +26,14 @@ public class Contact {
 		return name;
 	}
 	public String getDate(){ return date; }
-	public String getNumber() { return number; }
+	public String getItem() { return item; }
 
 	public void setName(String name) {
 		this.name = name;
 	}
 	public void setDate(String date){ this.date = date; }
-	public void setNumber(String number) {
-		this.number = number;
+	public void setItem(String number) {
+		this.item = number;
 	}
 
 }
