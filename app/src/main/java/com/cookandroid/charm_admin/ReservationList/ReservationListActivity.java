@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.cookandroid.charm_admin.CustomerManagement.HangulUtils;
 import com.cookandroid.charm_admin.R;
 
@@ -84,15 +86,18 @@ public class ReservationListActivity extends ListActivity{
 
         ReservationsList = getReservationsList();
 
+        /*Reservation size가 0일때 예약된 고객 없음 보이기*/
+        int size = ReservationsList.size();
+        if(Integer.toString(size).equals("0")){
+            tv_NoneCustomer.setVisibility(View.VISIBLE);
+        }else {
+            tv_NoneCustomer.setVisibility(View.INVISIBLE);
+        }
+
         ReservationsListAdapter<ReservationAdapter> adapter = new ReservationsListAdapter<ReservationAdapter>(
                 this, R.layout.reservation_list_row, ReservationsList);
         setListAdapter(adapter);
 
-/*        if(ReservationsList == null){
-            tv_NoneCustomer.setVisibility(View.VISIBLE);
-        }else {
-            tv_NoneCustomer.setVisibility(View.INVISIBLE);
-        }*/
     }
 
     /*리스트 어뎁터
