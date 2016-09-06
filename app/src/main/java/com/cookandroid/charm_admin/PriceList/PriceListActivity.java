@@ -35,7 +35,7 @@ public class PriceListActivity extends AppCompatActivity {
     LinearLayout btnLayout; //요금표 버튼 레이아웃
     TableLayout tableLayout; //요금표 테이블 레이아웃
     Button btnEdit; //수정 버튼
-    ArrayList<String> strMenu, strPrice;
+    ArrayList<String> strMenu, strFemalePrice, strMalePrice, strTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,23 +51,39 @@ public class PriceListActivity extends AppCompatActivity {
 
         //테스트용으로 strMenu 및 strprice에 값이 있다고 가정한다.
         strMenu = new ArrayList<String>();
-        strPrice = new ArrayList<String>();
-        strMenu.add("가나");
-        strMenu.add("다라");
-        strMenu.add("마바");
-        strMenu.add("사아");
-        strMenu.add("자차");
-        strPrice.add("10,000");
-        strPrice.add("20,000");
-        strPrice.add("30,000");
-        strPrice.add("40,000");
-        strPrice.add("50,000");
+        strFemalePrice = new ArrayList<String>();
+        strMalePrice = new ArrayList<String>();
+        strTime = new ArrayList<String>();
+
+        strMenu.add("일반컷");
+        strMenu.add("특수컷");
+        strMenu.add("청소년컷");
+        strMenu.add("기본펌");
+        strMenu.add("특수펌");
+        strFemalePrice.add("10,000");
+        strFemalePrice.add("15,000");
+        strFemalePrice.add("7,000");
+        strFemalePrice.add("30,000");
+        strFemalePrice.add("70,000");
+        strMalePrice.add("10,000");
+        strMalePrice.add("15,000");
+        strMalePrice.add("7,000");
+        strMalePrice.add("30,000");
+        strMalePrice.add("70,000");
+        strTime.add("30");
+        strTime.add("60");
+        strTime.add("30");
+        strTime.add("60");
+        strTime.add("70");
+
 
         //서버에서 받은 데이터 길이 만큼 setTableLayoutRow 수행
         for (int i = 0; i < strMenu.size(); i++) {
-            String[] data = new String[2];
+            String[] data = new String[4];
             data[0] = strMenu.get(i);
-            data[1] = strPrice.get(i);
+            data[1] = strFemalePrice.get(i);
+            data[2] = strMalePrice.get(i);
+            data[3] = strTime.get(i);
             addTableLayoutRow(tableLayout, data);
         }
 
@@ -81,12 +97,16 @@ public class PriceListActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 ArrayList<String> strEditMenu = strMenu;
-                ArrayList<String> strEditPrice = strPrice;
+                ArrayList<String> strEditFemalePrice = strFemalePrice;
+                final ArrayList<String> strEditMalePrice = strMalePrice;
+                final ArrayList<String> strEditTime = strTime;
                 removeTableLayout(tableLayout);
                 for (int i = 0; i < strEditMenu.size(); i++) {
-                    String[] data = new String[2];
+                    String[] data = new String[4];
                     data[0] = strEditMenu.get(i);
-                    data[1] = strEditPrice.get(i);
+                    data[1] = strEditFemalePrice.get(i);
+                    data[2] = strEditMalePrice.get(i);
+                    data[3] = strEditTime.get(i);
                     addTableLayoutRowEdit(tableLayout, data);
                 }
 
@@ -114,7 +134,9 @@ public class PriceListActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View view) {
                         strMenu.clear();
-                        strPrice.clear();
+                        strFemalePrice.clear();
+                        strMalePrice.clear();
+                        strTime.clear();
                         for (int i = 1; i < tableLayout.getChildCount(); i++) {
                             TableRow tr = (TableRow) tableLayout.getChildAt(i);
                             for (int j = 0; j < tr.getChildCount(); j++) {
@@ -125,7 +147,11 @@ public class PriceListActivity extends AppCompatActivity {
                                 if (j == 0) {
                                     strMenu.add(et.getText().toString());
                                 } else if (j == 1) {
-                                    strPrice.add(et.getText().toString());
+                                    strFemalePrice.add(et.getText().toString());
+                                } else if (j == 2) {
+                                    strEditMalePrice.add(et.getText().toString());
+                                } else {
+                                    strEditTime.add(et.getText().toString());
                                 }
                             }
                         }
@@ -133,9 +159,11 @@ public class PriceListActivity extends AppCompatActivity {
                         //테스트용 코드
                         removeTableLayout(tableLayout);
                         for (int i = 0; i < strMenu.size(); i++) {
-                            String[] data = new String[2];
+                            String[] data = new String[4];
                             data[0] = strMenu.get(i);
-                            data[1] = strPrice.get(i);
+                            data[1] = strFemalePrice.get(i);
+                            data[2] = strMalePrice.get(i);
+                            data[3] = strTime.get(i);
                             addTableLayoutRow(tableLayout, data);
                         }
                         btnEdit.setVisibility(View.VISIBLE);
@@ -143,8 +171,8 @@ public class PriceListActivity extends AppCompatActivity {
                         btnLayout.removeView(btnMenuAdd);
                         btnLayout.removeView(btnCencle);
 
-                        //strMenu, strPrice를 서버에 전송한다.
-                        //메소드를 제작해야하나 서버와 통신규격이 완료될 시 작성
+                        //요금표 정보를 서버에 전송한다.
+                        //메소드를 제작해야하나 서버 완료될 시 작성
 
                         //서버가 완료되면 아래코드 사용
                         //Intent intent = new Intent(getApplicationContext(), PriceListActivity.class);
@@ -156,9 +184,11 @@ public class PriceListActivity extends AppCompatActivity {
                 btnMenuAdd.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        String[] strTemp = new String[2];
+                        String[] strTemp = new String[4];
                         strTemp[0] = "메뉴";
-                        strTemp[1] = "가격";
+                        strTemp[1] = "여자가격";
+                        strTemp[2] = "남자가격";
+                        strTemp[3] = "소요시간";
                         addTableLayoutRowEdit(tableLayout, strTemp);
                         return;
                     }
@@ -169,9 +199,11 @@ public class PriceListActivity extends AppCompatActivity {
                     public void onClick(View view) {
                         removeTableLayout(tableLayout);
                         for (int i = 0; i < strMenu.size(); i++) {
-                            String[] data = new String[2];
+                            String[] data = new String[4];
                             data[0] = strMenu.get(i);
-                            data[1] = strPrice.get(i);
+                            data[1] = strFemalePrice.get(i);
+                            data[2] = strMalePrice.get(i);
+                            data[3] = strTime.get(i);
                             addTableLayoutRow(tableLayout, data);
                         }
                         btnEdit.setVisibility(View.VISIBLE);
@@ -196,7 +228,9 @@ public class PriceListActivity extends AppCompatActivity {
 
         try {
             strMenu = new ArrayList<String>();
-            strPrice = new ArrayList<String>();
+            strFemalePrice = new ArrayList<String>();
+            strMalePrice = new ArrayList<String>();
+            strTime = new ArrayList<String>();
 
             task.join();
             String result = task.getResult();
@@ -213,8 +247,10 @@ public class PriceListActivity extends AppCompatActivity {
             //메뉴와 요금을 ArrayList<String> 변수에 넣는다.
             for (int i = 0; i < list.length(); i++) {
                 JSONObject jsonObject = list.getJSONObject(i);
-                strMenu.add(jsonObject.getString("menu")); //메뉴
-                strPrice.add(jsonObject.getString("price")); //가격
+                strMenu.add(jsonObject.getString("StName")); //메뉴
+                strFemalePrice.add(jsonObject.getString("StPrice")); //여자가격
+                strMalePrice.add(jsonObject.getString("StmPrice")); //남자가격
+                strTime.add(jsonObject.getString("StTime")); //소요시
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -235,12 +271,16 @@ public class PriceListActivity extends AppCompatActivity {
             tv[i - 1].setText(strarray[i - 1].toString());
             tv[i - 1].setGravity(Gravity.CENTER);
 
-            if ((i != 0 && i % 2 == 0)) {
+            if ((i != 0 && i % 4 == 0)) {
                 TableRow tr = new TableRow(this);
                 tr.setLayoutParams(new TableRow.LayoutParams(
                         TableRow.LayoutParams.WRAP_CONTENT,
                         TableRow.LayoutParams.WRAP_CONTENT
                 ));
+                tr.addView(tv[i - 4], new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT,
+                        TableRow.LayoutParams.WRAP_CONTENT, 1));
+                tr.addView(tv[i - 3], new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT,
+                        TableRow.LayoutParams.WRAP_CONTENT, 1));
                 tr.addView(tv[i - 2], new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT,
                         TableRow.LayoutParams.WRAP_CONTENT, 1));
                 tr.addView(tv[i - 1], new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT,
@@ -257,21 +297,25 @@ public class PriceListActivity extends AppCompatActivity {
      * admin 기능
      *
      * @param tableLayout Row값을 추가할 테이블 레이아웃
-     * @param strarray    Row값에 들어갈 데이터
+     * @param starry    Row값에 들어갈 데이터
      */
-    private void addTableLayoutRowEdit(TableLayout tableLayout, String[] strarray) {
-        EditText[] tv = new EditText[strarray.length];
-        for (int i = 1; i < strarray.length + 1; i++) {
+    private void addTableLayoutRowEdit(TableLayout tableLayout, String[] starry) {
+        EditText[] tv = new EditText[starry.length];
+        for (int i = 1; i < starry.length + 1; i++) {
             tv[i - 1] = new EditText(this);
-            tv[i - 1].setText(strarray[i - 1].toString());
+            tv[i - 1].setText(starry[i - 1].toString());
             tv[i - 1].setGravity(Gravity.CENTER);
 
-            if ((i != 0 && i % 2 == 0)) {
+            if ((i != 0 && i % 4 == 0)) {
                 TableRow tr = new TableRow(this);
                 tr.setLayoutParams(new TableRow.LayoutParams(
                         TableRow.LayoutParams.WRAP_CONTENT,
                         TableRow.LayoutParams.WRAP_CONTENT
                 ));
+                tr.addView(tv[i - 4], new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT,
+                        TableRow.LayoutParams.WRAP_CONTENT, 1));
+                tr.addView(tv[i - 3], new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT,
+                        TableRow.LayoutParams.WRAP_CONTENT, 1));
                 tr.addView(tv[i - 2], new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT,
                         TableRow.LayoutParams.WRAP_CONTENT, 1));
                 tr.addView(tv[i - 1], new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT,
@@ -290,7 +334,7 @@ public class PriceListActivity extends AppCompatActivity {
      */
     private void removeTableLayout(TableLayout tableLayout) {
         int count = tableLayout.getChildCount();
-        for(int i=count-1; i>0; i--) {
+        for(int i = count -1; i>0;i--){
             tableLayout.removeViewAt(i);
         }
     }

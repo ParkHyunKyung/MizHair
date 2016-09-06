@@ -2,6 +2,7 @@ package com.cookandroid.charm_admin.ReservationList;
 
 import android.app.ListActivity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -11,8 +12,10 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.cookandroid.charm_admin.CustomerManagement.CustomerActivity;
 import com.cookandroid.charm_admin.CustomerManagement.HangulUtils;
 import com.cookandroid.charm_admin.R;
+import com.cookandroid.charm_admin.Reservation.ReservationActivity;
 
 import org.threeten.bp.LocalDate;
 
@@ -141,6 +144,18 @@ public class ReservationListActivity extends ListActivity{
                     viewDate.setText("시술날짜 : " + Reservations.getDate());
                 }
             }
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+					/*Toast.makeText(getApplicationContext(),contacts.getName(),Toast.LENGTH_SHORT).show();*/
+                    Intent Reservationintent = new Intent(getApplicationContext(), ReservationViewActivity.class);
+                    /*서버쿼리 생성*/
+                    Reservationintent.putExtra("Name",Reservations.getName());
+                    Reservationintent.putExtra("Item",Reservations.getItem());
+                    Reservationintent.putExtra("Date",Reservations.getDate());
+                    startActivity(Reservationintent);
+                }
+            });
             return view;
         }
     }

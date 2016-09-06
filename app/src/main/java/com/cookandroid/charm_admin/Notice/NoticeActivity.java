@@ -3,6 +3,7 @@ package com.cookandroid.charm_admin.Notice;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -31,12 +32,21 @@ public class NoticeActivity extends Activity {
         String content = intent.getStringExtra("Content");
         String add = intent.getStringExtra("Add");
 
-        if(add.equals("")){
+
+        if(add.toString().equals("")){
             notice_title.setText(title);
             notice_content.setText(content);
         }else {
+            notice_title.setText("");
+            notice_content.setText("");
             btnModify.setText(add);
         }
 
+        btnModify.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                /*서버에 내용 전송*/
+            }
+        });
     }
 }

@@ -46,6 +46,7 @@ public class NoticeListActivity extends Activity {
                 String content = "여기에 공지사항의 내용이 들어가 있습니다\n좀 더 길게 쓴걸 테스트 하기위해 한줄 더씀";
 
                 /*title과 contents를 intent로 NoticeActivity로 전송*/
+                intent.putExtra("Add","");
                 intent.putExtra("Title",noticeAdapter.getItem(i));
                 intent.putExtra("Content", content);
                 startActivity(intent);
