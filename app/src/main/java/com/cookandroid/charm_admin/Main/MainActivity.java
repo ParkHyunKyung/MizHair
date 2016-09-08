@@ -1,6 +1,7 @@
 package com.cookandroid.charm_admin.Main;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -16,6 +17,7 @@ import com.cookandroid.charm_admin.PriceList.PriceListActivity;
 import com.cookandroid.charm_admin.R;
 import com.cookandroid.charm_admin.Reservation.ReservationActivity;
 import com.cookandroid.charm_admin.ReservationList.ReservationListActivity;
+import com.cookandroid.charm_admin.User.LoginActivity;
 
 import java.util.ArrayList;
 
@@ -25,7 +27,7 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
     private Intent reservationIntent;
     Button btnReservation;
-    private Button btnNotice, btnPricelist, btnCustomerlist,btnReservationlist;
+    private Button btnNotice, btnPricelist, btnCustomerlist,btnReservationlist,btnSetting;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
         btnNotice = (Button)findViewById(R.id.main_btnNotice);
         btnPricelist = (Button)findViewById(R.id.main_btnPricelist);
         btnCustomerlist = (Button)findViewById(R.id.main_btnCustomerlist);
+        btnSetting = (Button)findViewById(R.id.main_btnSetting);
 
         btnReservationlist.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,7 +62,12 @@ public class MainActivity extends AppCompatActivity {
                 reservationIntent = new Intent(getApplicationContext(),ReservationActivity.class);
                 ArrayList<String> arrCheckBox = new ArrayList<>();
                 ArrayList<Integer> arrPrise = new ArrayList<>();
+                ArrayList<Integer> arrNum = new ArrayList<>(); // 기본키 배열
 
+
+
+                /*서버에서 기본키를 포함해서 가져옴
+                * 화면에는 기본키를 보여주지는 않으나 서버에는 기본키만 전송함*/
                 //test용
                 arrCheckBox.add("일반컷");
                 arrPrise.add(10000);
@@ -77,6 +85,7 @@ public class MainActivity extends AppCompatActivity {
                 arrPrise.add(30000);
                 arrCheckBox.add("매니큐어");
                 arrPrise.add(30000);
+                reservationIntent.putExtra("arrNum",arrNum);
                 reservationIntent.putExtra("arrCheckBox",arrCheckBox);
                 reservationIntent.putExtra("arrPrise",arrPrise);
                 startActivity(reservationIntent);
@@ -104,6 +113,22 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), ContactsListActivity.class);
                 startActivity(intent);
+            }
+        });
+
+        btnSetting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent loginIntent = new Intent(getApplicationContext(), LoginActivity.class);
+                startActivity(loginIntent);
+                //자동로그인 캐시를 지운다.
+                SharedPreferences setting;
+                SharedPreferences.Editor editor;
+                setting = getSharedPreferences("setting", 0);
+                editor = setting.edit();
+                editor.clear();
+                editor.commit();
+                finish();
             }
         });
 
