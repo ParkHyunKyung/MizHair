@@ -12,6 +12,8 @@ import android.widget.Toast;
 
 import com.cookandroid.charm_admin.R;
 
+import java.lang.reflect.Array;
+
 /**
  * Created by Jungminki on 2016-07-07.
  * 미구현
@@ -20,7 +22,7 @@ public class NoticeListActivity extends Activity {
 
     private Button btnCencle, btnAdd;
     private ListView noticeList;
-    private ArrayAdapter<String> noticeAdapter;
+    private NoticeAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,26 +30,36 @@ public class NoticeListActivity extends Activity {
         setContentView(R.layout.activity_noticelist);
         setTitle("공지사항");
 
-        noticeAdapter = new ArrayAdapter(getApplicationContext(),R.layout.notice_layout);
+        adapter = new NoticeAdapter();
 
         noticeList = (ListView)findViewById(R.id.notice_list);
-        noticeList.setAdapter(noticeAdapter);  // 리스트 뷰에 adapter 를 등록한다
+        noticeList.setAdapter(adapter);  // 리스트 뷰에 adapter 를 등록한다
 
-        noticeAdapter.add("공지1");
-        noticeAdapter.add("공지2");
+        String contents = "어쩌고 저쩌고" + "\n 가나다라 마바사 아자차카타파하 ";
+        String[] strContent = contents.split("\n");// 첫줄만 자르기
+        adapter.addItem("공지1",strContent[0]);
+        adapter.addItem("공지2",strContent[0]);
+        adapter.addItem("공지3",strContent[0]);
+        adapter.addItem("공지4",strContent[0]);
+        adapter.addItem("공지5",strContent[0]);
 
         noticeList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
+                /*리스트 내부에 있는 값을 가져오기위한 변수*/
+                NoticeListView item = (NoticeListView)adapterView.getItemAtPosition(i);
+
                 Intent intent = new Intent(getApplicationContext(), NoticeActivity.class);
 
-                /*title = noticeAdapter.getItem(i) 에 해당하는 내용을 서버에서 가져옴*/
-                String content = "여기에 공지사항의 내용이 들어가 있습니다\n좀 더 길게 쓴걸 테스트 하기위해 한줄 더씀";
+                /*title = item.getTvNoticeTItle() 에 해당하는 내용을 서버에서 가져옴*/
+                String title = item.getTvNoticeTItle();
+
+                String content = item.getTvNoticeContent();// 서버에서 가져온 내용을 저장
 
                 /*title과 contents를 intent로 NoticeActivity로 전송*/
                 intent.putExtra("Add","");
-                intent.putExtra("Title",noticeAdapter.getItem(i));
+                intent.putExtra("Title",title);
                 intent.putExtra("Content", content);
                 startActivity(intent);
             }

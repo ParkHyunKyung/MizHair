@@ -100,7 +100,6 @@ public class ReservationListActivity extends ListActivity{
         ReservationsListAdapter<ReservationAdapter> adapter = new ReservationsListAdapter<ReservationAdapter>(
                 this, R.layout.reservation_list_row, ReservationsList);
         setListAdapter(adapter);
-
     }
 
     /*리스트 어뎁터

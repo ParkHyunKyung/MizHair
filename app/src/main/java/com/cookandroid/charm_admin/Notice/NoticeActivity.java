@@ -13,7 +13,7 @@ import com.cookandroid.charm_admin.R;
  * Created by HP on 2016-08-24.
  */
 public class NoticeActivity extends Activity {
-    Button btnModify;
+    Button btnModify,btnDelete;
     EditText notice_title,notice_content;
 
     @Override
@@ -23,6 +23,7 @@ public class NoticeActivity extends Activity {
         setTitle("세부공지");
 
         btnModify = (Button)findViewById(R.id.btn_modify);
+        btnDelete = (Button)findViewById(R.id.btn_delete);
 
         notice_title = (EditText)findViewById(R.id.notice_title);
         notice_content = (EditText)findViewById(R.id.notice_content);
@@ -36,16 +37,30 @@ public class NoticeActivity extends Activity {
         if(add.toString().equals("")){
             notice_title.setText(title);
             notice_content.setText(content);
+            btnDelete.setVisibility(View.VISIBLE);
+            btnDelete.setClickable(true);
         }else {
             notice_title.setText("");
             notice_content.setText("");
             btnModify.setText(add);
+            btnDelete.setVisibility(View.INVISIBLE);
+            btnDelete.setClickable(false);
         }
 
         btnModify.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 /*서버에 내용 전송*/
+
+            }
+        });
+        btnDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                /*삭제 쿼리*/
+
             }
         });
     }
