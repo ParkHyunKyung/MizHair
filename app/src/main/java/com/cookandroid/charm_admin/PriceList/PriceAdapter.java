@@ -1,4 +1,4 @@
-package com.cookandroid.charm_admin.Notice;
+package com.cookandroid.charm_admin.PriceList;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import com.cookandroid.charm_admin.Notice.NoticeListView;
 import com.cookandroid.charm_admin.R;
 
 import java.util.ArrayList;
@@ -14,12 +15,12 @@ import java.util.ArrayList;
 /**
  * Created by HP on 2016-09-11.
  */
-public class NoticeAdapter extends BaseAdapter {
+public class PriceAdapter extends BaseAdapter {
     // Adapter에 추가된 데이터를 저장하기 위한 ArrayList
-    private ArrayList<NoticeListView> listViewItemList = new ArrayList<NoticeListView>() ;
+    private ArrayList<PriceListItem> listViewItemList = new ArrayList<PriceListItem>() ;
 
-    // ListViewAdapter의 생성자
-    public NoticeAdapter() {
+    // PriceAdapter 생성자
+    public PriceAdapter() {
 
     }
 
@@ -38,19 +39,21 @@ public class NoticeAdapter extends BaseAdapter {
         // "listview_item" Layout을 inflate하여 convertView 참조 획득.
         if (convertView == null) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = inflater.inflate(R.layout.notice_row, parent, false);
+            convertView = inflater.inflate(R.layout.price_list_row, parent, false);
         }
 
         // 화면에 표시될 View(Layout이 inflate된)으로부터 위젯에 대한 참조 획득
-        TextView titleTextView = (TextView) convertView.findViewById(R.id.tvNoticeTitle) ;
-        TextView descTextView = (TextView) convertView.findViewById(R.id.tvNoticeContent) ;
+        TextView nameTextView = (TextView) convertView.findViewById(R.id.tv_ItemName) ;
+        TextView priceView = (TextView) convertView.findViewById(R.id.tv_ItemPrice) ;
+        TextView tiemTextView = (TextView) convertView.findViewById(R.id.tv_ItemTime) ;
 
         // Data Set(listViewItemList)에서 position에 위치한 데이터 참조 획득
-        NoticeListView listViewItem = listViewItemList.get(position);
+        PriceListItem listViewItem = listViewItemList.get(position);
 
         // 아이템 내 각 위젯에 데이터 반영
-        titleTextView.setText(listViewItem.getTvNoticeTItle());
-        descTextView.setText(listViewItem.getTvNoticeContent());
+        nameTextView.setText(listViewItem.getTvItemName());
+        priceView.setText(listViewItem.getTvItemPrice());
+        tiemTextView.setText(listViewItem.getTvItemTime());
 
         return convertView;
     }
@@ -68,13 +71,18 @@ public class NoticeAdapter extends BaseAdapter {
     }
 
     // 아이템 데이터 추가를 위한 함수
-    public void addItem(String title, String content) {
-        NoticeListView item = new NoticeListView();
+    public void addItem(String name, String price,String time) {
+        PriceListItem item = new PriceListItem();
 
-        item.setTvNoticeTitle(title);
-        item.setTvNoticeContent(content);
+        item.setTvItemName(name);
+        item.setTvItemPrice(price);
+        item.setTvItemTime(time);
 
         listViewItemList.add(item);
     }
 
+    public void removeItem(int position) {
+        listViewItemList.remove(position);
+        notifyDataSetChanged();
+    }
 }

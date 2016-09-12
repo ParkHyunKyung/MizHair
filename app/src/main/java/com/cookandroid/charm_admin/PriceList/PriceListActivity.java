@@ -4,12 +4,17 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.TableLayout;
-import android.widget.TableRow;
+import android.widget.ListAdapter;
+import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.cookandroid.charm_admin.R;
 import com.cookandroid.charm_admin.Server.URLConnector;
@@ -20,22 +25,27 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 /**
- * Created by Jungminki on 2016-07-07.
+ * Created by HK on 2016-07-07.
  * 요금표를 보여주는 액티비티
- * 엑션바에 뒤로가기 버튼 구현
- * 테이블은 첫 행의 메뉴, 금액은 xml에 작성
+ * 리스트뷰를 커스텀하기 위해 생성한 price_list_row와 PriceAdapter 연결
  * 그 후의 행은 서버에서 요금표 데이터를 가져와서 동적으로 생성
- * 수정버튼 클릭 시 행의 객체를 TextView에서 EditText로 새로 그리게 되며
- * 수정버튼은 숨겨지고 완료버튼, 메뉴추가 버튼이 생긴다.
- * 완료버튼 클릭 시 EditText의 값을 서버로 전송한다.
- * 수정완료 시 메뉴 또는 요금에 아무런 값이 들어가 있지 않으면 메뉴가 삭제된다.
+ * 수정 버튼 클릭시 발생하는 이벤트는 아직 미정
  */
 public class PriceListActivity extends AppCompatActivity {
 
-    LinearLayout btnLayout; //요금표 버튼 레이아웃
-    TableLayout tableLayout; //요금표 테이블 레이아웃
-    Button btnEdit; //수정 버튼
-    ArrayList<String> strMenu, strFemalePrice, strMalePrice, strTime;
+    ListView listCut,listColor,listPerm,listMagic,listClinic;
+
+    LinearLayout btnLayout,layout_modify; //요금표 버튼 레이아웃
+    PriceAdapter adapterCut,adapterColor,adapterPerm,adapterMagic,adapterClinic;
+
+    Button btnEdit, btnAdd,btnDelete, btnOK; //수정 버튼, 추가버튼, 완료버튼
+    Spinner sStyleKind;
+    ArrayAdapter sAdapter;
+    String selectedSpinner = "Cut/컷";
+    int listviewPosition;
+
+    EditText edtName,edtTime,edtPrice;
+    /*ArrayList<String> strMenu, strPrice, strTime;*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,299 +53,299 @@ public class PriceListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_pricelist);
         setTitle("이용요금표");
 
+        layout_modify=(LinearLayout)findViewById(R.id.layout_modify);
         btnLayout = (LinearLayout) findViewById(R.id.pricelist_btnLayout);
-        tableLayout = (TableLayout) findViewById(R.id.pricelist_tableLayout);
         btnEdit = (Button) findViewById(R.id.pricelist_btnEdit);
+        sStyleKind = (Spinner)findViewById(R.id.styleKind);
+        sAdapter = ArrayAdapter.createFromResource(this,R.array.styleKind,android.R.layout.simple_spinner_dropdown_item);
+        sStyleKind.setAdapter(sAdapter);
 
-        //getPriceListData(); //서버에서 요금표 데이터를 가져온다.
+        sStyleKind.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                selectedSpinner = sAdapter.getItem(i).toString();
+            }
 
-        //테스트용으로 strMenu 및 strprice에 값이 있다고 가정한다.
-        strMenu = new ArrayList<String>();
-        strFemalePrice = new ArrayList<String>();
-        strMalePrice = new ArrayList<String>();
-        strTime = new ArrayList<String>();
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
 
-        strMenu.add("일반컷");
-        strMenu.add("특수컷");
-        strMenu.add("청소년컷");
-        strMenu.add("기본펌");
-        strMenu.add("특수펌");
-        strFemalePrice.add("10,000");
-        strFemalePrice.add("15,000");
-        strFemalePrice.add("7,000");
-        strFemalePrice.add("30,000");
-        strFemalePrice.add("70,000");
-        strMalePrice.add("10,000");
-        strMalePrice.add("15,000");
-        strMalePrice.add("7,000");
-        strMalePrice.add("30,000");
-        strMalePrice.add("70,000");
-        strTime.add("30");
-        strTime.add("60");
-        strTime.add("30");
-        strTime.add("60");
-        strTime.add("70");
+            }
+        });
+        edtName = (EditText)findViewById(R.id.edtName);
+        edtTime = (EditText)findViewById(R.id.edtTime);
+        edtPrice = (EditText)findViewById(R.id.edtPrice);
+        btnAdd = (Button)findViewById(R.id.btn_add);
+        btnDelete = (Button)findViewById(R.id.btn_delete);
+        btnOK = (Button)findViewById(R.id.btn_Ok);
 
+        addCut();
+        addColor();
+        addPerm();
+        addMagic();
+        addClinlic();
 
-        //서버에서 받은 데이터 길이 만큼 setTableLayoutRow 수행
-        for (int i = 0; i < strMenu.size(); i++) {
-            String[] data = new String[4];
-            data[0] = strMenu.get(i);
-            data[1] = strFemalePrice.get(i);
-            data[2] = strMalePrice.get(i);
-            data[3] = strTime.get(i);
-            addTableLayoutRow(tableLayout, data);
-        }
-
-        //이 위에까지가 클라이언트 기능, 이 아래부터는 admin 기능
-
-        //수정 버튼을 클릭시 테이블 레이아웃을 초기화하고
-        //서버에서 받은 데이터 길이 만큼 setTableLayoutRowEdit 수행
-        //수정버튼은 감추고 완료버튼, 메뉴추가 버튼 생성
-        //완료버튼 클릭 시 데이터를 서버에게 전송 및 초기화면 출력
         btnEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ArrayList<String> strEditMenu = strMenu;
-                ArrayList<String> strEditFemalePrice = strFemalePrice;
-                final ArrayList<String> strEditMalePrice = strMalePrice;
-                final ArrayList<String> strEditTime = strTime;
-                removeTableLayout(tableLayout);
-                for (int i = 0; i < strEditMenu.size(); i++) {
-                    String[] data = new String[4];
-                    data[0] = strEditMenu.get(i);
-                    data[1] = strEditFemalePrice.get(i);
-                    data[2] = strEditMalePrice.get(i);
-                    data[3] = strEditTime.get(i);
-                    addTableLayoutRowEdit(tableLayout, data);
+                layout_modify.setVisibility(View.VISIBLE);
+/*                listCut.setClickable(true);
+                listPerm.setClickable(true);
+                listMagic.setClickable(true);
+                listColor.setClickable(true);
+                listClinic.setClickable(true);*/
+            }
+        });
+
+        btnAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String name = edtName.getText().toString();
+                String price = edtPrice.getText().toString();
+                String time = edtTime.getText().toString();
+
+                Toast.makeText(getApplicationContext(),"추가",Toast.LENGTH_SHORT).show();
+                if(name.equals("")||price.equals("")||time.equals("")){
+                    Toast.makeText(getApplicationContext(),"모두 입력해주세요",Toast.LENGTH_SHORT).show();
+                }else {
+                    if(selectedSpinner.toString().equals("Cut/컷")){
+
+                        adapterCut.addItem(name,price,time+"분");
+                        setListViewHeightBasedOnChildren(listCut,adapterCut);
+
+                    }else if(selectedSpinner.toString().equals("Color/컬러염색")){
+
+                        adapterColor.addItem(name,price,time+"분");
+                        setListViewHeightBasedOnChildren(listColor,adapterColor);
+
+                    }else if(selectedSpinner.toString().equals("Perm/펌")){
+
+                        adapterPerm.addItem(name,price,time+"분");
+                        setListViewHeightBasedOnChildren(listPerm,adapterPerm);
+
+                    }else if(selectedSpinner.toString().equals("Magic and Straight/매직 또는 스트레이트")){
+
+                        adapterMagic.addItem(name,price,time+"분");
+                        setListViewHeightBasedOnChildren(listMagic,adapterMagic);
+
+                    }else if(selectedSpinner.toString().equals("Clinic/클리닉")){
+
+                        adapterClinic.addItem(name,price,time+"분");
+                        setListViewHeightBasedOnChildren(listClinic,adapterClinic);
+
+                    }else {
+                        Toast.makeText(getApplicationContext(),"저장 실패",Toast.LENGTH_SHORT).show();
+                    }
                 }
+            }
+        });
 
-                btnEdit.setVisibility(View.GONE);
+        btnDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
-                final Button btnOk = new Button(getApplicationContext());
-                btnOk.setText("완료");
-                btnOk.setMinimumHeight(100);
-                btnOk.setMinimumWidth(50);
-                btnLayout.addView(btnOk);
+                String name = edtName.getText().toString();
+                String price = edtPrice.getText().toString();
+                String time = edtTime.getText().toString();
 
-                final Button btnMenuAdd = new Button(getApplicationContext());
-                btnMenuAdd.setText("메뉴추가");
-                btnMenuAdd.setMinimumHeight(100);
-                btnMenuAdd.setMinimumWidth(50);
-                btnLayout.addView(btnMenuAdd);
+                Toast.makeText(getApplicationContext(),"삭제",Toast.LENGTH_SHORT).show();
+                if(name.equals("")||price.equals("")||time.equals("")){
+                    Toast.makeText(getApplicationContext(),"모두 입력해주세요",Toast.LENGTH_SHORT).show();
+                }else {
+                    if (selectedSpinner.toString().equals("Cut/컷")) {
 
-                final Button btnCencle = new Button(getApplicationContext());
-                btnCencle.setText("취소");
-                btnCencle.setMinimumHeight(100);
-                btnCencle.setMinimumWidth(50);
-                btnLayout.addView(btnCencle);
+                        adapterCut.removeItem(listviewPosition);
+                        setListViewHeightBasedOnChildren(listCut, adapterCut);
 
-                btnOk.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        strMenu.clear();
-                        strFemalePrice.clear();
-                        strMalePrice.clear();
-                        strTime.clear();
-                        for (int i = 1; i < tableLayout.getChildCount(); i++) {
-                            TableRow tr = (TableRow) tableLayout.getChildAt(i);
-                            for (int j = 0; j < tr.getChildCount(); j++) {
-                                EditText et = (EditText) tr.getChildAt(j);
-                                if (et.getText().toString().equals("")) {
-                                    continue;
-                                }
-                                if (j == 0) {
-                                    strMenu.add(et.getText().toString());
-                                } else if (j == 1) {
-                                    strFemalePrice.add(et.getText().toString());
-                                } else if (j == 2) {
-                                    strEditMalePrice.add(et.getText().toString());
-                                } else {
-                                    strEditTime.add(et.getText().toString());
-                                }
-                            }
-                        }
+                    } else if (selectedSpinner.toString().equals("Color/컬러염색")) {
 
-                        //테스트용 코드
-                        removeTableLayout(tableLayout);
-                        for (int i = 0; i < strMenu.size(); i++) {
-                            String[] data = new String[4];
-                            data[0] = strMenu.get(i);
-                            data[1] = strFemalePrice.get(i);
-                            data[2] = strMalePrice.get(i);
-                            data[3] = strTime.get(i);
-                            addTableLayoutRow(tableLayout, data);
-                        }
-                        btnEdit.setVisibility(View.VISIBLE);
-                        btnLayout.removeView(btnOk);
-                        btnLayout.removeView(btnMenuAdd);
-                        btnLayout.removeView(btnCencle);
+                        adapterColor.removeItem(listviewPosition);
+                        setListViewHeightBasedOnChildren(listColor, adapterColor);
 
-                        //요금표 정보를 서버에 전송한다.
-                        //메소드를 제작해야하나 서버 완료될 시 작성
+                    } else if (selectedSpinner.toString().equals("Perm/펌")) {
 
-                        //서버가 완료되면 아래코드 사용
-                        //Intent intent = new Intent(getApplicationContext(), PriceListActivity.class);
-                        // startActivity(intent);
-                        // finish();
+                        adapterPerm.removeItem(listviewPosition);
+                        setListViewHeightBasedOnChildren(listPerm, adapterPerm);
+
+                    } else if (selectedSpinner.toString().equals("Magic and Straight/매직 또는 스트레이트")) {
+
+                        adapterMagic.removeItem(listviewPosition);
+                        setListViewHeightBasedOnChildren(listMagic, adapterMagic);
+
+                    } else if (selectedSpinner.toString().equals("Clinic/클리닉")) {
+
+                        adapterClinic.removeItem(listviewPosition);
+                        setListViewHeightBasedOnChildren(listClinic, adapterClinic);
+
+                    } else {
+                        Toast.makeText(getApplicationContext(), "없는 정보입니다 실패", Toast.LENGTH_SHORT).show();
                     }
-                });
+                }
+            }
+        });
 
-                btnMenuAdd.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        String[] strTemp = new String[4];
-                        strTemp[0] = "메뉴";
-                        strTemp[1] = "여자가격";
-                        strTemp[2] = "남자가격";
-                        strTemp[3] = "소요시간";
-                        addTableLayoutRowEdit(tableLayout, strTemp);
-                        return;
-                    }
-                });
+        btnOK.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                layout_modify.setVisibility(View.INVISIBLE);
+/*                listCut.setClickable(false);
+                listPerm.setClickable(false);
+                listMagic.setClickable(false);
+                listColor.setClickable(false);
+                listClinic.setClickable(false);*/
+            }
+        });
 
-                btnCencle.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        removeTableLayout(tableLayout);
-                        for (int i = 0; i < strMenu.size(); i++) {
-                            String[] data = new String[4];
-                            data[0] = strMenu.get(i);
-                            data[1] = strFemalePrice.get(i);
-                            data[2] = strMalePrice.get(i);
-                            data[3] = strTime.get(i);
-                            addTableLayoutRow(tableLayout, data);
-                        }
-                        btnEdit.setVisibility(View.VISIBLE);
-                        btnLayout.removeView(btnOk);
-                        btnLayout.removeView(btnMenuAdd);
-                        btnLayout.removeView(btnCencle);
-                        return;
-                    }
-                });
+        listCut.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                PriceListItem item = (PriceListItem)adapterView.getItemAtPosition(i);
+                Toast.makeText(getApplicationContext(),"클릭",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(),item.getTvItemName().toString(),Toast.LENGTH_SHORT).show();
+
+                edtName.setText(item.getTvItemName().toString());
+                edtPrice.setText(item.getTvItemPrice().toString());
+                edtTime.setText(item.getTvItemTime().toString());
+
+                listviewPosition = listCut.getCheckedItemPosition();
+            }
+        });
+
+        listColor.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                PriceListItem item = (PriceListItem)adapterView.getItemAtPosition(i);
+                Toast.makeText(getApplicationContext(),"클릭",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(),item.getTvItemName().toString(),Toast.LENGTH_SHORT).show();
+
+                edtName.setText(item.getTvItemName().toString());
+                edtPrice.setText(item.getTvItemPrice().toString());
+                edtTime.setText(item.getTvItemTime().toString());
+            }
+        });
+
+        listPerm.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                PriceListItem item = (PriceListItem)adapterView.getItemAtPosition(i);
+                Toast.makeText(getApplicationContext(),"클릭",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(),item.getTvItemName().toString(),Toast.LENGTH_SHORT).show();
+
+                edtName.setText(item.getTvItemName().toString());
+                edtPrice.setText(item.getTvItemPrice().toString());
+                edtTime.setText(item.getTvItemTime().toString());
+            }
+        });
+
+        listMagic.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                PriceListItem item = (PriceListItem)adapterView.getItemAtPosition(i);
+                Toast.makeText(getApplicationContext(),"클릭",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(),item.getTvItemName().toString(),Toast.LENGTH_SHORT).show();
+
+                edtName.setText(item.getTvItemName().toString());
+                edtPrice.setText(item.getTvItemPrice().toString());
+                edtTime.setText(item.getTvItemTime().toString());
+            }
+        });
+
+        listClinic.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                PriceListItem item = (PriceListItem)adapterView.getItemAtPosition(i);
+                Toast.makeText(getApplicationContext(),"클릭",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(),item.getTvItemName().toString(),Toast.LENGTH_SHORT).show();
+
+                edtName.setText(item.getTvItemName().toString());
+                edtPrice.setText(item.getTvItemPrice().toString());
+                edtTime.setText(item.getTvItemTime().toString());
             }
         });
     }
 
-    /**
-     * 서버에서 요금표를 가져오는 메소드
-     * ArrayList<String> 변수에 메뉴 및 요금을 순서대로 넣는다.
-     */
-    private void getPriceListData() {
-        String serverQuery = "서버에게 전송할 쿼리";
-        URLConnector task = new URLConnector(serverQuery);
-        task.start();
+    private void addCut(){
 
-        try {
-            strMenu = new ArrayList<String>();
-            strFemalePrice = new ArrayList<String>();
-            strMalePrice = new ArrayList<String>();
-            strTime = new ArrayList<String>();
+        adapterCut = new PriceAdapter();
 
-            task.join();
-            String result = task.getResult();
-            JSONObject root = new JSONObject(result); //서버 메시지
-            String state = root.getString("state"); //상태 정보
+        listCut = (ListView)findViewById(R.id.list_cut);
 
-            //만약 상태정보가 이상이 있을 시 바로 종료
-            if (state.equals("0")) {
-                return;
-            }
+        listCut.setAdapter(adapterCut);  // 리스트 뷰에 adapter 를 등록한다
 
-            JSONArray list = new JSONArray("list"); //요금표 리스트
-
-            //메뉴와 요금을 ArrayList<String> 변수에 넣는다.
-            for (int i = 0; i < list.length(); i++) {
-                JSONObject jsonObject = list.getJSONObject(i);
-                strMenu.add(jsonObject.getString("StName")); //메뉴
-                strFemalePrice.add(jsonObject.getString("StPrice")); //여자가격
-                strMalePrice.add(jsonObject.getString("StmPrice")); //남자가격
-                strTime.add(jsonObject.getString("StTime")); //소요시
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        adapterCut.addItem("어린이커트","7000","30"+"분");
+        adapterCut.addItem("학생커트","8000","30"+"분");
+        adapterCut.addItem("남성커트","10000","30"+"분");
+        adapterCut.addItem("여성커트","10000","60"+"분");
+        setListViewHeightBasedOnChildren(listCut,adapterCut);
     }
 
-    /**
-     * 테이블 레이아웃에 TextView Row를 추가하는 메소드
-     * Row를 롱 클릭하면 삭제할 것 인지 창이 뜨며 확인을 누를 시 Row 삭제
-     *
-     * @param tableLayout Row값을 추가할 테이블 레이아웃
-     * @param strarray    Row값에 들어갈 데이터
-     */
-    private void addTableLayoutRow(TableLayout tableLayout, String[] strarray) {
-        TextView[] tv = new TextView[strarray.length];
-        for (int i = 1; i < strarray.length + 1; i++) {
-            tv[i - 1] = new TextView(this);
-            tv[i - 1].setText(strarray[i - 1].toString());
-            tv[i - 1].setGravity(Gravity.CENTER);
+    private void addColor(){
 
-            if ((i != 0 && i % 4 == 0)) {
-                TableRow tr = new TableRow(this);
-                tr.setLayoutParams(new TableRow.LayoutParams(
-                        TableRow.LayoutParams.WRAP_CONTENT,
-                        TableRow.LayoutParams.WRAP_CONTENT
-                ));
-                tr.addView(tv[i - 4], new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT,
-                        TableRow.LayoutParams.WRAP_CONTENT, 1));
-                tr.addView(tv[i - 3], new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT,
-                        TableRow.LayoutParams.WRAP_CONTENT, 1));
-                tr.addView(tv[i - 2], new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT,
-                        TableRow.LayoutParams.WRAP_CONTENT, 1));
-                tr.addView(tv[i - 1], new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT,
-                        TableRow.LayoutParams.WRAP_CONTENT, 1));
-                tableLayout.addView(tr, new TableLayout.LayoutParams(
-                        TableLayout.LayoutParams.MATCH_PARENT,
-                        TableLayout.LayoutParams.FILL_PARENT));
-            }
-        }
+        adapterColor = new PriceAdapter();
+        listColor = (ListView)findViewById(R.id.list_color);
+        listColor.setAdapter(adapterColor);  // 리스트 뷰에 adapter 를 등록한다
+
+        adapterColor.addItem("일반염색","35000","120"+"분");
+        adapterColor.addItem("왁싱","35000","60"+"분");
+        adapterColor.addItem("매니큐어","35000","60"+"분");
+
+        setListViewHeightBasedOnChildren(listColor,adapterColor);
+
     }
 
-    /**
-     * 테이블 레이아웃에 EditText Row를 추가하는 메소드
-     * admin 기능
-     *
-     * @param tableLayout Row값을 추가할 테이블 레이아웃
-     * @param starry    Row값에 들어갈 데이터
-     */
-    private void addTableLayoutRowEdit(TableLayout tableLayout, String[] starry) {
-        EditText[] tv = new EditText[starry.length];
-        for (int i = 1; i < starry.length + 1; i++) {
-            tv[i - 1] = new EditText(this);
-            tv[i - 1].setText(starry[i - 1].toString());
-            tv[i - 1].setGravity(Gravity.CENTER);
+    private void addPerm(){
 
-            if ((i != 0 && i % 4 == 0)) {
-                TableRow tr = new TableRow(this);
-                tr.setLayoutParams(new TableRow.LayoutParams(
-                        TableRow.LayoutParams.WRAP_CONTENT,
-                        TableRow.LayoutParams.WRAP_CONTENT
-                ));
-                tr.addView(tv[i - 4], new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT,
-                        TableRow.LayoutParams.WRAP_CONTENT, 1));
-                tr.addView(tv[i - 3], new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT,
-                        TableRow.LayoutParams.WRAP_CONTENT, 1));
-                tr.addView(tv[i - 2], new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT,
-                        TableRow.LayoutParams.WRAP_CONTENT, 1));
-                tr.addView(tv[i - 1], new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT,
-                        TableRow.LayoutParams.WRAP_CONTENT, 1));
-                tableLayout.addView(tr, new TableLayout.LayoutParams(
-                        TableLayout.LayoutParams.MATCH_PARENT,
-                        TableLayout.LayoutParams.FILL_PARENT));
-            }
-        }
+        adapterPerm = new PriceAdapter();
+        listPerm = (ListView)findViewById(R.id.list_perm);
+        listPerm.setAdapter(adapterPerm);  // 리스트 뷰에 adapter 를 등록한다
+
+        adapterPerm.addItem("일반펌","30000","120"+"분");
+        adapterPerm.addItem("웰빙펌","30000","120"+"분");
+        adapterPerm.addItem("디지털/세팅펌","45000","120"+"분");
+
+
+        setListViewHeightBasedOnChildren(listPerm,adapterPerm);
+
     }
 
-    /**
-     * 요금표 첫 행만 제외하고 모든 행을 삭제하는 메소드
-     *
-     * @param tableLayout
-     */
-    private void removeTableLayout(TableLayout tableLayout) {
-        int count = tableLayout.getChildCount();
-        for(int i = count -1; i>0;i--){
-            tableLayout.removeViewAt(i);
-        }
+    private void addMagic(){
+
+        adapterMagic = new PriceAdapter();
+        listMagic = (ListView)findViewById(R.id.list_magic);
+        listMagic.setAdapter(adapterMagic);  // 리스트 뷰에 adapter 를 등록한다
+
+        adapterMagic.addItem("일반스트레이트펌","35000","60"+"분");
+        adapterMagic.addItem("일반매직","40000","60"+"분");
+        adapterMagic.addItem("볼륨매직","50000","120"+"분");
+        adapterMagic.addItem("클리닉매직","80000","120"+"분");
+
+        setListViewHeightBasedOnChildren(listMagic,adapterMagic);
+
+    }
+
+    private void addClinlic(){
+        adapterClinic = new PriceAdapter();
+
+        listClinic = (ListView)findViewById(R.id.list_clinic);
+        listClinic.setAdapter(adapterClinic);  // 리스트 뷰에 adapter 를 등록한다
+
+        adapterClinic.addItem("손상회복클리닉","30000","60"+"분");
+        adapterClinic.addItem("두피클리닉","25000","90"+"분");
+
+        setListViewHeightBasedOnChildren(listClinic,adapterClinic);
+    }
+
+    //리스트뷰에 높이를 계산하기 위한 메소드
+    public static void setListViewHeightBasedOnChildren(ListView listview, PriceAdapter adapter) {
+        ViewGroup.LayoutParams params = listview.getLayoutParams();
+        int totalHeight = 105;
+
+        /*Toast.makeText(getApplicationContext(),Integer.toString(listCut.getHeight()),Toast.LENGTH_SHORT).show();//0*/
+        /*Toast.makeText(getApplicationContext(),Integer.toString(adapterCut.getCount()),Toast.LENGTH_SHORT).show();//4
+        Toast.makeText(getApplicationContext(),Integer.toString(layout_height),Toast.LENGTH_SHORT).show();//-2
+        Toast.makeText(getApplicationContext(),Integer.toString(listCut.getDividerHeight()),Toast.LENGTH_SHORT).show();//2*/
+
+        params.height = totalHeight*adapter.getCount();
+        listview.setLayoutParams(params);
+        listview.requestLayout();
     }
 }
