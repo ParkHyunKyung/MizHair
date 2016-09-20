@@ -36,7 +36,7 @@ public class PriceListActivity extends AppCompatActivity {
     ListView listCut,listColor,listPerm,listMagic,listClinic;
 
     LinearLayout btnLayout,layout_modify; //요금표 버튼 레이아웃
-    PriceAdapter adapterCut,adapterColor,adapterPerm,adapterMagic,adapterClinic;
+    PriceListAdapter adapterCut,adapterColor,adapterPerm,adapterMagic,adapterClinic;
 
     Button btnEdit, btnAdd,btnDelete, btnOK; //수정 버튼, 추가버튼, 완료버튼
     Spinner sStyleKind;
@@ -153,27 +153,27 @@ public class PriceListActivity extends AppCompatActivity {
                 }else {
                     if (selectedSpinner.toString().equals("Cut/컷")) {
 
-                        adapterCut.removeItem(listviewPosition);
+                        adapterCut.remove(listviewPosition);
                         setListViewHeightBasedOnChildren(listCut, adapterCut);
 
                     } else if (selectedSpinner.toString().equals("Color/컬러염색")) {
 
-                        adapterColor.removeItem(listviewPosition);
+                        adapterColor.remove(listviewPosition);
                         setListViewHeightBasedOnChildren(listColor, adapterColor);
 
                     } else if (selectedSpinner.toString().equals("Perm/펌")) {
 
-                        adapterPerm.removeItem(listviewPosition);
+                        adapterPerm.remove(listviewPosition);
                         setListViewHeightBasedOnChildren(listPerm, adapterPerm);
 
                     } else if (selectedSpinner.toString().equals("Magic and Straight/매직 또는 스트레이트")) {
 
-                        adapterMagic.removeItem(listviewPosition);
+                        adapterMagic.remove(listviewPosition);
                         setListViewHeightBasedOnChildren(listMagic, adapterMagic);
 
                     } else if (selectedSpinner.toString().equals("Clinic/클리닉")) {
 
-                        adapterClinic.removeItem(listviewPosition);
+                        adapterClinic.remove(listviewPosition);
                         setListViewHeightBasedOnChildren(listClinic, adapterClinic);
 
                     } else {
@@ -198,74 +198,82 @@ public class PriceListActivity extends AppCompatActivity {
         listCut.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                PriceListItem item = (PriceListItem)adapterView.getItemAtPosition(i);
-                Toast.makeText(getApplicationContext(),"클릭",Toast.LENGTH_SHORT).show();
-                Toast.makeText(getApplicationContext(),item.getTvItemName().toString(),Toast.LENGTH_SHORT).show();
+                PriceListData item = adapterCut.mPriceListData.get(i);
 
-                edtName.setText(item.getTvItemName().toString());
-                edtPrice.setText(item.getTvItemPrice().toString());
-                edtTime.setText(item.getTvItemTime().toString());
+                edtName.setText(item.getTv_ItemName().toString());
+                edtPrice.setText(item.getTv_ItemPrice().toString());
+                edtTime.setText(item.getTv_ItemTime().toString());
 
-                listviewPosition = listCut.getCheckedItemPosition();
+                listviewPosition = i;
+
+                sStyleKind.setSelection(0);
             }
         });
 
         listColor.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                PriceListItem item = (PriceListItem)adapterView.getItemAtPosition(i);
-                Toast.makeText(getApplicationContext(),"클릭",Toast.LENGTH_SHORT).show();
-                Toast.makeText(getApplicationContext(),item.getTvItemName().toString(),Toast.LENGTH_SHORT).show();
+                PriceListData item = adapterColor.mPriceListData.get(i);
 
-                edtName.setText(item.getTvItemName().toString());
-                edtPrice.setText(item.getTvItemPrice().toString());
-                edtTime.setText(item.getTvItemTime().toString());
+                edtName.setText(item.getTv_ItemName().toString());
+                edtPrice.setText(item.getTv_ItemPrice().toString());
+                edtTime.setText(item.getTv_ItemTime().toString());
+
+                listviewPosition = i;
+                sStyleKind.setSelection(1);
+
             }
         });
 
         listPerm.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                PriceListItem item = (PriceListItem)adapterView.getItemAtPosition(i);
-                Toast.makeText(getApplicationContext(),"클릭",Toast.LENGTH_SHORT).show();
-                Toast.makeText(getApplicationContext(),item.getTvItemName().toString(),Toast.LENGTH_SHORT).show();
+                PriceListData item = adapterPerm.mPriceListData.get(i);
 
-                edtName.setText(item.getTvItemName().toString());
-                edtPrice.setText(item.getTvItemPrice().toString());
-                edtTime.setText(item.getTvItemTime().toString());
+                edtName.setText(item.getTv_ItemName().toString());
+                edtPrice.setText(item.getTv_ItemPrice().toString());
+                edtTime.setText(item.getTv_ItemTime().toString());
+
+                listviewPosition = i;
+
+                sStyleKind.setSelection(2);
             }
         });
 
         listMagic.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                PriceListItem item = (PriceListItem)adapterView.getItemAtPosition(i);
-                Toast.makeText(getApplicationContext(),"클릭",Toast.LENGTH_SHORT).show();
-                Toast.makeText(getApplicationContext(),item.getTvItemName().toString(),Toast.LENGTH_SHORT).show();
+                PriceListData item = adapterMagic.mPriceListData.get(i);
 
-                edtName.setText(item.getTvItemName().toString());
-                edtPrice.setText(item.getTvItemPrice().toString());
-                edtTime.setText(item.getTvItemTime().toString());
+                edtName.setText(item.getTv_ItemName().toString());
+                edtPrice.setText(item.getTv_ItemPrice().toString());
+                edtTime.setText(item.getTv_ItemTime().toString());
+
+                listviewPosition = i;
+
+                sStyleKind.setSelection(3);
             }
         });
 
         listClinic.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                PriceListItem item = (PriceListItem)adapterView.getItemAtPosition(i);
-                Toast.makeText(getApplicationContext(),"클릭",Toast.LENGTH_SHORT).show();
-                Toast.makeText(getApplicationContext(),item.getTvItemName().toString(),Toast.LENGTH_SHORT).show();
+                PriceListData item = adapterClinic.mPriceListData.get(i);
 
-                edtName.setText(item.getTvItemName().toString());
-                edtPrice.setText(item.getTvItemPrice().toString());
-                edtTime.setText(item.getTvItemTime().toString());
+                edtName.setText(item.getTv_ItemName().toString());
+                edtPrice.setText(item.getTv_ItemPrice().toString());
+                edtTime.setText(item.getTv_ItemTime().toString());
+
+                listviewPosition = i;
+
+                sStyleKind.setSelection(4);
             }
         });
     }
 
     private void addCut(){
 
-        adapterCut = new PriceAdapter();
+        adapterCut = new PriceListAdapter();
 
         listCut = (ListView)findViewById(R.id.list_cut);
 
@@ -280,7 +288,7 @@ public class PriceListActivity extends AppCompatActivity {
 
     private void addColor(){
 
-        adapterColor = new PriceAdapter();
+        adapterColor = new PriceListAdapter();
         listColor = (ListView)findViewById(R.id.list_color);
         listColor.setAdapter(adapterColor);  // 리스트 뷰에 adapter 를 등록한다
 
@@ -294,7 +302,7 @@ public class PriceListActivity extends AppCompatActivity {
 
     private void addPerm(){
 
-        adapterPerm = new PriceAdapter();
+        adapterPerm = new PriceListAdapter();
         listPerm = (ListView)findViewById(R.id.list_perm);
         listPerm.setAdapter(adapterPerm);  // 리스트 뷰에 adapter 를 등록한다
 
@@ -309,7 +317,7 @@ public class PriceListActivity extends AppCompatActivity {
 
     private void addMagic(){
 
-        adapterMagic = new PriceAdapter();
+        adapterMagic = new PriceListAdapter();
         listMagic = (ListView)findViewById(R.id.list_magic);
         listMagic.setAdapter(adapterMagic);  // 리스트 뷰에 adapter 를 등록한다
 
@@ -323,7 +331,7 @@ public class PriceListActivity extends AppCompatActivity {
     }
 
     private void addClinlic(){
-        adapterClinic = new PriceAdapter();
+        adapterClinic = new PriceListAdapter();
 
         listClinic = (ListView)findViewById(R.id.list_clinic);
         listClinic.setAdapter(adapterClinic);  // 리스트 뷰에 adapter 를 등록한다
@@ -335,14 +343,9 @@ public class PriceListActivity extends AppCompatActivity {
     }
 
     //리스트뷰에 높이를 계산하기 위한 메소드
-    public static void setListViewHeightBasedOnChildren(ListView listview, PriceAdapter adapter) {
+    public static void setListViewHeightBasedOnChildren(ListView listview, PriceListAdapter adapter) {
         ViewGroup.LayoutParams params = listview.getLayoutParams();
         int totalHeight = 105;
-
-        /*Toast.makeText(getApplicationContext(),Integer.toString(listCut.getHeight()),Toast.LENGTH_SHORT).show();//0*/
-        /*Toast.makeText(getApplicationContext(),Integer.toString(adapterCut.getCount()),Toast.LENGTH_SHORT).show();//4
-        Toast.makeText(getApplicationContext(),Integer.toString(layout_height),Toast.LENGTH_SHORT).show();//-2
-        Toast.makeText(getApplicationContext(),Integer.toString(listCut.getDividerHeight()),Toast.LENGTH_SHORT).show();//2*/
 
         params.height = totalHeight*adapter.getCount();
         listview.setLayoutParams(params);
