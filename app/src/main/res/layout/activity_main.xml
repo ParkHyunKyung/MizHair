@@ -26,6 +26,12 @@
             android:background="@drawable/main_button" />
 
         <Button
+            android:id="@+id/main_btnReservation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="예약"/>
+
+        <Button
             android:id="@+id/main_btnNotice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

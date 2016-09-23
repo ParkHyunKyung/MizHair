@@ -35,6 +35,7 @@
         <activity android:name=".PriceList.PriceListActivity" android:label="PriceListActivity"/>
         <activity android:name=".ReservationList.ReservationViewActivity" android:label="ReservationViewActivity"/>
         <activity android:name=".ReservationList.ReservationListActivity" android:label="ReservationListActivity"/>
+        <activity android:name=".Reservation.ReservationTest" android:label="ReservationTestActivity"/>
     </application>
 
 </manifest>

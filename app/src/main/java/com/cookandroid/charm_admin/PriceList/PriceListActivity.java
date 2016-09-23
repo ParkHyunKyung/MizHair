@@ -279,10 +279,7 @@ public class PriceListActivity extends AppCompatActivity {
 
         listCut.setAdapter(adapterCut);  // 리스트 뷰에 adapter 를 등록한다
 
-        adapterCut.addItem("어린이커트","7000","30"+"분");
-        adapterCut.addItem("학생커트","8000","30"+"분");
-        adapterCut.addItem("남성커트","10000","30"+"분");
-        adapterCut.addItem("여성커트","10000","60"+"분");
+        connetion("컷",adapterCut);
         setListViewHeightBasedOnChildren(listCut,adapterCut);
     }
 
@@ -292,9 +289,7 @@ public class PriceListActivity extends AppCompatActivity {
         listColor = (ListView)findViewById(R.id.list_color);
         listColor.setAdapter(adapterColor);  // 리스트 뷰에 adapter 를 등록한다
 
-        adapterColor.addItem("일반염색","35000","120"+"분");
-        adapterColor.addItem("왁싱","35000","60"+"분");
-        adapterColor.addItem("매니큐어","35000","60"+"분");
+        connetion("염색",adapterColor);
 
         setListViewHeightBasedOnChildren(listColor,adapterColor);
 
@@ -306,10 +301,7 @@ public class PriceListActivity extends AppCompatActivity {
         listPerm = (ListView)findViewById(R.id.list_perm);
         listPerm.setAdapter(adapterPerm);  // 리스트 뷰에 adapter 를 등록한다
 
-        adapterPerm.addItem("일반펌","30000","120"+"분");
-        adapterPerm.addItem("웰빙펌","30000","120"+"분");
-        adapterPerm.addItem("디지털/세팅펌","45000","120"+"분");
-
+        connetion("펌",adapterPerm);
 
         setListViewHeightBasedOnChildren(listPerm,adapterPerm);
 
@@ -321,10 +313,7 @@ public class PriceListActivity extends AppCompatActivity {
         listMagic = (ListView)findViewById(R.id.list_magic);
         listMagic.setAdapter(adapterMagic);  // 리스트 뷰에 adapter 를 등록한다
 
-        adapterMagic.addItem("일반스트레이트펌","35000","60"+"분");
-        adapterMagic.addItem("일반매직","40000","60"+"분");
-        adapterMagic.addItem("볼륨매직","50000","120"+"분");
-        adapterMagic.addItem("클리닉매직","80000","120"+"분");
+        connetion("스타일링",adapterMagic);
 
         setListViewHeightBasedOnChildren(listMagic,adapterMagic);
 
@@ -336,8 +325,7 @@ public class PriceListActivity extends AppCompatActivity {
         listClinic = (ListView)findViewById(R.id.list_clinic);
         listClinic.setAdapter(adapterClinic);  // 리스트 뷰에 adapter 를 등록한다
 
-        adapterClinic.addItem("손상회복클리닉","30000","60"+"분");
-        adapterClinic.addItem("두피클리닉","25000","90"+"분");
+        connetion("클리닉",adapterClinic);
 
         setListViewHeightBasedOnChildren(listClinic,adapterClinic);
     }
@@ -350,5 +338,31 @@ public class PriceListActivity extends AppCompatActivity {
         params.height = totalHeight*adapter.getCount();
         listview.setLayoutParams(params);
         listview.requestLayout();
+    }
+
+    private void connetion(String styleName,PriceListAdapter adapter) {
+
+        String LoginServer = "http://118.36.3.200/menu.php";
+        URLConnector task = new URLConnector(LoginServer);
+        task.start();
+
+        try {
+            task.join();
+            String result = task.getResult();
+
+            JSONObject state = new JSONObject(result);
+
+            JSONArray var = state.getJSONArray(styleName);
+            for (int i=0;i<var.length();i++){
+                JSONObject varTest = new JSONObject(var.get(i).toString());// 한줄
+                String Name = varTest.getString("StName");// StName에 해당하는 이름 가져옴
+                String Price = varTest.getString("StPrice");// StName에 해당하는 이름 가져옴
+                String Time = varTest.getString("StTime");// StName에 해당하는 이름 가져옴
+                adapter.addItem(Name,Price,Time);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

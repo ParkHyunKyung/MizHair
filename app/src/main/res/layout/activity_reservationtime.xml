@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#EFEFEF"
+    android:gravity="center">
+
+    <TextView
+        android:id="@+id/txt_date"
+        android:layout_width="wrap_content"
+        android:layout_height="26pt"
+        android:text="2016년 9월 14일"
+        android:textSize="24pt"
+        />
+
+    <solar.blaz.date.week.WeekDatePicker
+        android:id="@+id/reservationtime_date_picker"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:textSize="18sp"
+        android:textColor="@color/date_picker_text_color"
+        app:wdp_labelTextSize="12sp"
+        app:wdp_labelPadding="5dp"
+        app:wdp_dayBackground="@drawable/date_picker_day_bg"
+        app:wdp_indicatorDrawable="@drawable/date_picker_indicator"
+        app:wdp_firstDayOfWeek="monday"/>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:background="#FF7D9F"
+        android:layout_width="336pt"
+        android:layout_height="30pt">
+
+        <TextView
+            android:layout_marginTop="5pt"
+            android:layout_marginLeft="18pt"
+            android:layout_width="wrap_content"
+            android:layout_height="20pt"
+            android:textColor="#FFFFFF"
+            android:textSize="18pt"
+            android:text="예약메뉴"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="336pt"
+        android:layout_height="60pt"
+        android:layout_marginLeft="18pt"
+        >
+
+        <TextView
+            android:id="@+id/txt_item"
+            android:layout_width="wrap_content"
+            android:layout_height="25pt"
+            android:layout_marginRight="30pt"
+            android:textColor="#6E6E6E"
+            android:textSize="18pt"
+            android:text="볼륨매직"
+            />
+            
+        <TextView
+            android:id="@+id/txt_price"
+            android:layout_width="wrap_content"
+            android:layout_height="25pt"
+            android:textColor="#6E6E6E"
+            android:textSize="18pt"
+            android:text="50,000원"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:background="#FF7D9F"
+        android:layout_width="336pt"
+        android:layout_height="30pt"
+        android:layout_marginTop="10px">
+
+        <TextView
+            android:layout_marginTop="5pt"
+            android:layout_marginLeft="18pt"
+            android:layout_width="wrap_content"
+            android:layout_height="20pt"
+            android:textColor="#FFFFFF"
+            android:textSize="18pt"
+            android:text="시간선택"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="336pt"
+        android:layout_height="60pt"
+        android:layout_marginLeft="18pt">
+
+        <TextView
+            android:id="@+id/txt_"
+            android:layout_width="wrap_content"
+            android:layout_height="25pt"
+            android:layout_marginRight="30pt"
+            android:textColor="#6E6E6E"
+            android:textSize="18pt"
+            android:text="13:00"
+            />
+
+    </LinearLayout>
+
+
+</LinearLayout>

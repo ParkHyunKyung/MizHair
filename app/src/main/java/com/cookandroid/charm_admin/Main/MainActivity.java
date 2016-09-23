@@ -16,6 +16,7 @@ import com.cookandroid.charm_admin.Notice.NoticeListActivity;
 import com.cookandroid.charm_admin.PriceList.PriceListActivity;
 import com.cookandroid.charm_admin.R;
 import com.cookandroid.charm_admin.Reservation.ReservationActivity;
+import com.cookandroid.charm_admin.Reservation.ReservationTest;
 import com.cookandroid.charm_admin.ReservationList.ReservationListActivity;
 import com.cookandroid.charm_admin.User.LoginActivity;
 
@@ -27,7 +28,7 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
     private Intent reservationIntent;
     Button btnReservation;
-    private Button btnNotice, btnPricelist, btnCustomerlist,btnReservationlist,btnSetting;
+    private Button btn_Reservation, btnNotice, btnPricelist, btnCustomerlist,btnReservationlist,btnSetting;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
         // 홈 아이콘 표시
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        btn_Reservation = (Button)findViewById(R.id.main_btnReservation);
         btnReservationlist = (Button)findViewById(R.id.main_btnReservationlist);
         btnReservation = (Button)findViewById(R.id.btnReservation);
         btnNotice = (Button)findViewById(R.id.main_btnNotice);
@@ -53,6 +55,14 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent reservationlistIntent = new Intent(getApplicationContext(),ReservationListActivity.class);
                 startActivity(reservationlistIntent);
+            }
+        });
+
+        btn_Reservation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent reservationIntent = new Intent(getApplicationContext(),ReservationTest.class);
+                startActivity(reservationIntent);
             }
         });
 
