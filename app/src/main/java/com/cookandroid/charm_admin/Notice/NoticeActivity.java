@@ -6,8 +6,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.cookandroid.charm_admin.R;
+import com.cookandroid.charm_admin.Server.URLConnector;
 
 /**
  * Created by HP on 2016-08-24.
@@ -29,8 +31,9 @@ public class NoticeActivity extends Activity {
         notice_content = (EditText)findViewById(R.id.notice_content);
 
         Intent intent = this.getIntent();
-        String title = intent.getStringExtra("Title");
-        String content = intent.getStringExtra("Content");
+        final String title = intent.getStringExtra("Title");
+        final String content = intent.getStringExtra("Content");
+        final String num = intent.getStringExtra("Num");
         String add = intent.getStringExtra("Add");
 
 
@@ -51,7 +54,7 @@ public class NoticeActivity extends Activity {
             @Override
             public void onClick(View view) {
 
-                /*서버에 내용 전송*/
+                modifyInServer(title,content,num);
 
             }
         });
@@ -59,9 +62,52 @@ public class NoticeActivity extends Activity {
             @Override
             public void onClick(View view) {
 
-                /*삭제 쿼리*/
+                deleteInServer(title);
 
             }
         });
+    }
+
+    private void deleteInServer(String name) {
+
+        String LoginServer = "http://118.36.3.200/notice.php?changeNum=1&NoticeTitle="+name;
+        URLConnector task = new URLConnector(LoginServer);
+        task.start();
+
+        try {
+            task.join();
+            String result = task.getResult();
+
+            if (result.equals(Integer.toString(0))){
+                Toast.makeText(getApplicationContext(),result.toString()+"성공",Toast.LENGTH_SHORT).show();
+            }else if (result.equals(Integer.toString(1))){
+                Toast.makeText(getApplicationContext(),result.toString()+"실패",Toast.LENGTH_SHORT).show();
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void modifyInServer(String name,String comment,String num) {
+
+        String LoginServer = "http://118.36.3.200/changeNotice.php?changeNum=1&NoticeTitle="+name
+                +"&NoticeComment="+comment+"&NoticeNum="+num;
+        URLConnector task = new URLConnector(LoginServer);
+        task.start();
+
+        try {
+            task.join();
+            String result = task.getResult();
+
+            if (result.equals(Integer.toString(0))){
+                Toast.makeText(getApplicationContext(),result.toString()+"성공",Toast.LENGTH_SHORT).show();
+            }else if (result.equals(Integer.toString(1))){
+                Toast.makeText(getApplicationContext(),result.toString()+"실패",Toast.LENGTH_SHORT).show();
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

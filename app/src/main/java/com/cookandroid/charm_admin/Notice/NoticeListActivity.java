@@ -40,13 +40,7 @@ public class NoticeListActivity extends Activity {
         noticeList = (ListView)findViewById(R.id.notice_list);
         noticeList.setAdapter(adapter);  // 리스트 뷰에 adapter 를 등록한다
 
-/*        String contents = "어쩌고 저쩌고" + "\n 가나다라 마바사 아자차카타파하 ";
-        String[] strContent = contents.split("\n");// 첫줄만 자르기
-        adapter.addItem("공지1",strContent[0]);
-        adapter.addItem("공지2",strContent[0]);
-        adapter.addItem("공지3",strContent[0]);
-        adapter.addItem("공지4",strContent[0]);
-        adapter.addItem("공지5",strContent[0]);*/
+        connection();
 
         noticeList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -92,7 +86,7 @@ public class NoticeListActivity extends Activity {
         });
     }
 
-    private void connection(NoticeAdapter adapter) {
+    private void connection() {
 
         String LoginServer = "http://118.36.3.200/notice.php";
         URLConnector task = new URLConnector(LoginServer);
@@ -101,10 +95,8 @@ public class NoticeListActivity extends Activity {
         try {
             task.join();
             String result = task.getResult();
+            JSONArray var = new JSONArray(result);
 
-            JSONObject state = new JSONObject(result);
-
-            JSONArray var = state.getJSONArray(result);
             for (int i=0;i<var.length();i++){
                 JSONObject varTest = new JSONObject(var.get(i).toString());// 한줄
                 String NoticeNum = varTest.getString("NoticeNum");// NoticeNum에 해당하는 이름 가져옴

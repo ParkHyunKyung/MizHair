@@ -351,14 +351,35 @@ public class PriceListActivity extends AppCompatActivity {
             String result = task.getResult();
 
             JSONObject state = new JSONObject(result);
-
             JSONArray var = state.getJSONArray(styleName);
+
             for (int i=0;i<var.length();i++){
                 JSONObject varTest = new JSONObject(var.get(i).toString());// 한줄
                 String Name = varTest.getString("StName");// StName에 해당하는 이름 가져옴
                 String Price = varTest.getString("StPrice");// StPrice에 해당하는 이름 가져옴
                 String Time = varTest.getString("StTime");// StTime에 해당하는 이름 가져옴
                 adapter.addItem(Name,Price,Time);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void deleteInServer(String name) {
+
+        String LoginServer = "http://118.36.3.200/menu.php"+name;
+        URLConnector task = new URLConnector(LoginServer);
+        task.start();
+
+        try {
+            task.join();
+            String result = task.getResult();
+
+            if (result.equals(Integer.toString(0))){
+                Toast.makeText(getApplicationContext(),result.toString()+"성공",Toast.LENGTH_SHORT).show();
+            }else if (result.equals(Integer.toString(1))){
+                Toast.makeText(getApplicationContext(),result.toString()+"실패",Toast.LENGTH_SHORT).show();
             }
 
         } catch (Exception e) {
