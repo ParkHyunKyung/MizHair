@@ -1,96 +1,209 @@
 package com.cookandroid.charm_admin.Reservation;
-
-import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.SparseBooleanArray;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.CheckBox;
-import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.Toast;
-
+import com.cookandroid.charm_admin.PriceList.PriceListAdapter;
+import com.cookandroid.charm_admin.PriceList.PriceListData;
 import com.cookandroid.charm_admin.R;
+import com.cookandroid.charm_admin.Server.URLConnector;
 
-import java.util.ArrayList;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 /**
- * Created by HP on 2016-07-06.
+ * Created by HP on 2016-09-21.
  */
-public class ReservationActivity extends Activity{
-    private ArrayList<String> arrCheckBox; //이름 배열
-    private ArrayList<Integer> arrPrise; //가격 배열
+public class ReservationActivity extends Activity {
+    ListView listCut,listColor,listPerm,listMagic,listClinic;
+    PriceListAdapter adapterCut,adapterColor,adapterPerm,adapterMagic,adapterClinic;
+    int listviewPosition;
 
-    private EditText edtPrise,edtAMPM,edtDate,edtTime,edtMileage,edtMemo;
-    int Prise = 0 , Time = 0, Mileage = 0;
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_reservation);
+        setTitle("예약화면 테스트");
+        setContentView(R.layout.activity_reservationitemlist);
 
-        edtPrise = (EditText)findViewById(R.id.edtPrise);
-        edtAMPM = (EditText)findViewById(R.id.edtAMPM);
-        edtDate = (EditText)findViewById(R.id.edtDate);
-        edtTime = (EditText)findViewById(R.id.edtTime);
-        edtMileage = (EditText)findViewById(R.id.edtMileage);
-        edtMemo = (EditText)findViewById(R.id.edtMemo);
+        addCut();
+        addColor();
+        addPerm();
+        addMagic();
+        addClinlic();
+        clicklist();
 
-        // 빈 데이터 리스트 생성.
-        final ArrayList<String> items = new ArrayList<String>() ;
-        // ArrayAdapter 생성. 아이템 View를 선택(multiple choice)가능하도록 만듦.
-        final ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_multiple_choice, items) ;
+    }
 
-        // listview 생성 및 adapter 지정.
-        final ListView listview = (ListView) findViewById(R.id.listview1) ;
-        listview.setAdapter(adapter) ;
+    private void intentselectTime(String Name, String Price,String Time){
+        Intent selectTimeIntent = new Intent(getApplicationContext(),ReservationTimeActivity.class);
+        selectTimeIntent.putExtra("Name",Name);
+        selectTimeIntent.putExtra("Price",Price);
+        selectTimeIntent.putExtra("Time",Time);
+        startActivity(selectTimeIntent);
+    }
 
-        arrCheckBox = new ArrayList<>();
-        arrCheckBox = getIntent().getStringArrayListExtra("arrCheckBox");
-        arrPrise = new ArrayList<>();
-        arrPrise = getIntent().getIntegerArrayListExtra("arrPrise");
-        // 예상 소요 시간
-        /*arrTime = new ArrayList<>();
-        arrTime = getIntent().getIntegerArrayListExtra("arrPrise");*/
-
-
-        for(int i=0;i<arrCheckBox.size();i++){
-            // 아이템 추가.
-            items.add(arrCheckBox.get(i).toString()+"("+arrPrise.get(i).toString()+")");
-            // listview 갱신
-            adapter.notifyDataSetChanged();
-        }
-
-        /*시술 리스트 클릭시 발생 이벤트*/
-        listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+    private void clicklist(){
+        listCut.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                PriceListData item = adapterCut.mPriceListData.get(i);
 
-                /*Toast.makeText(getApplicationContext(),items.get(i)+"가격:"+arrPrise.get(i).toString(),Toast.LENGTH_SHORT).show();*/
-
-                SparseBooleanArray checkedItems = listview.getCheckedItemPositions();
-                int count = adapter.getCount() ;
-
-                if (checkedItems.get(i)) {
-                    /*Toast.makeText(getApplicationContext(),items.get(i),Toast.LENGTH_SHORT).show();*/
-                    Prise = Prise + arrPrise.get(i);
-                    edtPrise.setText(Integer.toString(Prise));
-                    /*edtTime.setText();*/
-                    edtMileage.setText(Integer.toString(Prise/20)+"p");
-                }else {
-                    Prise = Prise - arrPrise.get(i);
-                    edtPrise.setText(Integer.toString(Prise));
-                    /*edtTime.setText();*/
-                    edtMileage.setText(Integer.toString(Prise/20)+"p");
-                }
-
+                intentselectTime(item.getTv_ItemName().toString(),
+                                item.getTv_ItemPrice().toString(),
+                                item.getTv_ItemTime().toString());
 
             }
         });
 
+        listColor.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                PriceListData item = adapterColor.mPriceListData.get(i);
 
+                intentselectTime(item.getTv_ItemName().toString(),
+                        item.getTv_ItemPrice().toString(),
+                        item.getTv_ItemTime().toString());
+
+                listviewPosition = i;
+
+            }
+        });
+
+        listPerm.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                PriceListData item = adapterPerm.mPriceListData.get(i);
+
+                intentselectTime(item.getTv_ItemName().toString(),
+                        item.getTv_ItemPrice().toString(),
+                        item.getTv_ItemTime().toString());
+
+                listviewPosition = i;
+            }
+        });
+
+        listMagic.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                PriceListData item = adapterMagic.mPriceListData.get(i);
+
+                intentselectTime(item.getTv_ItemName().toString(),
+                        item.getTv_ItemPrice().toString(),
+                        item.getTv_ItemTime().toString());
+
+                listviewPosition = i;
+            }
+        });
+
+        listClinic.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                PriceListData item = adapterClinic.mPriceListData.get(i);
+
+                intentselectTime(item.getTv_ItemName().toString(),
+                        item.getTv_ItemPrice().toString(),
+                        item.getTv_ItemTime().toString());
+
+                listviewPosition = i;
+            }
+        });
+    }
+
+    private void addCut(){
+
+        adapterCut = new PriceListAdapter();
+
+        listCut = (ListView)findViewById(R.id.reservation_list_cut);
+
+        listCut.setAdapter(adapterCut);  // 리스트 뷰에 adapter 를 등록한다
+
+        connection("컷",adapterCut);
+        setListViewHeightBasedOnChildren(listCut,adapterCut);
+    }
+
+    private void addColor(){
+
+        adapterColor = new PriceListAdapter();
+        listColor = (ListView)findViewById(R.id.reservation_list_color);
+        listColor.setAdapter(adapterColor);  // 리스트 뷰에 adapter 를 등록한다
+
+        connection("염색",adapterColor);
+
+        setListViewHeightBasedOnChildren(listColor,adapterColor);
+
+    }
+
+    private void addPerm(){
+
+        adapterPerm = new PriceListAdapter();
+        listPerm = (ListView)findViewById(R.id.reservation_list_perm);
+        listPerm.setAdapter(adapterPerm);  // 리스트 뷰에 adapter 를 등록한다
+
+        connection("펌",adapterPerm);
+
+        setListViewHeightBasedOnChildren(listPerm,adapterPerm);
+
+    }
+
+    private void addMagic(){
+
+        adapterMagic = new PriceListAdapter();
+        listMagic = (ListView)findViewById(R.id.reservation_list_magic);
+        listMagic.setAdapter(adapterMagic);  // 리스트 뷰에 adapter 를 등록한다
+
+        connection("스타일링",adapterMagic);
+
+        setListViewHeightBasedOnChildren(listMagic,adapterMagic);
+
+    }
+
+    private void addClinlic(){
+        adapterClinic = new PriceListAdapter();
+
+        listClinic = (ListView)findViewById(R.id.reservation_list_clinic);
+        listClinic.setAdapter(adapterClinic);  // 리스트 뷰에 adapter 를 등록한다
+
+        connection("클리닉",adapterClinic);
+
+        setListViewHeightBasedOnChildren(listClinic,adapterClinic);
+    }
+
+    //리스트뷰에 높이를 계산하기 위한 메소드
+    public static void setListViewHeightBasedOnChildren(ListView listview, PriceListAdapter adapter) {
+        ViewGroup.LayoutParams params = listview.getLayoutParams();
+        int totalHeight = 105;
+
+        params.height = totalHeight*adapter.getCount();
+        listview.setLayoutParams(params);
+        listview.requestLayout();
+    }
+
+    private void connection(String styleName,PriceListAdapter adapter) {
+
+        String LoginServer = "http://118.36.3.200/menu.php";
+        URLConnector task = new URLConnector(LoginServer);
+        task.start();
+
+        try {
+            task.join();
+            String result = task.getResult();
+
+            JSONObject state = new JSONObject(result);
+
+            JSONArray var = state.getJSONArray(styleName);
+            for (int i=0;i<var.length();i++){
+                JSONObject varTest = new JSONObject(var.get(i).toString());// 한줄
+                String Name = varTest.getString("StName");// StName에 해당하는 이름 가져옴
+                String Price = varTest.getString("StPrice");// StPrice에 해당하는 이름 가져옴
+                String Time = varTest.getString("StTime");// StTime에 해당하는 이름 가져옴
+                adapter.addItem(Name,Price,Time);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

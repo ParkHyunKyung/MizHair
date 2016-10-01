@@ -279,7 +279,7 @@ public class PriceListActivity extends AppCompatActivity {
 
         listCut.setAdapter(adapterCut);  // 리스트 뷰에 adapter 를 등록한다
 
-        connetion("컷",adapterCut);
+        connection("컷",adapterCut);
         setListViewHeightBasedOnChildren(listCut,adapterCut);
     }
 
@@ -289,7 +289,7 @@ public class PriceListActivity extends AppCompatActivity {
         listColor = (ListView)findViewById(R.id.list_color);
         listColor.setAdapter(adapterColor);  // 리스트 뷰에 adapter 를 등록한다
 
-        connetion("염색",adapterColor);
+        connection("염색",adapterColor);
 
         setListViewHeightBasedOnChildren(listColor,adapterColor);
 
@@ -301,7 +301,7 @@ public class PriceListActivity extends AppCompatActivity {
         listPerm = (ListView)findViewById(R.id.list_perm);
         listPerm.setAdapter(adapterPerm);  // 리스트 뷰에 adapter 를 등록한다
 
-        connetion("펌",adapterPerm);
+        connection("펌",adapterPerm);
 
         setListViewHeightBasedOnChildren(listPerm,adapterPerm);
 
@@ -313,7 +313,7 @@ public class PriceListActivity extends AppCompatActivity {
         listMagic = (ListView)findViewById(R.id.list_magic);
         listMagic.setAdapter(adapterMagic);  // 리스트 뷰에 adapter 를 등록한다
 
-        connetion("스타일링",adapterMagic);
+        connection("스타일링",adapterMagic);
 
         setListViewHeightBasedOnChildren(listMagic,adapterMagic);
 
@@ -325,7 +325,7 @@ public class PriceListActivity extends AppCompatActivity {
         listClinic = (ListView)findViewById(R.id.list_clinic);
         listClinic.setAdapter(adapterClinic);  // 리스트 뷰에 adapter 를 등록한다
 
-        connetion("클리닉",adapterClinic);
+        connection("클리닉",adapterClinic);
 
         setListViewHeightBasedOnChildren(listClinic,adapterClinic);
     }
@@ -340,7 +340,7 @@ public class PriceListActivity extends AppCompatActivity {
         listview.requestLayout();
     }
 
-    private void connetion(String styleName,PriceListAdapter adapter) {
+    private void connection(String styleName,PriceListAdapter adapter) {
 
         String LoginServer = "http://118.36.3.200/menu.php";
         URLConnector task = new URLConnector(LoginServer);
@@ -356,8 +356,8 @@ public class PriceListActivity extends AppCompatActivity {
             for (int i=0;i<var.length();i++){
                 JSONObject varTest = new JSONObject(var.get(i).toString());// 한줄
                 String Name = varTest.getString("StName");// StName에 해당하는 이름 가져옴
-                String Price = varTest.getString("StPrice");// StName에 해당하는 이름 가져옴
-                String Time = varTest.getString("StTime");// StName에 해당하는 이름 가져옴
+                String Price = varTest.getString("StPrice");// StPrice에 해당하는 이름 가져옴
+                String Time = varTest.getString("StTime");// StTime에 해당하는 이름 가져옴
                 adapter.addItem(Name,Price,Time);
             }
 

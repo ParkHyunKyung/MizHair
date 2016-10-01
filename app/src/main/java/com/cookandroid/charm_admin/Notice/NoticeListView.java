@@ -4,6 +4,7 @@ package com.cookandroid.charm_admin.Notice;
  * Created by HP on 2016-09-11.
  */
 public class NoticeListView {
+    private String tvNum;
     private String tvNoticeTitle;
     private String tvNoticeContent;
 
@@ -21,5 +22,13 @@ public class NoticeListView {
 
     public void setTvNoticeContent(String tvNoticeContent) {
         this.tvNoticeContent = tvNoticeContent;
+    }
+
+    public String getTvNum() {
+        return tvNum;
+    }
+
+    public void setTvNum(String tvNum) {
+        this.tvNum = tvNum;
     }
 }

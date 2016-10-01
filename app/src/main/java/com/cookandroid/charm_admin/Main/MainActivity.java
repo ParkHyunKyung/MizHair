@@ -16,7 +16,6 @@ import com.cookandroid.charm_admin.Notice.NoticeListActivity;
 import com.cookandroid.charm_admin.PriceList.PriceListActivity;
 import com.cookandroid.charm_admin.R;
 import com.cookandroid.charm_admin.Reservation.ReservationActivity;
-import com.cookandroid.charm_admin.Reservation.ReservationTest;
 import com.cookandroid.charm_admin.ReservationList.ReservationListActivity;
 import com.cookandroid.charm_admin.User.LoginActivity;
 
@@ -61,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
         btn_Reservation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent reservationIntent = new Intent(getApplicationContext(),ReservationTest.class);
+                Intent reservationIntent = new Intent(getApplicationContext(),ReservationActivity.class);
                 startActivity(reservationIntent);
             }
         });

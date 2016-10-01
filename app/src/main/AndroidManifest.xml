@@ -29,13 +29,15 @@
         <activity android:name=".User.JoinActivity" android:label="JoinActivity"/>
         <activity android:name=".CustomerManagement.ContactsListActivity" android:label="ContactListActivity"/>
         <activity android:name=".CustomerManagement.CustomerActivity" android:label="CustomerActivity"/>
-        <activity android:name=".Reservation.ReservationActivity" android:label="ReservationActivity"/>
         <activity android:name=".Notice.NoticeActivity" android:label="NoticeActivity"/>
         <activity android:name=".Notice.NoticeListActivity" android:label="NoticeListActivity"/>
         <activity android:name=".PriceList.PriceListActivity" android:label="PriceListActivity"/>
         <activity android:name=".ReservationList.ReservationViewActivity" android:label="ReservationViewActivity"/>
         <activity android:name=".ReservationList.ReservationListActivity" android:label="ReservationListActivity"/>
-        <activity android:name=".Reservation.ReservationTest" android:label="ReservationTestActivity"/>
+        <activity android:name=".Reservation.ReservationActivity" android:label="ReservationActivity"/>
+        <activity android:name=".Reservation.ReservationTimeActivity" android:label="ReservationTimeActivity"/>
+        <activity android:name=".Reservation.ReservationCheckActivity" android:label="ReservationCheckActivity"/>
+
     </application>
 
 </manifest>

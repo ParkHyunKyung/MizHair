@@ -3,4 +3,166 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <LinearLayout
+        android:orientation="vertical"
+        android:background="#FF7D9F"
+        android:layout_width="336pt"
+        android:layout_height="30pt"
+        android:layout_marginTop="10px">
+
+        <TextView
+            android:layout_marginTop="5pt"
+            android:layout_marginLeft="18pt"
+            android:layout_width="wrap_content"
+            android:layout_height="20pt"
+            android:textColor="#FFFFFF"
+            android:textSize="18pt"
+            android:text="예약정보"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="336pt"
+        android:layout_height="253pt"
+        android:layout_marginLeft="20pt">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="70pt"
+                android:layout_height="wrap_content"
+                android:textSize="16pt"
+                android:text="성함"/>
+
+            <TextView
+                android:id="@+id/txt_reservationCheckName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16pt"
+                android:text="이름"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="70pt"
+                android:layout_height="wrap_content"
+                android:textSize="16pt"
+                android:text="연락처"/>
+
+            <TextView
+                android:id="@+id/txt_reservationCheckPhoneNum"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16pt"
+                android:text="번호"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="70pt"
+                android:layout_height="wrap_content"
+                android:textSize="16pt"
+                android:text="예약시술"/>
+
+            <TextView
+                android:id="@+id/txt_reservationCheckItem"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16pt"
+                android:text="아이템"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="70pt"
+                android:layout_height="wrap_content"
+                android:textSize="16pt"
+                android:text="가격"/>
+
+            <TextView
+                android:id="@+id/txt_reservationCheckPrice"
+                android:layout_width="70pt"
+                android:layout_height="wrap_content"
+                android:textSize="16pt"
+                android:text="얼마"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="70pt"
+                android:layout_height="wrap_content"
+                android:textSize="16pt"
+                android:text="예약일시"/>
+
+            <TextView
+                android:id="@+id/txt_reservationCheckDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16pt"
+                android:text="날짜"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="70pt"
+                android:layout_height="wrap_content"
+                android:textSize="16pt"
+                android:text="소요시간"/>
+
+            <TextView
+                android:id="@+id/txt_reservationCheckTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16pt"
+                android:text="시간"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="70pt"
+                android:layout_height="wrap_content"
+                android:textSize="16pt"
+                android:text="적립금"/>
+
+            <TextView
+                android:id="@+id/txt_reservationCheckMileage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16pt"
+                android:text="마일리지"/>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+    
+    <Button
+        android:id="@+id/btn_reservatioinOK"
+        android:layout_marginTop="17pt"
+        android:layout_width="336pt"
+        android:layout_height="57pt"
+        android:background="#a259ff"
+        android:textColor="#ffffff"
+        android:textSize="24pt"
+        android:text="예약완료"/>
+
 </LinearLayout>

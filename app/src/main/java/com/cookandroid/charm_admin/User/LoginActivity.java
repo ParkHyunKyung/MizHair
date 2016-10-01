@@ -152,6 +152,8 @@ public class LoginActivity extends Activity{
                 startActivity(mainIntent);
                 finish();
             } else {
+
+
             Toast.makeText(getApplicationContext(), "로그인 실패!", Toast.LENGTH_SHORT).show();
             edtPw.setText(null);
         }

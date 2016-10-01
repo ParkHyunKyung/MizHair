@@ -10,7 +10,12 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.cookandroid.charm_admin.PriceList.PriceListAdapter;
 import com.cookandroid.charm_admin.R;
+import com.cookandroid.charm_admin.Server.URLConnector;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.lang.reflect.Array;
 
@@ -35,13 +40,13 @@ public class NoticeListActivity extends Activity {
         noticeList = (ListView)findViewById(R.id.notice_list);
         noticeList.setAdapter(adapter);  // 리스트 뷰에 adapter 를 등록한다
 
-        String contents = "어쩌고 저쩌고" + "\n 가나다라 마바사 아자차카타파하 ";
+/*        String contents = "어쩌고 저쩌고" + "\n 가나다라 마바사 아자차카타파하 ";
         String[] strContent = contents.split("\n");// 첫줄만 자르기
         adapter.addItem("공지1",strContent[0]);
         adapter.addItem("공지2",strContent[0]);
         adapter.addItem("공지3",strContent[0]);
         adapter.addItem("공지4",strContent[0]);
-        adapter.addItem("공지5",strContent[0]);
+        adapter.addItem("공지5",strContent[0]);*/
 
         noticeList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -52,12 +57,14 @@ public class NoticeListActivity extends Activity {
 
                 Intent intent = new Intent(getApplicationContext(), NoticeActivity.class);
 
+                String num = item.getTvNum();
                 /*title = item.getTvNoticeTItle() 에 해당하는 내용을 서버에서 가져옴*/
                 String title = item.getTvNoticeTItle();
 
                 String content = item.getTvNoticeContent();// 서버에서 가져온 내용을 저장
 
                 /*title과 contents를 intent로 NoticeActivity로 전송*/
+                intent.putExtra("Num",num);
                 intent.putExtra("Add","");
                 intent.putExtra("Title",title);
                 intent.putExtra("Content", content);
@@ -83,5 +90,31 @@ public class NoticeListActivity extends Activity {
                 startActivity(intent);
             }
         });
+    }
+
+    private void connection(NoticeAdapter adapter) {
+
+        String LoginServer = "http://118.36.3.200/notice.php";
+        URLConnector task = new URLConnector(LoginServer);
+        task.start();
+
+        try {
+            task.join();
+            String result = task.getResult();
+
+            JSONObject state = new JSONObject(result);
+
+            JSONArray var = state.getJSONArray(result);
+            for (int i=0;i<var.length();i++){
+                JSONObject varTest = new JSONObject(var.get(i).toString());// 한줄
+                String NoticeNum = varTest.getString("NoticeNum");// NoticeNum에 해당하는 이름 가져옴
+                String NoticeTitle = varTest.getString("NoticeTitle");// NoticeTitle에 해당하는 이름 가져옴
+                String NoticeComment = varTest.getString("NoticeComment");// NoticeComment에 해당하는 이름 가져옴
+                adapter.addItem(NoticeNum,NoticeTitle,NoticeComment);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
