@@ -70,6 +70,7 @@ public class NoticeAdapter extends BaseAdapter {
     // 아이템 데이터 추가를 위한 함수
     public void addItem(String num, String title, String content) {
         NoticeListView item = new NoticeListView();
+        item.setTvNum(num);
         item.setTvNoticeTitle(title);
         item.setTvNoticeContent(content);
 

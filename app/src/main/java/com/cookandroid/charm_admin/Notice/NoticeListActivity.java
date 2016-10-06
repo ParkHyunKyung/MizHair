@@ -52,6 +52,8 @@ public class NoticeListActivity extends Activity {
                 Intent intent = new Intent(getApplicationContext(), NoticeActivity.class);
 
                 String num = item.getTvNum();
+
+                Toast.makeText(getApplicationContext(),num,Toast.LENGTH_SHORT).show();
                 /*title = item.getTvNoticeTItle() 에 해당하는 내용을 서버에서 가져옴*/
                 String title = item.getTvNoticeTItle();
 

@@ -36,6 +36,8 @@ public class NoticeActivity extends Activity {
         final String num = intent.getStringExtra("Num");
         String add = intent.getStringExtra("Add");
 
+        //Toast.makeText(getApplicationContext(),title.toString()+content.toString()+num.toString(),Toast.LENGTH_SHORT).show();
+
 
         if(add.toString().equals("")){
             notice_title.setText(title);
@@ -54,23 +56,30 @@ public class NoticeActivity extends Activity {
             @Override
             public void onClick(View view) {
 
-                modifyInServer(title,content,num);
-
+                if(btnModify.getText().toString().equals("수정")){
+                    Toast.makeText(getApplicationContext(),"수정",Toast.LENGTH_SHORT).show();
+                    modifyInServer(title,notice_content.getText().toString(),num);
+                }else if(btnModify.getText().toString().equals("저장")){
+                    Toast.makeText(getApplicationContext(),"저장",Toast.LENGTH_SHORT).show();
+                    insertInServer(title,notice_content.getText().toString());
+                }
+                finish();
             }
         });
         btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                deleteInServer(title);
+                deleteInServer(num);
+                finish();
 
             }
         });
     }
 
-    private void deleteInServer(String name) {
+    private void deleteInServer(String num) {
 
-        String LoginServer = "http://118.36.3.200/notice.php?changeNum=1&NoticeTitle="+name;
+        String LoginServer = "http://118.36.3.200/changeNotice.php?NoticeChange=1&NoticeNum="+num;
         URLConnector task = new URLConnector(LoginServer);
         task.start();
 
@@ -78,21 +87,34 @@ public class NoticeActivity extends Activity {
             task.join();
             String result = task.getResult();
 
-            if (result.equals(Integer.toString(0))){
-                Toast.makeText(getApplicationContext(),result.toString()+"성공",Toast.LENGTH_SHORT).show();
-            }else if (result.equals(Integer.toString(1))){
-                Toast.makeText(getApplicationContext(),result.toString()+"실패",Toast.LENGTH_SHORT).show();
-            }
+                Toast.makeText(getApplicationContext(),result.toString(),Toast.LENGTH_SHORT).show();
 
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    private void modifyInServer(String name,String comment,String num) {
+    private void modifyInServer(String title,String comment,String num) {
 
-        String LoginServer = "http://118.36.3.200/changeNotice.php?changeNum=1&NoticeTitle="+name
-                +"&NoticeComment="+comment+"&NoticeNum="+num;
+        String LoginServer = "http://118.36.3.200/changeNotice.php?NoticeChange=2&NoticeNum="+num+"&NoticeTitle="+title+"&NoticeComment="+comment;
+        URLConnector task = new URLConnector(LoginServer);
+        task.start();
+
+        Toast.makeText(getApplicationContext(),title.toString()+comment.toString()+num.toString(),Toast.LENGTH_SHORT).show();
+
+        try {
+            task.join();
+            String result = task.getResult();
+            Toast.makeText(getApplicationContext(),result.toString(),Toast.LENGTH_SHORT).show();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void insertInServer(String title,String comment) {
+
+        String LoginServer = "http://118.36.3.200/changeNotice.php?NoticeChange=0=&NoticeTitle="+title+"&NoticeComment="+comment;
         URLConnector task = new URLConnector(LoginServer);
         task.start();
 
@@ -100,11 +122,7 @@ public class NoticeActivity extends Activity {
             task.join();
             String result = task.getResult();
 
-            if (result.equals(Integer.toString(0))){
-                Toast.makeText(getApplicationContext(),result.toString()+"성공",Toast.LENGTH_SHORT).show();
-            }else if (result.equals(Integer.toString(1))){
-                Toast.makeText(getApplicationContext(),result.toString()+"실패",Toast.LENGTH_SHORT).show();
-            }
+            Toast.makeText(getApplicationContext(),result.toString(),Toast.LENGTH_SHORT).show();
 
         } catch (Exception e) {
             e.printStackTrace();
