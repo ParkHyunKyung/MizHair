@@ -1,6 +1,7 @@
 package com.cookandroid.charm_admin.Server;
 
 import android.util.Log;
+import android.widget.Toast;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -13,7 +14,7 @@ import java.net.URL;
 public class URLConnector extends Thread {
     private String result;
     private String URL;
-
+    private String str;
     public URLConnector(String url) {
         URL = url;
     }
@@ -49,6 +50,7 @@ public class URLConnector extends Thread {
                         }
                         output.append(line + "\n");
                     }
+
                     reader.close();
                     conn.disconnect();
                 }

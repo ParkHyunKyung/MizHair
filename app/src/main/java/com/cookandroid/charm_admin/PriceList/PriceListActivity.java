@@ -88,11 +88,6 @@ public class PriceListActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 layout_modify.setVisibility(View.VISIBLE);
-/*                listCut.setClickable(true);
-                listPerm.setClickable(true);
-                listMagic.setClickable(true);
-                listColor.setClickable(true);
-                listClinic.setClickable(true);*/
             }
         });
 
@@ -110,21 +105,25 @@ public class PriceListActivity extends AppCompatActivity {
                     if(selectedSpinner.toString().equals("Cut/컷")){
 
                         adapterCut.addItem(name,price,time+"분");
+                        insertInServer("컷",name,price,time);
                         setListViewHeightBasedOnChildren(listCut,adapterCut);
 
                     }else if(selectedSpinner.toString().equals("Color/컬러염색")){
 
                         adapterColor.addItem(name,price,time+"분");
+                        insertInServer("펌",name,price,time);
                         setListViewHeightBasedOnChildren(listColor,adapterColor);
 
                     }else if(selectedSpinner.toString().equals("Perm/펌")){
 
                         adapterPerm.addItem(name,price,time+"분");
+                        insertInServer("염색",name,price,time);
                         setListViewHeightBasedOnChildren(listPerm,adapterPerm);
 
                     }else if(selectedSpinner.toString().equals("Magic and Straight/매직 또는 스트레이트")){
 
                         adapterMagic.addItem(name,price,time+"분");
+                        insertInServer("펌",name,price,time);
                         setListViewHeightBasedOnChildren(listMagic,adapterMagic);
 
                     }else if(selectedSpinner.toString().equals("Clinic/클리닉")){
@@ -154,26 +153,31 @@ public class PriceListActivity extends AppCompatActivity {
                     if (selectedSpinner.toString().equals("Cut/컷")) {
 
                         adapterCut.remove(listviewPosition);
+                        deleteInServer("컷",name,price,time);
                         setListViewHeightBasedOnChildren(listCut, adapterCut);
 
                     } else if (selectedSpinner.toString().equals("Color/컬러염색")) {
 
                         adapterColor.remove(listviewPosition);
+                        deleteInServer("펌",name,price,time);
                         setListViewHeightBasedOnChildren(listColor, adapterColor);
 
                     } else if (selectedSpinner.toString().equals("Perm/펌")) {
 
                         adapterPerm.remove(listviewPosition);
+                        deleteInServer("염색",name,price,time);
                         setListViewHeightBasedOnChildren(listPerm, adapterPerm);
 
                     } else if (selectedSpinner.toString().equals("Magic and Straight/매직 또는 스트레이트")) {
 
                         adapterMagic.remove(listviewPosition);
+                        deleteInServer("스타일링",name,price,time);
                         setListViewHeightBasedOnChildren(listMagic, adapterMagic);
 
                     } else if (selectedSpinner.toString().equals("Clinic/클리닉")) {
 
                         adapterClinic.remove(listviewPosition);
+                        deleteInServer("클리닉",name,price,time);
                         setListViewHeightBasedOnChildren(listClinic, adapterClinic);
 
                     } else {
@@ -366,9 +370,9 @@ public class PriceListActivity extends AppCompatActivity {
         }
     }
 
-    private void deleteInServer(String name) {
+    private void deleteInServer(String num) {
 
-        String LoginServer = "http://118.36.3.200/menu.php"+name;
+        String LoginServer = "http://118.36.3.200/changeNotice.php?NoticeChange=1&NoticeNum="+num;
         URLConnector task = new URLConnector(LoginServer);
         task.start();
 
@@ -376,11 +380,67 @@ public class PriceListActivity extends AppCompatActivity {
             task.join();
             String result = task.getResult();
 
-            if (result.equals(Integer.toString(0))){
-                Toast.makeText(getApplicationContext(),result.toString()+"성공",Toast.LENGTH_SHORT).show();
-            }else if (result.equals(Integer.toString(1))){
-                Toast.makeText(getApplicationContext(),result.toString()+"실패",Toast.LENGTH_SHORT).show();
-            }
+            Toast.makeText(getApplicationContext(),result.toString(),Toast.LENGTH_SHORT).show();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void insertInServer(String StCategory, String StName,String StPrice,String StTime ) {
+
+        String LoginServer = "http://118.36.3.200/changeMenu.php?";
+        LoginServer += "StCategory="+StCategory;
+        LoginServer += "&StName="+StName;
+        LoginServer += "&StPrice="+StPrice;
+        LoginServer += "&StTime="+StTime;
+        URLConnector task = new URLConnector(LoginServer);
+        task.start();
+
+        try {
+            task.join();
+            String result = task.getResult();
+
+            Toast.makeText(getApplicationContext(),result.toString(),Toast.LENGTH_SHORT).show();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void deleteInServer(String StCategory, String StName,String StPrice,String StTime ) {
+
+        String LoginServer = "http://118.36.3.200/changeMenu.php?";
+        LoginServer += "&StName="+StName;
+        URLConnector task = new URLConnector(LoginServer);
+        task.start();
+
+        try {
+            task.join();
+            String result = task.getResult();
+
+            Toast.makeText(getApplicationContext(),result.toString(),Toast.LENGTH_SHORT).show();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void modifyInServer(String StCategory, String StName,String StPrice,String StTime ) {
+
+        String LoginServer = "http://118.36.3.200/changeMenu.php?";
+        LoginServer += "StCategory="+StCategory;
+        LoginServer += "&StName="+StName;
+        LoginServer += "&StPrice="+StPrice;
+        LoginServer += "&StTime="+StTime;
+        URLConnector task = new URLConnector(LoginServer);
+        task.start();
+
+        try {
+            task.join();
+            String result = task.getResult();
+
+            Toast.makeText(getApplicationContext(),result.toString(),Toast.LENGTH_SHORT).show();
 
         } catch (Exception e) {
             e.printStackTrace();

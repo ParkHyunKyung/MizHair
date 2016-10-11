@@ -11,6 +11,9 @@ import android.widget.Toast;
 import com.cookandroid.charm_admin.R;
 import com.cookandroid.charm_admin.Server.URLConnector;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+
 /**
  * Created by HP on 2016-08-24.
  */
@@ -58,10 +61,10 @@ public class NoticeActivity extends Activity {
 
                 if(btnModify.getText().toString().equals("수정")){
                     Toast.makeText(getApplicationContext(),"수정",Toast.LENGTH_SHORT).show();
-                    modifyInServer(title,notice_content.getText().toString(),num);
+                    modifyInServer(notice_title.getText().toString(),notice_content.getText().toString(),num);
                 }else if(btnModify.getText().toString().equals("저장")){
                     Toast.makeText(getApplicationContext(),"저장",Toast.LENGTH_SHORT).show();
-                    insertInServer(title,notice_content.getText().toString());
+                    insertInServer(notice_title.getText().toString(),notice_content.getText().toString());
                 }
                 finish();
             }
@@ -78,6 +81,11 @@ public class NoticeActivity extends Activity {
     }
 
     private void deleteInServer(String num) {
+        try {
+            num = URLEncoder.encode(num, "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
 
         String LoginServer = "http://118.36.3.200/changeNotice.php?NoticeChange=1&NoticeNum="+num;
         URLConnector task = new URLConnector(LoginServer);
@@ -87,7 +95,7 @@ public class NoticeActivity extends Activity {
             task.join();
             String result = task.getResult();
 
-                Toast.makeText(getApplicationContext(),result.toString(),Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(),"3"+result.toString(),Toast.LENGTH_SHORT).show();
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -95,17 +103,22 @@ public class NoticeActivity extends Activity {
     }
 
     private void modifyInServer(String title,String comment,String num) {
+        try {
+            title = URLEncoder.encode(title, "UTF-8");
+            comment = URLEncoder.encode(comment, "UTF-8");
+            num = URLEncoder.encode(num, "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
 
         String LoginServer = "http://118.36.3.200/changeNotice.php?NoticeChange=2&NoticeNum="+num+"&NoticeTitle="+title+"&NoticeComment="+comment;
         URLConnector task = new URLConnector(LoginServer);
         task.start();
 
-        Toast.makeText(getApplicationContext(),title.toString()+comment.toString()+num.toString(),Toast.LENGTH_SHORT).show();
-
         try {
             task.join();
             String result = task.getResult();
-            Toast.makeText(getApplicationContext(),result.toString(),Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(),"1"+result.toString(),Toast.LENGTH_SHORT).show();
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -113,8 +126,14 @@ public class NoticeActivity extends Activity {
     }
 
     private void insertInServer(String title,String comment) {
+        try {
+            title = URLEncoder.encode(title, "UTF-8");
+            comment = URLEncoder.encode(comment, "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        String LoginServer = "http://118.36.3.200/changeNotice.php?NoticeChange=0&NoticeTitle="+title+"&NoticeComment="+comment;
 
-        String LoginServer = "http://118.36.3.200/changeNotice.php?NoticeChange=0=&NoticeTitle="+title+"&NoticeComment="+comment;
         URLConnector task = new URLConnector(LoginServer);
         task.start();
 
@@ -122,7 +141,7 @@ public class NoticeActivity extends Activity {
             task.join();
             String result = task.getResult();
 
-            Toast.makeText(getApplicationContext(),result.toString(),Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(),"6"+result.toString(),Toast.LENGTH_SHORT).show();
 
         } catch (Exception e) {
             e.printStackTrace();

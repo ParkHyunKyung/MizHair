@@ -21,7 +21,6 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginBottom="8dp"
-        android:inputType="textEmailAddress"
         android:hint="아이디 입력"/>
 
     <EditText

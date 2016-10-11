@@ -26,7 +26,6 @@ import java.util.ArrayList;
  */
 public class MainActivity extends AppCompatActivity {
     private Intent reservationIntent;
-    Button btnReservation;
     private Button btn_Reservation, btnNotice, btnPricelist, btnCustomerlist,btnReservationlist,btnSetting;
 
     @Override
@@ -43,7 +42,6 @@ public class MainActivity extends AppCompatActivity {
 
         btn_Reservation = (Button)findViewById(R.id.main_btnReservation);
         btnReservationlist = (Button)findViewById(R.id.main_btnReservationlist);
-        btnReservation = (Button)findViewById(R.id.btnReservation);
         btnNotice = (Button)findViewById(R.id.main_btnNotice);
         btnPricelist = (Button)findViewById(R.id.main_btnPricelist);
         btnCustomerlist = (Button)findViewById(R.id.main_btnCustomerlist);
@@ -64,43 +62,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(reservationIntent);
             }
         });
-
-        btnReservation.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                reservationIntent = new Intent(getApplicationContext(),ReservationActivity.class);
-                ArrayList<String> arrCheckBox = new ArrayList<>();
-                ArrayList<Integer> arrPrise = new ArrayList<>();
-                ArrayList<Integer> arrNum = new ArrayList<>(); // 기본키 배열
-
-
-
-                /*서버에서 기본키를 포함해서 가져옴
-                * 화면에는 기본키를 보여주지는 않으나 서버에는 기본키만 전송함*/
-                //test용
-                arrCheckBox.add("일반컷");
-                arrPrise.add(10000);
-                arrCheckBox.add("특수컷");
-                arrPrise.add(15000);
-                arrCheckBox.add("청소년컷");
-                arrPrise.add(7000);
-                arrCheckBox.add("특수펌");
-                arrPrise.add(5000);
-                arrCheckBox.add("드라이");
-                arrPrise.add(20000);
-                arrCheckBox.add("염색");
-                arrPrise.add(30000);
-                arrCheckBox.add("업스타일");
-                arrPrise.add(30000);
-                arrCheckBox.add("매니큐어");
-                arrPrise.add(30000);
-                reservationIntent.putExtra("arrNum",arrNum);
-                reservationIntent.putExtra("arrCheckBox",arrCheckBox);
-                reservationIntent.putExtra("arrPrise",arrPrise);
-                startActivity(reservationIntent);
-            }
-        });
-
+        
         btnNotice.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
