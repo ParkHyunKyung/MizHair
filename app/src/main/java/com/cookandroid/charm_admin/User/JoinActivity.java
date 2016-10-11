@@ -115,7 +115,6 @@ public class JoinActivity extends Activity {
             URLConnector task = new URLConnector(SingupServer);
             task.start();
 
-
             task.join();
             String result = task.getResult();
             JSONObject state = new JSONObject(result);

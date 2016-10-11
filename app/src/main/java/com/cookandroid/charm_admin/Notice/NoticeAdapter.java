@@ -16,7 +16,7 @@ import java.util.ArrayList;
  */
 public class NoticeAdapter extends BaseAdapter {
     // Adapter에 추가된 데이터를 저장하기 위한 ArrayList
-    private ArrayList<NoticeListView> listViewItemList = new ArrayList<NoticeListView>() ;
+    private ArrayList<NoticeListData> listViewItemList = new ArrayList<NoticeListData>() ;
 
     // ListViewAdapter의 생성자
     public NoticeAdapter() {
@@ -46,7 +46,7 @@ public class NoticeAdapter extends BaseAdapter {
         TextView descTextView = (TextView) convertView.findViewById(R.id.tvNoticeContent) ;
 
         // Data Set(listViewItemList)에서 position에 위치한 데이터 참조 획득
-        NoticeListView listViewItem = listViewItemList.get(position);
+        NoticeListData listViewItem = listViewItemList.get(position);
 
         // 아이템 내 각 위젯에 데이터 반영
         titleTextView.setText(listViewItem.getTvNoticeTItle());
@@ -69,7 +69,7 @@ public class NoticeAdapter extends BaseAdapter {
 
     // 아이템 데이터 추가를 위한 함수
     public void addItem(String num, String title, String content) {
-        NoticeListView item = new NoticeListView();
+        NoticeListData item = new NoticeListData();
         item.setTvNum(num);
         item.setTvNoticeTitle(title);
         item.setTvNoticeContent(content);

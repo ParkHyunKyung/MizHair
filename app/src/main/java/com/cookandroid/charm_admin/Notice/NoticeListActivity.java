@@ -5,19 +5,15 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.cookandroid.charm_admin.PriceList.PriceListAdapter;
 import com.cookandroid.charm_admin.R;
 import com.cookandroid.charm_admin.Server.URLConnector;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
-
-import java.lang.reflect.Array;
 
 /**
  * Created by Jungminki on 2016-07-07.
@@ -47,17 +43,17 @@ public class NoticeListActivity extends Activity {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
                 /*리스트 내부에 있는 값을 가져오기위한 변수*/
-                NoticeListView item = (NoticeListView)adapterView.getItemAtPosition(i);
+                NoticeListData item = (NoticeListData)adapterView.getItemAtPosition(i);
 
                 Intent intent = new Intent(getApplicationContext(), NoticeActivity.class);
 
                 String num = item.getTvNum();
 
                 Toast.makeText(getApplicationContext(),num,Toast.LENGTH_SHORT).show();
-                /*title = item.getTvNoticeTItle() 에 해당하는 내용을 서버에서 가져옴*/
+
                 String title = item.getTvNoticeTItle();
 
-                String content = item.getTvNoticeContent();// 서버에서 가져온 내용을 저장
+                String content = item.getTvNoticeContent();
 
                 /*title과 contents를 intent로 NoticeActivity로 전송*/
                 intent.putExtra("Num",num);
