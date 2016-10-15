@@ -21,7 +21,12 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.cookandroid.charm_admin.PriceList.PriceListAdapter;
 import com.cookandroid.charm_admin.R;
+import com.cookandroid.charm_admin.Server.URLConnector;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,20 +48,14 @@ public class ContactsListActivity extends ListActivity {
 
 		List<CustomerAdapter> contactsList = new ArrayList<CustomerAdapter>();
 
-		/*고객의 정보*/
-		addContact(contactsList, "김창민", "010-1234-1234", "1월 1일");
-		addContact(contactsList, "김우진", "010-1234-5678", "2월 2일");
-		addContact(contactsList, "권동효", "010-1212-1212", "3월 3일" );
-		addContact(contactsList, "나수현", "010-432-3432", "5월 5일");
-		addContact(contactsList, "홍길동", "010-1234-5678", "6월 6일");
+		connection(contactsList);
 
 		return contactsList;
 	}
 
-
 	/*고객의 정보 리스트 추가*/
-	private void addContact(List<CustomerAdapter> contactsList, String name,
-							String number, String date) throws Exception {
+	private void addContact(List<CustomerAdapter> contactsList, String UserName,
+							String UserNum, String UserId, String UserPhone,String UserGender) throws Exception {
 
 		if (contactsList == null) {
 			throw new NullPointerException("contactList가 null 입니다.");
@@ -67,7 +66,7 @@ public class ContactsListActivity extends ListActivity {
 		/*검색창의 글 입력받았을 경우*/
 		if (searchKeyword != null && "".equals(searchKeyword.trim()) == false) {
 
-			String iniName = HangulUtils.getHangulInitialSound(name,
+			String iniName = HangulUtils.getHangulInitialSound(UserName,
 					searchKeyword);
 
 			if (iniName.indexOf(searchKeyword) >= 0) {
@@ -78,7 +77,7 @@ public class ContactsListActivity extends ListActivity {
 		}
 
 		if (isAdd) {
-			contactsList.add(new CustomerAdapter(name, number, date));
+			contactsList.add(new CustomerAdapter(UserName,UserNum,UserId,"0"+UserPhone,UserGender));
 		}
 	}
 
@@ -122,17 +121,17 @@ public class ContactsListActivity extends ListActivity {
 			if (contacts != null) {
 				TextView viewName = (TextView) view.findViewById(R.id.tvName);
 				if (viewName != null) {
-					viewName.setText(contacts.getName());
+					viewName.setText(contacts.getUserName());
 				}
 
 				TextView viewNumber = (TextView) view.findViewById(R.id.tvPhoneNum);
 				if (viewNumber != null) {
-					viewNumber.setText("전화번호 : " + contacts.getNumber());
+					viewNumber.setText("전화번호 : " + contacts.getUserPhone());
 				}
 
 				TextView viewDate = (TextView) view.findViewById(R.id.tvDate);
 				if (viewDate != null) {
-					viewDate.setText("시술날짜 : " + contacts.getDate());
+					viewDate.setText("아이디 : " + contacts.getUserId());
 				}
 			}
 
@@ -142,9 +141,11 @@ public class ContactsListActivity extends ListActivity {
 					/*Toast.makeText(getApplicationContext(),contacts.getName(),Toast.LENGTH_SHORT).show();*/
 					Intent customerintent = new Intent(getApplicationContext(), CustomerActivity.class);
 
-					customerintent.putExtra("name",contacts.getName());
-					customerintent.putExtra("phoneNum",contacts.getNumber());
-					customerintent.putExtra("date",contacts.getDate());
+					customerintent.putExtra("UserName",contacts.getUserName());
+					customerintent.putExtra("UserPhone",contacts.getUserPhone());
+					customerintent.putExtra("UserId",contacts.getUserId());
+					customerintent.putExtra("UserGender",contacts.getUserGender());
+					customerintent.putExtra("UserNum",contacts.getUserNum());
 					startActivity(customerintent);
 				}
 			});
@@ -191,6 +192,32 @@ public class ContactsListActivity extends ListActivity {
 			displayList();
 		} catch (Exception e) {
 			Log.e("", e.getMessage(), e);
+		}
+	}
+
+	private void connection(List<CustomerAdapter> contactsList) {
+
+		String LoginServer = "http://118.36.3.200/showUsers.php?Pass=12345";
+		URLConnector task = new URLConnector(LoginServer);
+		task.start();
+
+		try {
+			task.join();
+			String result = task.getResult();
+			JSONArray var = new JSONArray(result);
+
+			for (int i=1;i<var.length();i++){
+				JSONObject varTest = new JSONObject(var.get(i).toString());// 한줄
+				String UserNum = varTest.getString("UserNum");
+				String UserID = varTest.getString("UserID");
+				String UserName = varTest.getString("UserName");
+				String UserPhone = varTest.getString("UserPhone");
+				String UserGender = varTest.getString("UserGender");
+				addContact(contactsList, UserName, UserNum, UserID, UserPhone, UserGender);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 }

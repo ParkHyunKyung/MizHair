@@ -12,28 +12,57 @@ package com.cookandroid.charm_admin.CustomerManagement;
  * 
  */
 public class CustomerAdapter {
-	private String name;
-	private String number;
-	private String date;
+	private String userName;
+	private String userNum;
+	private String userId;
+	private String userPhone;
+	private String userGender;
 
-	public CustomerAdapter(String name, String number, String date) {
-		this.name = name;
-		this.number = number;
-		this.date = date;
+	public CustomerAdapter(String userName, String userNum, String userId,String userPhone,String userGender) {
+		this.userName = userName;
+		this.userNum = userNum;
+		this.userId = userId;
+		this.userPhone = userPhone;
+		this.userGender = userGender;
 	}
 
-	public String getName() {
-		return name;
-	}
-	public String getDate(){ return date; }
-	public String getNumber() { return number; }
-
-	public void setName(String name) {
-		this.name = name;
-	}
-	public void setDate(String date){ this.date = date; }
-	public void setNumber(String number) {
-		this.number = number;
+	public String getUserName() {
+		return userName;
 	}
 
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	public String getUserNum() {
+		return userNum;
+	}
+
+	public void setUserNum(String userNum) {
+		this.userNum = userNum;
+	}
+
+	public String getUserId() {
+		return userId;
+	}
+
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+
+	public String getUserPhone() {
+		return userPhone;
+	}
+
+	public void setUserPhone(String userPhone) {
+		this.userPhone = userPhone;
+	}
+
+	public String getUserGender() {
+		return userGender;
+	}
+
+	public void setUserGender(String userGender) {
+		this.userGender = userGender;
+	}
 }

@@ -31,6 +31,25 @@
         <TextView
             android:layout_width="80dp"
             android:layout_height="30dp"
+            android:text="ID"/>
+
+        <EditText
+            android:id="@+id/edtID"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/edit_text"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_margin="5dp">
+
+        <TextView
+            android:layout_width="80dp"
+            android:layout_height="30dp"
             android:text="전화번호"/>
 
         <EditText
@@ -40,43 +59,34 @@
             android:background="@drawable/edit_text"/>
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <RadioGroup
+        android:id="@+id/rg_Gender"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_margin="5dp">
-
-        <TextView
-            android:layout_width="80dp"
-            android:layout_height="30dp"
-            android:text="적립금"/>
-
-        <EditText
-            android:id="@+id/edtMileage"
-            android:layout_width="match_parent"
+        >
+        <RadioButton
+            android:id="@+id/radio_btnWoman"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/edit_text"/>
+            android:checked="false"
+            android:text="여성"/>
 
-    </LinearLayout>
+        <RadioButton
+            android:id="@+id/radio_btnMan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="false"
+            android:text="남성"/>
 
-    <LinearLayout
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/btn_changePass"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_margin="5dp">
-
-        <TextView
-            android:layout_width="80dp"
-            android:layout_height="30dp"
-            android:text="최근방문"/>
-
-        <EditText
-            android:id="@+id/edtDate"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/edit_text"/>
-
-    </LinearLayout>
+        android:text="비밀번호 변경"
+        />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -98,7 +108,7 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/btnModiify"
+        android:id="@+id/customer_btnModiify"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="수정"
