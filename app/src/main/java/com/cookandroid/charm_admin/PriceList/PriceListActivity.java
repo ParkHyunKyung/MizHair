@@ -104,31 +104,31 @@ public class PriceListActivity extends AppCompatActivity {
                 }else {
                     if(selectedSpinner.toString().equals("Cut/컷")){
 
-                        adapterCut.addItem(name,price,time+"분");
+                        adapterCut.addItem(name,price,time+"분","");
                         insertInServer("컷",name,price,time);
                         setListViewHeightBasedOnChildren(listCut,adapterCut);
 
                     }else if(selectedSpinner.toString().equals("Color/컬러염색")){
 
-                        adapterColor.addItem(name,price,time+"분");
+                        adapterColor.addItem(name,price,time+"분","");
                         insertInServer("펌",name,price,time);
                         setListViewHeightBasedOnChildren(listColor,adapterColor);
 
                     }else if(selectedSpinner.toString().equals("Perm/펌")){
 
-                        adapterPerm.addItem(name,price,time+"분");
+                        adapterPerm.addItem(name,price,time+"분","");
                         insertInServer("염색",name,price,time);
                         setListViewHeightBasedOnChildren(listPerm,adapterPerm);
 
                     }else if(selectedSpinner.toString().equals("Magic and Straight/매직 또는 스트레이트")){
 
-                        adapterMagic.addItem(name,price,time+"분");
+                        adapterMagic.addItem(name,price,time+"분","");
                         insertInServer("펌",name,price,time);
                         setListViewHeightBasedOnChildren(listMagic,adapterMagic);
 
                     }else if(selectedSpinner.toString().equals("Clinic/클리닉")){
 
-                        adapterClinic.addItem(name,price,time+"분");
+                        adapterClinic.addItem(name,price,time+"분","");
                         setListViewHeightBasedOnChildren(listClinic,adapterClinic);
 
                     }else {
@@ -359,10 +359,11 @@ public class PriceListActivity extends AppCompatActivity {
 
             for (int i=0;i<var.length();i++){
                 JSONObject varTest = new JSONObject(var.get(i).toString());// 한줄
-                String Name = varTest.getString("StName");// StName에 해당하는 이름 가져옴
-                String Price = varTest.getString("StPrice");// StPrice에 해당하는 이름 가져옴
-                String Time = varTest.getString("StTime");// StTime에 해당하는 이름 가져옴
-                adapter.addItem(Name,Price,Time);
+                String Name = varTest.getString("StName");// StName에 해당하는 값 가져옴
+                String Price = varTest.getString("StPrice");// StPrice에 해당하는 값 가져옴
+                String Time = varTest.getString("StTime");// StTime에 해당하는 값 가져옴
+                String num = varTest.getString("StNum");//StNum에 해당하는 값 가져옴
+                adapter.addItem(Name,Price,Time,num);
             }
 
         } catch (Exception e) {

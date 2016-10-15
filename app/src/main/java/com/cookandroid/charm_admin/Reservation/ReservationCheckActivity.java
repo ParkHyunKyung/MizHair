@@ -4,17 +4,24 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.cookandroid.charm_admin.R;
+import com.cookandroid.charm_admin.Server.URLConnector;
+
+import org.json.JSONObject;
+
+import java.net.URLEncoder;
 
 /**
  * Created by HP on 2016-10-01.
  */
 public class ReservationCheckActivity extends Activity{
     TextView txt_Name,txt_PhoneNum,txt_Item,txt_Price,txt_Date,txt_Time,txt_Mileage;
-    String name,phoneNum,item,price,date,time,mileage;
+    EditText edt_Memo;
+    String UserName,UserPhone,UserNum,Item,Price,Date,Time,Mileage,StNum;
     Button reservationOK;
 
     @Override
@@ -23,10 +30,14 @@ public class ReservationCheckActivity extends Activity{
         setTitle("예약확인");
         setContentView(R.layout.activity_reservationcheck);
 
-        item = getIntent().getStringExtra("Item");
-        price = getIntent().getStringExtra("price");
-        time = getIntent().getStringExtra("time");
-        date = getIntent().getStringExtra("date");
+        Item = getIntent().getStringExtra("Item");
+        Price = getIntent().getStringExtra("Price");
+        Time = getIntent().getStringExtra("Time");
+        Date = getIntent().getStringExtra("Date");
+        StNum = getIntent().getStringExtra("StNum");
+        UserName = getIntent().getStringExtra("UserName");
+        UserNum = getIntent().getStringExtra("UserNum");
+        UserPhone = getIntent().getStringExtra("UserPhone");
 
         txt_Name =(TextView)findViewById(R.id.txt_reservationCheckName);
         txt_PhoneNum =(TextView)findViewById(R.id.txt_reservationCheckPhoneNum);
@@ -35,29 +46,69 @@ public class ReservationCheckActivity extends Activity{
         txt_Date =(TextView)findViewById(R.id.txt_reservationCheckDate);
         txt_Time =(TextView)findViewById(R.id.txt_reservationCheckTime);
         txt_Mileage =(TextView)findViewById(R.id.txt_reservationCheckMileage);
+        edt_Memo = (EditText) findViewById(R.id.edt_reservationCheckMemo);
         reservationOK = (Button)findViewById(R.id.btn_reservatioinOK);
 
-        Toast.makeText(getApplicationContext(),item.toString(),Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(),Item.toString(),Toast.LENGTH_SHORT).show();
 
-        txt_Item.setText(item.toString());
-        txt_Price.setText(price.toString());
-        txt_Date.setText(date.toString());
-        txt_Time.setText(time.toString());
-        int mileage = Integer.parseInt(price.toString())/20;
-        txt_Mileage.setText(Integer.toString(mileage));
+
+        txt_Name.setText(UserName);
+        txt_PhoneNum.setText("0"+UserPhone.substring(0,2)+"-"+UserPhone.substring(2,6)+"-"+UserPhone.substring(6));
+        txt_Item.setText(Item.toString());
+        txt_Price.setText(Price.toString());
+        txt_Date.setText(Date.toString());
+        txt_Time.setText(Time.toString());
+        Mileage = Integer.toString(Integer.parseInt(Price.toString())/20);
+        txt_Mileage.setText(Mileage);
 
         reservationOK.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getApplicationContext(),"예약",Toast.LENGTH_SHORT).show();
-                //finish();
+                edt_Memo.getText().toString();
+                //String memo;
+                reservation(UserNum,StNum,Date,Time,edt_Memo.getText().toString());
+
             }
         });
-
-
-
     }
 
+    private void reservation(String UserNum,String StNum,String ReserveDate, String ReserveTime, String ReserveMemo) {
 
+        //5개의 값(ReserveDate ReserveTime ReserveMemo UserNum StNum)
+        try {
+            String SingupServer = "http://118.36.3.200/reservation.php?";
+            UserNum = URLEncoder.encode(UserNum, "UTF-8");
+            StNum = URLEncoder.encode(StNum, "UTF-8");
+            ReserveDate = URLEncoder.encode(ReserveDate, "UTF-8");
+            ReserveTime = URLEncoder.encode(ReserveTime, "UTF-8");
+            ReserveMemo = URLEncoder.encode(ReserveMemo, "UTF-8");
+            SingupServer += "&ReserveDate=";
+            SingupServer += ReserveDate;
+            SingupServer += "&ReserveMemo=";
+            SingupServer += ReserveMemo;
+            SingupServer += "&ReserveTime=";
+            SingupServer += ReserveTime;
+            SingupServer += "&UserNum=";
+            SingupServer += UserNum;
+            SingupServer += "&StNum=";
+            SingupServer += StNum;
+            URLConnector task = new URLConnector(SingupServer);
+            task.start();
 
+            task.join();
+            String result = task.getResult();
+            JSONObject state = new JSONObject(result);
+            if (state.getString("STATE").equals("1")) {
+                Toast.makeText(getApplicationContext(), "1.", Toast.LENGTH_SHORT).show();
+                return;
+            } else if (state.getString("STATE").equals("0")) {
+                Toast.makeText(getApplicationContext(), "0", Toast.LENGTH_SHORT).show();
+                finish();
+                return;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return;
+        }
+    }
 }

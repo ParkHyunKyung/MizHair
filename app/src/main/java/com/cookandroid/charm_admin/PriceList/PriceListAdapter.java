@@ -38,12 +38,12 @@ public class PriceListAdapter extends BaseAdapter {
         return position;
     }
 
-    public void addItem(String ItemName, String ItemPrice, String ItemTime){
-        PriceListData addInfo = null;
-        addInfo = new PriceListData();
+    public void addItem(String ItemName, String ItemPrice, String ItemTime, String ItemNum){
+        PriceListData addInfo = new PriceListData();
         addInfo.setTv_ItemName(ItemName);
         addInfo.setTv_ItemPrice(ItemPrice);
         addInfo.setTv_ItemTime(ItemTime);
+        addInfo.setTv_ItemNum(ItemNum);
 
         mPriceListData.add(addInfo);
     }

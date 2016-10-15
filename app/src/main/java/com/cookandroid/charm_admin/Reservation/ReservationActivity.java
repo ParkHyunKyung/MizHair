@@ -21,12 +21,16 @@ public class ReservationActivity extends Activity {
     ListView listCut,listColor,listPerm,listMagic,listClinic;
     PriceListAdapter adapterCut,adapterColor,adapterPerm,adapterMagic,adapterClinic;
     int listviewPosition;
+    String UserName,UserNum,UserPhone;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setTitle("예약화면 테스트");
         setContentView(R.layout.activity_reservationitemlist);
+        UserName  = getIntent().getStringExtra("UserName");
+        UserNum = getIntent().getStringExtra("UserNum");
+        UserPhone = getIntent().getStringExtra("UserPhone");
 
         addCut();
         addColor();
@@ -37,11 +41,15 @@ public class ReservationActivity extends Activity {
 
     }
 
-    private void intentselectTime(String Name, String Price,String Time){
+    private void intentselectTime(String Name, String Price,String Time,String Num){
         Intent selectTimeIntent = new Intent(getApplicationContext(),ReservationTimeActivity.class);
+        selectTimeIntent.putExtra("UserName",UserName);
         selectTimeIntent.putExtra("Name",Name);
         selectTimeIntent.putExtra("Price",Price);
         selectTimeIntent.putExtra("Time",Time);
+        selectTimeIntent.putExtra("StNum",Num);
+        selectTimeIntent.putExtra("UserNum",UserNum);
+        selectTimeIntent.putExtra("UserPhone",UserPhone);
         startActivity(selectTimeIntent);
     }
 
@@ -53,8 +61,9 @@ public class ReservationActivity extends Activity {
 
                 intentselectTime(item.getTv_ItemName().toString(),
                                 item.getTv_ItemPrice().toString(),
-                                item.getTv_ItemTime().toString());
-
+                                item.getTv_ItemTime().toString()
+                                ,item.getTv_ItemNum());
+                finish();
             }
         });
 
@@ -65,10 +74,9 @@ public class ReservationActivity extends Activity {
 
                 intentselectTime(item.getTv_ItemName().toString(),
                         item.getTv_ItemPrice().toString(),
-                        item.getTv_ItemTime().toString());
-
-                listviewPosition = i;
-
+                        item.getTv_ItemTime().toString()
+                        ,item.getTv_ItemNum());
+                finish();
             }
         });
 
@@ -79,9 +87,9 @@ public class ReservationActivity extends Activity {
 
                 intentselectTime(item.getTv_ItemName().toString(),
                         item.getTv_ItemPrice().toString(),
-                        item.getTv_ItemTime().toString());
-
-                listviewPosition = i;
+                        item.getTv_ItemTime().toString()
+                        ,item.getTv_ItemNum());
+                finish();
             }
         });
 
@@ -92,9 +100,9 @@ public class ReservationActivity extends Activity {
 
                 intentselectTime(item.getTv_ItemName().toString(),
                         item.getTv_ItemPrice().toString(),
-                        item.getTv_ItemTime().toString());
-
-                listviewPosition = i;
+                        item.getTv_ItemTime().toString()
+                        ,item.getTv_ItemNum());
+                finish();
             }
         });
 
@@ -105,9 +113,9 @@ public class ReservationActivity extends Activity {
 
                 intentselectTime(item.getTv_ItemName().toString(),
                         item.getTv_ItemPrice().toString(),
-                        item.getTv_ItemTime().toString());
-
-                listviewPosition = i;
+                        item.getTv_ItemTime().toString()
+                        ,item.getTv_ItemNum());
+                finish();
             }
         });
     }
@@ -196,10 +204,11 @@ public class ReservationActivity extends Activity {
             JSONArray var = state.getJSONArray(styleName);
             for (int i=0;i<var.length();i++){
                 JSONObject varTest = new JSONObject(var.get(i).toString());// 한줄
-                String Name = varTest.getString("StName");// StName에 해당하는 이름 가져옴
-                String Price = varTest.getString("StPrice");// StPrice에 해당하는 이름 가져옴
-                String Time = varTest.getString("StTime");// StTime에 해당하는 이름 가져옴
-                adapter.addItem(Name,Price,Time);
+                String Name = varTest.getString("StName");// StName에 해당하는 값 가져옴
+                String Price = varTest.getString("StPrice");// StPrice에 해당하는 값 가져옴
+                String Time = varTest.getString("StTime");// StTime에 해당하는 값 가져옴
+                String num = varTest.getString("StNum");//StNum에 해당하는 값 가져옴
+                adapter.addItem(Name,Price,Time,num);
             }
 
         } catch (Exception e) {

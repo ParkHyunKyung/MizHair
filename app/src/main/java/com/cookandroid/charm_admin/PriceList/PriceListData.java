@@ -7,6 +7,7 @@ public class PriceListData {
     public String tv_ItemPrice;
 
     public String tv_ItemTime;
+    public String tv_ItemNum;
 
     public String getTv_ItemName() {
         return tv_ItemName;
@@ -30,6 +31,14 @@ public class PriceListData {
 
     public void setTv_ItemTime(String tv_ItemTime) {
         this.tv_ItemTime = tv_ItemTime;
+    }
+
+    public String getTv_ItemNum() {
+        return tv_ItemNum;
+    }
+
+    public void setTv_ItemNum(String tv_ItemNum) {
+        this.tv_ItemNum = tv_ItemNum;
     }
 }
 

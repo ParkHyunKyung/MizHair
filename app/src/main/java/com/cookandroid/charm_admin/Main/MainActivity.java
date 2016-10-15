@@ -27,6 +27,7 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
     private Intent reservationIntent;
     private Button btn_Reservation, btnNotice, btnPricelist, btnCustomerlist,btnReservationlist,btnSetting;
+    private String UserId,UserPass,UserName,UserPhone,UserNum,UserGender;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,19 +48,29 @@ public class MainActivity extends AppCompatActivity {
         btnCustomerlist = (Button)findViewById(R.id.main_btnCustomerlist);
         btnSetting = (Button)findViewById(R.id.main_btnSetting);
 
-        btnReservationlist.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent reservationlistIntent = new Intent(getApplicationContext(),ReservationListActivity.class);
-                startActivity(reservationlistIntent);
-            }
-        });
+        UserId = getIntent().getStringExtra("LoginId");
+        UserPass = getIntent().getStringExtra("LoginPass");
+        UserName = getIntent().getStringExtra("LoginName");
+        UserPhone = getIntent().getStringExtra("LoginPhone");
+        UserNum = getIntent().getStringExtra("LoginNum");
+        UserGender = getIntent().getStringExtra("LoginGender");
 
         btn_Reservation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent reservationIntent = new Intent(getApplicationContext(),ReservationActivity.class);
+                reservationIntent.putExtra("UserName",UserName);
+                reservationIntent.putExtra("UserNum",UserNum);
+                reservationIntent.putExtra("UserPhone",UserPhone);
                 startActivity(reservationIntent);
+            }
+        });
+
+        btnReservationlist.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), ReservationListActivity.class);
+                startActivity(intent);
             }
         });
         

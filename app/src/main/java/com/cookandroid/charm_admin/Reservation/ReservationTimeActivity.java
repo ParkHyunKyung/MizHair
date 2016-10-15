@@ -20,7 +20,7 @@ public class ReservationTimeActivity extends Activity {
     private TextView txt_item,txt_price;
     private LinearLayout layout_time;
     String Date = LocalDate.now().toString();
-    String Name,Price;
+    String Name,Price,StNum,UserNum,UserPhone,UserName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +38,10 @@ public class ReservationTimeActivity extends Activity {
 
         Name = getIntent().getStringExtra("Name");
         Price = getIntent().getStringExtra("Price");
+        StNum = getIntent().getStringExtra("StNum");
+        UserName = getIntent().getStringExtra("UserName");
+        UserNum = getIntent().getStringExtra("UserNum");
+        UserPhone = getIntent().getStringExtra("UserPhone");
 
         txt_item.setText(Name);
         txt_price.setText(Price);
@@ -47,19 +51,19 @@ public class ReservationTimeActivity extends Activity {
             public void onDateSelected(LocalDate date) {
                 layout_time.removeAllViews();
                 Date = date.toString();
-                makeTime(Name,Price,Date,"1:30");
-                makeTime(Name,Price,Date,"2:30");
-                makeTime(Name,Price,Date,"3:30");
+                makeTime("1:30");
+                makeTime("2:30");
+                makeTime("3:30");
                 Toast.makeText(getApplicationContext(),date.toString(),Toast.LENGTH_SHORT).show();
             }
         });
 
-        makeTime(Name,Price,Date,"1:30");
-        makeTime(Name,Price,Date,"2:30");
-        makeTime(Name,Price,Date,"3:30");
+        makeTime("1:30");
+        makeTime("2:30");
+        makeTime("3:30");
     }
 
-    public void makeTime(final String Name, final String Price,final String Date, final String Time){
+    public void makeTime(final String Time){
 
         TextView name = new TextView(this);
         name.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
@@ -75,9 +79,13 @@ public class ReservationTimeActivity extends Activity {
                 Intent checkIntent = new Intent(getApplicationContext(),ReservationCheckActivity.class);
 
                 checkIntent.putExtra("Item",Name);
-                checkIntent.putExtra("price",Price);
-                checkIntent.putExtra("time",Time);
-                checkIntent.putExtra("date",Date);
+                checkIntent.putExtra("Price",Price);
+                checkIntent.putExtra("Time",Time);
+                checkIntent.putExtra("Date",Date);
+                checkIntent.putExtra("StNum",StNum);
+                checkIntent.putExtra("UserNum",UserNum);
+                checkIntent.putExtra("UserPhone",UserPhone);
+                checkIntent.putExtra("UserName",UserName);
                 startActivity(checkIntent);
             }
         });
