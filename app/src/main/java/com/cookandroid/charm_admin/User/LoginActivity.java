@@ -27,7 +27,7 @@ public class LoginActivity extends Activity{
     private EditText edtId, edtPw; //입력받는 아이디, 비밀번호
     private Button btnLogin; //로그인 버튼
     private TextView tvLinktoSignup, tvLinktoFindPw; //회원가입 및 비밀번호 찾기
-    private String strInputId, strInputPass, strId, strPass, strName, strPhone, strNum, strGender; //사용자 정보 객체
+    private String strInputId, strInputPass, strId, strPass, strName, strPhone, strNum, strGender,strHisCount; //사용자 정보 객체
     private Intent mainIntent; //화면 인텐트
     private CheckBox chkAutoLogin; //자동 로그인 체크박스
     private boolean isLogin = false; //로그인 성공, 실패 논리변수
@@ -122,6 +122,7 @@ public class LoginActivity extends Activity{
                 strPhone = info.getString("UserPhone");
                 strNum = info.getString("UserNum");
                 strGender = info.getString("UserGender");
+                strHisCount = info.getString("HisCount");
                 return true;
             }
         } catch (Exception e) {
@@ -154,7 +155,7 @@ public class LoginActivity extends Activity{
                 mainIntent.putExtra("LoginPhone", strPhone);
                 mainIntent.putExtra("LoginNum", strNum);
                 mainIntent.putExtra("LoginGender", strGender);
-
+                mainIntent.putExtra("HisCount", strHisCount);
                 startActivity(mainIntent);
                 finish();
             } else {

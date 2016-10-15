@@ -53,7 +53,7 @@ public class ChangePassActivity extends Activity {
         LoginServer += UserNum;
         LoginServer += "&UserPass=";
         LoginServer += UserPass;
-        
+
         URLConnector task = new URLConnector(LoginServer);
         task.start();
 

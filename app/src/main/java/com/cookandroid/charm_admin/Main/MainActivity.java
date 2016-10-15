@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.cookandroid.charm_admin.CustomerManagement.ContactsListActivity;
+import com.cookandroid.charm_admin.History.HistoryActivity;
 import com.cookandroid.charm_admin.Notice.NoticeListActivity;
 import com.cookandroid.charm_admin.PriceList.PriceListActivity;
 import com.cookandroid.charm_admin.R;
@@ -26,8 +27,8 @@ import java.util.ArrayList;
  */
 public class MainActivity extends AppCompatActivity {
     private Intent reservationIntent;
-    private Button btn_Reservation, btnNotice, btnPricelist, btnCustomerlist,btnReservationlist,btnSetting;
-    private String UserId,UserPass,UserName,UserPhone,UserNum,UserGender;
+    private Button btnReservation, btnNotice, btnPricelist, btnCustomerlist,btnReservationlist,btnSetting,btnHistory;
+    private String UserId,UserPass,UserName,UserPhone,UserNum,UserGender,HisCount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,12 +42,13 @@ public class MainActivity extends AppCompatActivity {
         // 홈 아이콘 표시
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        btn_Reservation = (Button)findViewById(R.id.main_btnReservation);
+        btnReservation = (Button)findViewById(R.id.main_btnReservation);
         btnReservationlist = (Button)findViewById(R.id.main_btnReservationlist);
         btnNotice = (Button)findViewById(R.id.main_btnNotice);
         btnPricelist = (Button)findViewById(R.id.main_btnPricelist);
         btnCustomerlist = (Button)findViewById(R.id.main_btnCustomerlist);
         btnSetting = (Button)findViewById(R.id.main_btnSetting);
+        btnHistory = (Button)findViewById(R.id.main_btnHistory);
 
         UserId = getIntent().getStringExtra("LoginId");
         UserPass = getIntent().getStringExtra("LoginPass");
@@ -54,8 +56,9 @@ public class MainActivity extends AppCompatActivity {
         UserPhone = getIntent().getStringExtra("LoginPhone");
         UserNum = getIntent().getStringExtra("LoginNum");
         UserGender = getIntent().getStringExtra("LoginGender");
+        HisCount  = getIntent().getStringExtra("HisCount");
 
-        btn_Reservation.setOnClickListener(new View.OnClickListener() {
+        btnReservation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent reservationIntent = new Intent(getApplicationContext(),ReservationActivity.class);
@@ -111,6 +114,16 @@ public class MainActivity extends AppCompatActivity {
                 editor.clear();
                 editor.commit();
                 finish();
+            }
+        });
+
+        btnHistory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent historyIntent = new Intent(getApplicationContext(), HistoryActivity.class);
+                historyIntent.putExtra("UserId",UserId);
+                historyIntent.putExtra("HisCount",HisCount);
+                startActivity(historyIntent);
             }
         });
 
