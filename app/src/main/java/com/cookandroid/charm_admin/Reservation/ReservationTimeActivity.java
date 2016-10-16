@@ -6,10 +6,19 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.TableLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.cookandroid.charm_admin.R;
+import com.cookandroid.charm_admin.Server.URLConnector;
+
+import org.json.JSONArray;
 import org.threeten.bp.LocalDate;
+
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+
 import solar.blaz.date.week.WeekDatePicker;
 
 /**
@@ -18,7 +27,7 @@ import solar.blaz.date.week.WeekDatePicker;
 public class ReservationTimeActivity extends Activity {
     private WeekDatePicker datePicker;
     private TextView txt_item,txt_price;
-    private LinearLayout layout_time;
+    private LinearLayout layout_time,layout_time2,layout_time3;
     String Date = LocalDate.now().toString();
     String Name,Price,StNum,UserNum,UserPhone,UserName;
 
@@ -30,7 +39,8 @@ public class ReservationTimeActivity extends Activity {
         txt_item = (TextView)findViewById(R.id.txt_item);
         txt_price = (TextView)findViewById(R.id.txt_price);
         layout_time = (LinearLayout)findViewById(R.id.layout_time);
-
+        layout_time2 = (LinearLayout)findViewById(R.id.layout_time2);
+        layout_time3 = (LinearLayout)findViewById(R.id.layout_time3);
         datePicker = (WeekDatePicker) findViewById(R.id.reservationtime_date_picker);
 
         datePicker.setDateIndicator(LocalDate.now().plusDays(0), true);
@@ -50,27 +60,30 @@ public class ReservationTimeActivity extends Activity {
             @Override
             public void onDateSelected(LocalDate date) {
                 layout_time.removeAllViews();
+                layout_time2.removeAllViews();
+                layout_time3.removeAllViews();
                 Date = date.toString();
-                makeTime("1:30");
-                makeTime("2:30");
-                makeTime("3:30");
+                getTimeinServer(Date,StNum);
                 Toast.makeText(getApplicationContext(),date.toString(),Toast.LENGTH_SHORT).show();
             }
         });
 
-        makeTime("1:30");
-        makeTime("2:30");
-        makeTime("3:30");
+        getTimeinServer(Date,StNum);
     }
 
-    public void makeTime(final String Time){
-
+    public void makeTime(final String Time, int count){
         TextView name = new TextView(this);
         name.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
         name.setPadding(20,20,20,20);
         name.setTextSize(30);
         name.setText(Time);
-        layout_time.addView(name);
+        if(count<7){
+            layout_time.addView(name);
+        }else if (count<14){
+            layout_time2.addView(name);
+        }else{
+            layout_time3.addView(name);
+        }
 
         name.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -89,5 +102,37 @@ public class ReservationTimeActivity extends Activity {
                 startActivity(checkIntent);
             }
         });
+    }
+
+    private void getTimeinServer(String ReserveDate,String StNum) {
+        try {
+            ReserveDate = URLEncoder.encode(ReserveDate, "UTF-8");
+            StNum = URLEncoder.encode(StNum, "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        String LoginServer = "http://118.36.3.200/availableTime.php?";
+        LoginServer += "ReserveDate";
+        LoginServer += ReserveDate;
+        LoginServer += "&StNum";
+        LoginServer += StNum;
+
+        URLConnector task = new URLConnector(LoginServer);
+        task.start();
+
+        try {
+            task.join();
+            String result = task.getResult();
+
+            JSONArray var = new JSONArray(result);
+
+            for(int i=0;i<var.length();i++){
+                String time = var.get(i).toString();
+                makeTime(time.substring(0,5),i);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

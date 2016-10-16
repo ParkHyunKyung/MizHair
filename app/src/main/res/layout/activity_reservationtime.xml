@@ -94,9 +94,23 @@
         android:id="@+id/layout_time"
         android:orientation="horizontal"
         android:layout_width="336pt"
-        android:layout_height="60pt"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="18pt">
 
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/layout_time2"
+        android:orientation="horizontal"
+        android:layout_width="336pt"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="18pt">
 
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/layout_time3"
+        android:orientation="horizontal"
+        android:layout_width="336pt"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="18pt">
     </LinearLayout>
 </LinearLayout>
