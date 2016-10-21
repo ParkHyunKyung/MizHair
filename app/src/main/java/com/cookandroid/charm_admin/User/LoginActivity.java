@@ -3,6 +3,7 @@ package com.cookandroid.charm_admin.User;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.style.UnderlineSpan;
@@ -24,9 +25,10 @@ import org.json.JSONObject;
  */
 public class LoginActivity extends Activity{
 
+    private TextView txtLogo;
     private EditText edtId, edtPw; //입력받는 아이디, 비밀번호
-    private Button btnLogin; //로그인 버튼
-    private TextView tvLinktoSignup, tvLinktoFindPw; //회원가입 및 비밀번호 찾기
+    private Button btnLogin,btnJoin; //로그인 버튼, 회원가입버튼
+    //private TextView tvLinktoSignup, tvLinktoFindPw; //회원가입 및 비밀번호 찾기
     private String strInputId, strInputPass, strId, strPass, strName, strPhone, strNum, strGender,strHisCount; //사용자 정보 객체
     private Intent mainIntent; //화면 인텐트
     private CheckBox chkAutoLogin; //자동 로그인 체크박스
@@ -41,11 +43,13 @@ public class LoginActivity extends Activity{
         setTitle("로그인");
 
         //Xml 변수들에 대입
+        txtLogo = (TextView)findViewById(R.id.login_txtLogo);
         edtId = (EditText) findViewById(R.id.login_edtId);
         edtPw = (EditText) findViewById(R.id.login_edtPw);
         btnLogin = (Button) findViewById(R.id.login_btnLogin);
-        tvLinktoSignup = (TextView) findViewById(R.id.login_tvLinktoJoin);
-        tvLinktoFindPw = (TextView) findViewById(R.id.login_tvLinktoFindPw);
+        btnJoin = (Button)findViewById(R.id.login_btnJoin);
+        /*tvLinktoSignup = (TextView) findViewById(R.id.login_tvLinktoJoin);
+        tvLinktoFindPw = (TextView) findViewById(R.id.login_tvLinktoFindPw);*/
         chkAutoLogin = (CheckBox) findViewById(R.id.login_chkAutoLogin);
 
         //메인액티비티를 불러오는 인텐트 선언
@@ -56,12 +60,12 @@ public class LoginActivity extends Activity{
         autoLoginLoad();
 
         //회원가입, 비밀번호 찾기 밑줄
-        SpannableString spanSignup = new SpannableString("회원가입");
+        /*SpannableString spanSignup = new SpannableString("회원가입");
         spanSignup.setSpan(new UnderlineSpan(), 0, spanSignup.length(), 0);
         tvLinktoSignup.setText(spanSignup);
         SpannableString spanFindpw = new SpannableString("비밀번호 찾기");
         spanFindpw.setSpan(new UnderlineSpan(), 0, spanFindpw.length(), 0);
-        tvLinktoFindPw.setText(spanFindpw);
+        tvLinktoFindPw.setText(spanFindpw);*/
 
 
 
@@ -77,7 +81,7 @@ public class LoginActivity extends Activity{
         });
 
         //회원가입 클릭 시 회원가입 화면 출력
-        tvLinktoSignup.setOnClickListener(new View.OnClickListener() {
+        btnJoin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), JoinActivity.class);
@@ -86,7 +90,7 @@ public class LoginActivity extends Activity{
         });
 
         //비밀번호 찾기 클릭 시
-        tvLinktoFindPw.setOnClickListener(new View.OnClickListener() {
+        /*tvLinktoFindPw.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getApplicationContext(), "미구현", Toast.LENGTH_SHORT).show();
@@ -94,7 +98,7 @@ public class LoginActivity extends Activity{
                 //Intent intent = new Intent(getApplicationContext(), FindPwActivity.class);
                 //startActivity(intent);
             }
-        });
+        });*/
     }
 
     private boolean isLoginCheck(String id, String pw) {
@@ -148,17 +152,17 @@ public class LoginActivity extends Activity{
         //저장된 아이디와 비번 불러와서 입력된 것과 일치하는지 비교
         if (isLogin) {
             autoLoginSave();
-                //사용자가 입력한 아이디와 비번을 메인액티비티에 넘김
-                mainIntent.putExtra("LoginId", strId);
-                mainIntent.putExtra("LoginPass", strPass);
-                mainIntent.putExtra("LoginName", strName);
-                mainIntent.putExtra("LoginPhone", strPhone);
-                mainIntent.putExtra("LoginNum", strNum);
-                mainIntent.putExtra("LoginGender", strGender);
-                mainIntent.putExtra("HisCount", strHisCount);
-                startActivity(mainIntent);
-                finish();
-            } else {
+            //사용자가 입력한 아이디와 비번을 메인액티비티에 넘김
+            mainIntent.putExtra("LoginId", strId);
+            mainIntent.putExtra("LoginPass", strPass);
+            mainIntent.putExtra("LoginName", strName);
+            mainIntent.putExtra("LoginPhone", strPhone);
+            mainIntent.putExtra("LoginNum", strNum);
+            mainIntent.putExtra("LoginGender", strGender);
+            mainIntent.putExtra("HisCount", strHisCount);
+            startActivity(mainIntent);
+            finish();
+        } else {
 
 
             Toast.makeText(getApplicationContext(), "로그인 실패!", Toast.LENGTH_SHORT).show();
@@ -196,5 +200,15 @@ public class LoginActivity extends Activity{
             chkAutoLogin.setChecked(true);
             login();
         }
+    }
+
+    private  void font(){
+        Typeface type = Typeface.createFromAsset(this.getAssets(), "NanumSquareOTFR.ttf");
+        txtLogo.setTypeface(type);
+        edtId.setTypeface(type);
+        edtPw.setTypeface(type);
+        chkAutoLogin.setTypeface(type);
+        btnLogin.setTypeface(type);
+        btnJoin.setTypeface(type);
     }
 }

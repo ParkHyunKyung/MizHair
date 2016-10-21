@@ -53,7 +53,7 @@ public class ReservationCheckActivity extends Activity{
 
 
         txt_Name.setText(UserName);
-        txt_PhoneNum.setText("0"+UserPhone.substring(0,2)+"-"+UserPhone.substring(2,6)+"-"+UserPhone.substring(6));
+        txt_PhoneNum.setText(UserPhone.substring(0,3)+"-"+UserPhone.substring(3,7)+"-"+UserPhone.substring(7));
         txt_Item.setText(Item.toString());
         txt_Price.setText(Price.toString());
         txt_Date.setText(Date.toString());

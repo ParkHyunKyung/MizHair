@@ -26,8 +26,8 @@ public class ReservationActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setTitle("예약화면 테스트");
         setContentView(R.layout.activity_reservationitemlist);
+        setTitle("예약화면 테스트");
         UserName  = getIntent().getStringExtra("UserName");
         UserNum = getIntent().getStringExtra("UserNum");
         UserPhone = getIntent().getStringExtra("UserPhone");
@@ -182,7 +182,7 @@ public class ReservationActivity extends Activity {
     //리스트뷰에 높이를 계산하기 위한 메소드
     public static void setListViewHeightBasedOnChildren(ListView listview, PriceListAdapter adapter) {
         ViewGroup.LayoutParams params = listview.getLayoutParams();
-        int totalHeight = 105;
+        int totalHeight = 305;
 
         params.height = totalHeight*adapter.getCount();
         listview.setLayoutParams(params);

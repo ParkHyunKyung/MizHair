@@ -1,36 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+    android:orientation="horizontal"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-        <TextView
-            android:id="@+id/tv_ItemName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="10dp"
-            android:text="TextView"/>
+    android:layout_height="match_parent"
+    android:background="#ffffff">
 
-        <TextView
-            android:id="@+id/tv_ItemPrice"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/pricetime_text"
-            android:text="TextView"/>
+    <TextView
+        android:id="@+id/tv_ItemName"
+        android:layout_width="100pt"
+        android:layout_height="25pt"
+        android:layout_marginLeft="18pt"
+        android:layout_marginTop="10pt"
+        android:layout_marginBottom="10pt"
+        android:layout_marginRight="10dp"
+        android:textSize="18pt"
+        android:text="TextView"/>
 
-        <CheckBox
-            android:id="@+id/item_checkbox"
-            android:visibility="invisible"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-    </LinearLayout>
+    <TextView
+        android:id="@+id/tv_ItemPrice"
+        android:layout_width="70pt"
+        android:layout_height="25pt"
+        android:layout_marginTop="10pt"
+        android:layout_marginBottom="10pt"
+        android:layout_marginRight="10dp"
+        android:textSize="18pt"
+        android:text="TextView"/>
+
     <TextView
         android:id="@+id/tv_ItemTime"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="50pt"
+        android:layout_height="25pt"
+        android:layout_marginTop="10pt"
+        android:layout_marginBottom="10pt"
+        android:layout_marginRight="10dp"
+        android:textSize="18pt"
         android:text="TextView"/>
+    
+    <TextView
+        android:layout_width="49pt"
+        android:layout_height="49pt"
+        android:layout_marginTop="10pt"
+        android:layout_marginBottom="10pt"
+        android:background="@drawable/pricetime_text"
+        android:textSize="15pt"
+        android:text="등록"/>
 
 </LinearLayout>

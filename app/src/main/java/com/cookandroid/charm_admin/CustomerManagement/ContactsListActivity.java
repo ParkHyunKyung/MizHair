@@ -77,7 +77,7 @@ public class ContactsListActivity extends ListActivity {
 		}
 
 		if (isAdd) {
-			contactsList.add(new CustomerAdapter(UserName,UserNum,UserId,"0"+UserPhone,UserGender));
+			contactsList.add(new CustomerAdapter(UserName,UserNum,UserId,UserPhone,UserGender));
 		}
 	}
 

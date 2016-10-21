@@ -2,6 +2,7 @@ package com.cookandroid.charm_admin.Reservation;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -77,6 +78,7 @@ public class ReservationTimeActivity extends Activity {
         name.setPadding(20,20,20,20);
         name.setTextSize(30);
         name.setText(Time);
+        name.setBackgroundDrawable(getResources().getDrawable(R.drawable.pricetime_text));
         if(count<7){
             layout_time.addView(name);
         }else if (count<14){

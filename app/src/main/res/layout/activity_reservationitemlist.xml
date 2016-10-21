@@ -4,18 +4,22 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginLeft="20pt"
-    android:layout_marginRight="19pt">
+    android:background="#efefef">
 
     <ScrollView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10pt"
+        android:layout_marginBottom="10pt"
+        android:layout_marginLeft="10pt"
+        android:layout_marginRight="10pt">
 
 
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            >
             <LinearLayout
                 android:orientation="vertical"
                 android:background="#FF7D9F"
@@ -35,6 +39,7 @@
                 android:id="@+id/reservation_list_cut"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="14pt"
                 >
             </ListView>
             <LinearLayout
@@ -42,7 +47,8 @@
                 android:background="#FF7D9F"
                 android:layout_width="336pt"
                 android:layout_height="30pt"
-                android:layout_marginTop="10pt">
+                android:layout_marginTop="10pt"
+                >
 
                 <TextView
                     android:layout_marginTop="5pt"
@@ -57,6 +63,7 @@
                 android:id="@+id/reservation_list_color"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="14pt"
                 >
             </ListView>
 
@@ -80,6 +87,7 @@
                 android:id="@+id/reservation_list_perm"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="14pt"
                 >
             </ListView>
 
@@ -105,7 +113,7 @@
                 android:id="@+id/reservation_list_magic"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                >
+                android:layout_marginBottom="14pt">
             </ListView>
 
             <LinearLayout
@@ -129,7 +137,7 @@
                 android:id="@+id/reservation_list_clinic"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                >
+                android:layout_marginBottom="14pt">
             </ListView>
 
         </LinearLayout>

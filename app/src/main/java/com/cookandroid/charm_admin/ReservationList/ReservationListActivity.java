@@ -43,6 +43,7 @@ public class ReservationListActivity extends Activity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reservationlist);
+        setTitle("메인화면");
 
         reservationlist = (ListView)findViewById(R.id.reservationlist);
         datePicker = (WeekDatePicker) findViewById(R.id.date_picker);

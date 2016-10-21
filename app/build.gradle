@@ -3,7 +3,7 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 24
     buildToolsVersion "24.0.0"
-    useLibrary  'org.apache.http.legacy'
+    useLibrary 'org.apache.http.legacy'
     defaultConfig {
         applicationId "com.cookandroid.charm_admin"
         minSdkVersion 15
@@ -17,6 +17,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    sourceSets { main { assets.srcDirs = ['src/main/assets', 'src/main/assets/'] } }
 }
 
 dependencies {
