@@ -26,9 +26,10 @@ import solar.blaz.date.week.WeekDatePicker;
  * Created by HP on 2016-09-21.
  */
 public class ReservationTimeActivity extends Activity {
-    private WeekDatePicker datePicker;
+    //private WeekDatePicker datePicker;
+    private com.cookandroid.charm_admin.DatePicker.WeekDatePicker datePicker;
     private TextView txt_item,txt_price;
-    private LinearLayout layout_time,layout_time2,layout_time3;
+    private LinearLayout layout_time,layout_time2,layout_time3,layout_time4,layout_time5,layout_time6,layout_time7,layout_time8;
     String Date = LocalDate.now().toString();
     String Name,Price,StNum,UserNum,UserPhone,UserName;
 
@@ -42,10 +43,16 @@ public class ReservationTimeActivity extends Activity {
         layout_time = (LinearLayout)findViewById(R.id.layout_time);
         layout_time2 = (LinearLayout)findViewById(R.id.layout_time2);
         layout_time3 = (LinearLayout)findViewById(R.id.layout_time3);
-        datePicker = (WeekDatePicker) findViewById(R.id.reservationtime_date_picker);
+        layout_time4 = (LinearLayout)findViewById(R.id.layout_time4);
+        layout_time5 = (LinearLayout)findViewById(R.id.layout_time5);
+        layout_time6 = (LinearLayout)findViewById(R.id.layout_time6);
+        layout_time7 = (LinearLayout)findViewById(R.id.layout_time7);
+        layout_time8 = (LinearLayout)findViewById(R.id.layout_time8);
+        datePicker = (com.cookandroid.charm_admin.DatePicker.WeekDatePicker) findViewById(R.id.reservationtime_date_picker);
 
         datePicker.setDateIndicator(LocalDate.now().plusDays(0), true);
         datePicker.setLimits(LocalDate.now().minusWeeks(0), null);
+
 
         Name = getIntent().getStringExtra("Name");
         Price = getIntent().getStringExtra("Price");
@@ -57,12 +64,17 @@ public class ReservationTimeActivity extends Activity {
         txt_item.setText(Name);
         txt_price.setText(Price);
 
-        datePicker.setOnDateSelectedListener(new WeekDatePicker.OnDateSelected() {
+        datePicker.setOnDateSelectedListener(new com.cookandroid.charm_admin.DatePicker.WeekDatePicker.OnDateSelected() {
             @Override
             public void onDateSelected(LocalDate date) {
                 layout_time.removeAllViews();
                 layout_time2.removeAllViews();
                 layout_time3.removeAllViews();
+                layout_time4.removeAllViews();
+                layout_time5.removeAllViews();
+                layout_time6.removeAllViews();
+                layout_time7.removeAllViews();
+                layout_time8.removeAllViews();
                 Date = date.toString();
                 getTimeinServer(Date,StNum);
                 Toast.makeText(getApplicationContext(),date.toString(),Toast.LENGTH_SHORT).show();
@@ -74,17 +86,48 @@ public class ReservationTimeActivity extends Activity {
 
     public void makeTime(final String Time, int count){
         TextView name = new TextView(this);
+        TextView blank = new TextView(this);
         name.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
-        name.setPadding(20,20,20,20);
         name.setTextSize(30);
+        blank.setTextSize(30);
         name.setText(Time);
-        name.setBackgroundDrawable(getResources().getDrawable(R.drawable.pricetime_text));
-        if(count<7){
-            layout_time.addView(name);
-        }else if (count<14){
-            layout_time2.addView(name);
-        }else{
-            layout_time3.addView(name);
+        blank.setText("  ");
+        name.setBackgroundDrawable(getResources().getDrawable(R.drawable.time_text));
+        int line = count/3;
+
+        switch (line){
+            case 0:
+                layout_time.addView(name);
+                layout_time.addView(blank);
+                break;
+            case 1:
+                layout_time2.addView(name);
+                layout_time2.addView(blank);
+                break;
+            case 2:
+                layout_time3.addView(name);
+                layout_time3.addView(blank);
+                break;
+            case 3:
+                layout_time4.addView(name);
+                layout_time4.addView(blank);
+                break;
+            case 4:
+                layout_time5.addView(name);
+                layout_time5.addView(blank);
+                break;
+            case 5:
+                layout_time6.addView(name);
+                layout_time6.addView(blank);
+                break;
+            case 6:
+                layout_time7.addView(name);
+                layout_time7.addView(blank);
+                break;
+            case 7:
+                layout_time8.addView(name);
+                layout_time8.addView(blank);
+                break;
         }
 
         name.setOnClickListener(new View.OnClickListener() {
@@ -138,3 +181,5 @@ public class ReservationTimeActivity extends Activity {
         }
     }
 }
+
+

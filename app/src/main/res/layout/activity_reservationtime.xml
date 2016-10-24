@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#EFEFEF"
+    android:layout_marginBottom="5pt"
     android:gravity="center_horizontal"
     >
 
@@ -13,21 +14,22 @@
         android:layout_marginTop="20pt"
         android:layout_marginBottom="20pt"
         android:layout_width="wrap_content"
-        android:layout_height="26pt"
+        android:layout_height="30pt"
         android:text="2016년 9월 14일"
         android:textSize="24pt"
         />
 
-    <solar.blaz.date.week.WeekDatePicker
+    <com.cookandroid.charm_admin.DatePicker.WeekDatePicker
         android:id="@+id/reservationtime_date_picker"
-        android:layout_width="match_parent"
+        android:layout_width="295pt"
         android:layout_height="wrap_content"
         android:layout_marginBottom="35pt"
         android:paddingTop="5dp"
         android:paddingBottom="5dp"
-        android:textSize="18sp"
+        android:textSize="15pt"
         android:textColor="@color/date_picker_text_color"
-        app:wdp_labelTextSize="12sp"
+        app:wdp_labelTextSize="15pt"
+        app:wdp_labelTextColor="@color/date_picker_text_color"
         app:wdp_labelPadding="5dp"
         app:wdp_dayBackground="@drawable/date_picker_day_bg"
         app:wdp_indicatorDrawable="@drawable/date_picker_indicator"
@@ -53,14 +55,16 @@
     <LinearLayout
         android:layout_width="336pt"
         android:layout_height="60pt"
-        android:layout_marginLeft="18pt"
+        android:background="#ffffff"
         >
 
         <TextView
             android:id="@+id/txt_item"
             android:layout_width="wrap_content"
             android:layout_height="25pt"
+            android:layout_marginLeft="18pt"
             android:layout_marginRight="30pt"
+            android:layout_marginTop="9pt"
             android:textColor="#6E6E6E"
             android:textSize="18pt"
             android:text="볼륨매직"
@@ -70,6 +74,7 @@
             android:id="@+id/txt_price"
             android:layout_width="wrap_content"
             android:layout_height="25pt"
+            android:layout_marginTop="9pt"
             android:textColor="#6E6E6E"
             android:textSize="18pt"
             android:text="50,000원"
@@ -93,27 +98,89 @@
             android:text="시간선택"/>
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/layout_time"
-        android:orientation="horizontal"
-        android:layout_width="336pt"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="18pt">
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
 
-    </LinearLayout>
-    <LinearLayout
-        android:id="@+id/layout_time2"
-        android:orientation="horizontal"
-        android:layout_width="336pt"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="18pt">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
 
-    </LinearLayout>
-    <LinearLayout
-        android:id="@+id/layout_time3"
-        android:orientation="horizontal"
-        android:layout_width="336pt"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="18pt">
-    </LinearLayout>
+            <LinearLayout
+                android:id="@+id/layout_time"
+                android:orientation="horizontal"
+                android:layout_width="336pt"
+                android:background="#ffffff"
+                android:layout_height="50pt"
+                android:gravity="center"
+                >
+
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/layout_time2"
+                android:orientation="horizontal"
+                android:layout_width="336pt"
+                android:background="#ffffff"
+                android:layout_height="50pt"
+                android:gravity="center">
+
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/layout_time3"
+                android:orientation="horizontal"
+                android:layout_width="336pt"
+                android:background="#ffffff"
+                android:layout_height="50pt"
+                android:gravity="center">
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layout_time4"
+                android:orientation="horizontal"
+                android:layout_width="336pt"
+                android:background="#ffffff"
+                android:layout_height="50pt"
+                android:gravity="center">
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layout_time5"
+                android:orientation="horizontal"
+                android:layout_width="336pt"
+                android:background="#ffffff"
+                android:layout_height="50pt"
+                android:gravity="center">
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layout_time6"
+                android:orientation="horizontal"
+                android:layout_width="336pt"
+                android:background="#ffffff"
+                android:layout_height="50pt"
+                android:gravity="center">
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layout_time7"
+                android:orientation="horizontal"
+                android:layout_width="336pt"
+                android:background="#ffffff"
+                android:layout_height="50pt"
+                android:gravity="center">
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layout_time8"
+                android:orientation="horizontal"
+                android:layout_width="336pt"
+                android:background="#ffffff"
+                android:layout_height="50pt"
+                android:gravity="center">
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
 </LinearLayout>

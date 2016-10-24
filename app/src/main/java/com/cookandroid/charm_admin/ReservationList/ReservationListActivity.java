@@ -51,6 +51,7 @@ public class ReservationListActivity extends Activity{
         datePicker.setLimits(LocalDate.now().minusWeeks(0), null);
         tv_NoneCustomer = (TextView)findViewById(R.id.tv_NoneCustomer);
 
+        searchRservation(LocalDate.now().toString());
         /*날짜 클릭시 발생하는 이벤트*/
         datePicker.setOnDateSelectedListener(new WeekDatePicker.OnDateSelected() {
             @Override

@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#efefef"
+    android:gravity="center">
 
     <LinearLayout
         android:orientation="vertical"
         android:background="#FF7D9F"
-        android:layout_width="336pt"
+        android:layout_width="330pt"
         android:layout_height="30pt"
         android:layout_marginTop="10px">
 
@@ -22,16 +24,19 @@
 
     <LinearLayout
         android:orientation="vertical"
-        android:layout_width="336pt"
-        android:layout_height="253pt"
-        android:layout_marginLeft="20pt">
+        android:background="#ffffff"
+        android:layout_width="330pt"
+        android:layout_height="300pt"
+        >
 
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20pt">
             <TextView
                 android:layout_width="70pt"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="9pt"
                 android:textSize="16pt"
                 android:text="성함"/>
 
@@ -40,35 +45,50 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="16pt"
+                android:layout_marginTop="9pt"
                 android:text="이름"/>
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20pt"
+            android:background="#ffffff">
             <TextView
                 android:layout_width="70pt"
                 android:layout_height="wrap_content"
                 android:textSize="16pt"
+                android:layout_marginTop="9pt"
                 android:text="연락처"/>
 
             <TextView
                 android:id="@+id/txt_reservationCheckPhoneNum"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="9pt"
                 android:textSize="16pt"
                 android:text="번호"/>
 
         </LinearLayout>
 
+            <View
+                android:layout_width="300pt"
+                android:layout_height="1dp"
+                android:background="#d1d1d1"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="15dp"
+                android:layout_marginLeft="20pt"/>
+
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20pt">
             <TextView
                 android:layout_width="70pt"
                 android:layout_height="wrap_content"
                 android:textSize="16pt"
+                android:layout_marginTop="9pt"
                 android:text="예약시술"/>
 
             <TextView
@@ -76,17 +96,20 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="16pt"
+                android:layout_marginTop="9pt"
                 android:text="아이템"/>
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20pt">
             <TextView
                 android:layout_width="70pt"
                 android:layout_height="wrap_content"
                 android:textSize="16pt"
+                android:layout_marginTop="9pt"
                 android:text="가격"/>
 
             <TextView
@@ -94,17 +117,20 @@
                 android:layout_width="70pt"
                 android:layout_height="wrap_content"
                 android:textSize="16pt"
+                android:layout_marginTop="9pt"
                 android:text="얼마"/>
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20pt">
             <TextView
                 android:layout_width="70pt"
                 android:layout_height="wrap_content"
                 android:textSize="16pt"
+                android:layout_marginTop="9pt"
                 android:text="예약일시"/>
 
             <TextView
@@ -112,35 +138,41 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="16pt"
+                android:layout_marginTop="9pt"
                 android:text="날짜"/>
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20pt">
             <TextView
                 android:layout_width="70pt"
                 android:layout_height="wrap_content"
                 android:textSize="16pt"
-                android:text="소요시간"/>
+                android:layout_marginTop="9pt"
+                android:text="예약시간"/>
 
             <TextView
                 android:id="@+id/txt_reservationCheckTime"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="16pt"
+                android:layout_marginTop="9pt"
                 android:text="시간"/>
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20pt">
             <TextView
                 android:layout_width="70pt"
                 android:layout_height="wrap_content"
                 android:textSize="16pt"
+                android:layout_marginTop="9pt"
                 android:text="적립금"/>
 
             <TextView
@@ -148,17 +180,21 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="16pt"
+                android:layout_marginTop="9pt"
                 android:text="마일리지"/>
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20pt">
             <TextView
                 android:layout_width="70pt"
                 android:layout_height="wrap_content"
                 android:textSize="16pt"
+                android:layout_marginTop="8pt"
+                android:gravity="start"
                 android:text="메모"/>
 
             <EditText
@@ -166,6 +202,8 @@
                 android:layout_width="200pt"
                 android:layout_height="100pt"
                 android:textSize="16pt"
+                android:layout_marginTop="8pt"
+                android:gravity="start"
                 android:hint="Memo"/>
 
         </LinearLayout>
