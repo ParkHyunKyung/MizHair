@@ -4,6 +4,25 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="50pt"
+            android:background="@drawable/actionbar"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_marginTop="10pt"
+            android:layout_height="30pt"
+            android:textColor="#ffffff"
+            android:textSize="25pt"
+            android:gravity="center"
+            android:text="공지사항"/>
+    </RelativeLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

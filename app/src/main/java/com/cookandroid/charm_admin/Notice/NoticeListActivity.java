@@ -100,6 +100,7 @@ public class NoticeListActivity extends Activity {
                 String NoticeNum = varTest.getString("NoticeNum");// NoticeNum에 해당하는 이름 가져옴
                 String NoticeTitle = varTest.getString("NoticeTitle");// NoticeTitle에 해당하는 이름 가져옴
                 String NoticeComment = varTest.getString("NoticeComment");// NoticeComment에 해당하는 이름 가져옴
+                String NoticeDate = varTest.getString("NoticeDate");// NoticeDate에 해당하는 이름 가져옴
                 adapter.addItem(NoticeNum,NoticeTitle,NoticeComment);
             }
 

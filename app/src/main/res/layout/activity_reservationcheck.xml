@@ -2,15 +2,34 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#efefef"
-    android:gravity="center">
+    android:background="#efefef">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="50pt"
+            android:background="@drawable/actionbar"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_marginTop="10pt"
+            android:layout_height="30pt"
+            android:textColor="#ffffff"
+            android:textSize="25pt"
+            android:gravity="center"
+            android:text="예약정보 확인"/>
+    </RelativeLayout>
 
     <LinearLayout
+        android:layout_gravity="center"
         android:orientation="vertical"
         android:background="#FF7D9F"
         android:layout_width="330pt"
         android:layout_height="30pt"
-        android:layout_marginTop="10px">
+        android:layout_marginTop="10pt">
 
         <TextView
             android:layout_marginTop="5pt"
@@ -26,7 +45,8 @@
         android:orientation="vertical"
         android:background="#ffffff"
         android:layout_width="330pt"
-        android:layout_height="300pt"
+        android:layout_height="280pt"
+        android:layout_gravity="center"
         >
 
         <LinearLayout
@@ -172,27 +192,6 @@
                 android:layout_width="70pt"
                 android:layout_height="wrap_content"
                 android:textSize="16pt"
-                android:layout_marginTop="9pt"
-                android:text="적립금"/>
-
-            <TextView
-                android:id="@+id/txt_reservationCheckMileage"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="16pt"
-                android:layout_marginTop="9pt"
-                android:text="마일리지"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20pt">
-            <TextView
-                android:layout_width="70pt"
-                android:layout_height="wrap_content"
-                android:textSize="16pt"
                 android:layout_marginTop="8pt"
                 android:gravity="start"
                 android:text="메모"/>
@@ -200,9 +199,10 @@
             <EditText
                 android:id="@+id/edt_reservationCheckMemo"
                 android:layout_width="200pt"
-                android:layout_height="100pt"
+                android:layout_height="60pt"
                 android:textSize="16pt"
                 android:layout_marginTop="8pt"
+                android:background="@drawable/edit_text"
                 android:gravity="start"
                 android:hint="Memo"/>
 
@@ -213,8 +213,9 @@
     
     <Button
         android:id="@+id/btn_reservatioinOK"
-        android:layout_marginTop="17pt"
-        android:layout_width="336pt"
+        android:layout_gravity="center"
+        android:layout_marginTop="10pt"
+        android:layout_width="330pt"
         android:layout_height="57pt"
         android:background="#a259ff"
         android:textColor="#ffffff"

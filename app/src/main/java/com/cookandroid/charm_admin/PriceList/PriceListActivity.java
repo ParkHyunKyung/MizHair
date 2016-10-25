@@ -337,7 +337,7 @@ public class PriceListActivity extends AppCompatActivity {
     //리스트뷰에 높이를 계산하기 위한 메소드
     public static void setListViewHeightBasedOnChildren(ListView listview, PriceListAdapter adapter) {
         ViewGroup.LayoutParams params = listview.getLayoutParams();
-        int totalHeight = 105;
+        int totalHeight = 305;
 
         params.height = totalHeight*adapter.getCount();
         listview.setLayoutParams(params);

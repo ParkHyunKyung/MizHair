@@ -19,9 +19,9 @@ import java.net.URLEncoder;
  * Created by HP on 2016-10-01.
  */
 public class ReservationCheckActivity extends Activity{
-    TextView txt_Name,txt_PhoneNum,txt_Item,txt_Price,txt_Date,txt_Time,txt_Mileage;
+    TextView txt_Name,txt_PhoneNum,txt_Item,txt_Price,txt_Date,txt_Time;
     EditText edt_Memo;
-    String UserName,UserPhone,UserNum,Item,Price,Date,Time,Mileage,StNum;
+    String UserName,UserPhone,UserNum,Item,Price,Date,Time,StNum;
     Button reservationOK;
 
     @Override
@@ -45,7 +45,6 @@ public class ReservationCheckActivity extends Activity{
         txt_Price =(TextView)findViewById(R.id.txt_reservationCheckPrice);
         txt_Date =(TextView)findViewById(R.id.txt_reservationCheckDate);
         txt_Time =(TextView)findViewById(R.id.txt_reservationCheckTime);
-        txt_Mileage =(TextView)findViewById(R.id.txt_reservationCheckMileage);
         edt_Memo = (EditText) findViewById(R.id.edt_reservationCheckMemo);
         reservationOK = (Button)findViewById(R.id.btn_reservatioinOK);
 
@@ -58,9 +57,6 @@ public class ReservationCheckActivity extends Activity{
         txt_Price.setText(Price.toString());
         txt_Date.setText(Date.toString());
         txt_Time.setText(Time.toString());
-        Mileage = Integer.toString(Integer.parseInt(Price.toString())/20);
-        txt_Mileage.setText(Mileage);
-
         reservationOK.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -20,21 +20,17 @@ public class ImageDownloader
 {
 	public static final int IMGAE_CACHE_LIMIT_SIZE = 50;
 	public static HashMap<String, Bitmap> mImageCache = new HashMap<String, Bitmap>();
-	
+
 	public static void download(String url, ImageView imageView)
 	{
-		Bitmap cachedImage = mImageCache.get(url);
-		if(cachedImage != null)
-		{
-			imageView.setImageBitmap(getCircleBitmap(cachedImage));
-		}
-		else if(cancelPotentialDownload(url, imageView))
+
+		if(cancelPotentialDownload(url, imageView))
 		{
 			if(mImageCache.size() > IMGAE_CACHE_LIMIT_SIZE)
 			{
 				mImageCache.clear();
 			}
-			
+
 			ImageDownloaderTask task = new ImageDownloaderTask(url, imageView);
 			DownloadedDrawable downloadedDrawable = new DownloadedDrawable(task);
 			imageView.setImageDrawable(downloadedDrawable);

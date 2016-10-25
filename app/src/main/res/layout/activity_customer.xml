@@ -1,119 +1,164 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
+    android:background="#efefef"
     android:layout_height="match_parent">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_margin="5dp">
-
-        <TextView android:layout_width="80dp"
-            android:layout_height="30dp"
-            android:text="고객명"/>
-
-        <EditText android:id="@+id/edtName"
+        android:gravity="center">
+        <ImageView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="15dp"
-            android:hint="고객명"
-            android:background="@drawable/edit_text" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_margin="5dp">
+            android:layout_height="50pt"
+            android:background="@drawable/actionbar"/>
 
         <TextView
-            android:layout_width="80dp"
-            android:layout_height="30dp"
-            android:text="ID"/>
-
-        <EditText
-            android:id="@+id/edtID"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/edit_text"/>
-
-    </LinearLayout>
+            android:layout_marginTop="10pt"
+            android:layout_height="30pt"
+            android:textColor="#ffffff"
+            android:textSize="25pt"
+            android:gravity="center"
+            android:text="고객정보 수정"/>
+    </RelativeLayout>
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_width="300pt"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_margin="5dp">
-
-        <TextView
-            android:layout_width="80dp"
-            android:layout_height="30dp"
-            android:text="전화번호"/>
-
-        <EditText
-            android:id="@+id/edtPhoneNum"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/edit_text"/>
-    </LinearLayout>
-
-    <RadioGroup
-        android:id="@+id/rg_Gender"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        >
-        <RadioButton
-            android:id="@+id/radio_btnWoman"
+        android:layout_marginTop="10pt"
+        android:background="#ffffff"
+        android:layout_gravity="center"
+        android:gravity="center">
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:checked="false"
-            android:text="여성"/>
+            android:orientation="horizontal"
+            android:layout_margin="5dp">
 
-        <RadioButton
-            android:id="@+id/radio_btnMan"
+            <TextView
+                android:layout_width="70pt"
+                android:layout_height="wrap_content"
+                android:textSize="16pt"
+                android:layout_marginTop="8pt"
+                android:text="고객명"/>
+
+            <EditText android:id="@+id/edtName"
+                android:layout_width="200pt"
+                android:layout_height="wrap_content"
+                android:textSize="16pt"
+                android:layout_marginTop="8pt"
+                android:hint="고객명"
+                android:background="@drawable/edit_text" />
+
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:checked="false"
-            android:text="남성"/>
+            android:orientation="horizontal"
+            android:layout_margin="5dp">
 
-    </RadioGroup>
+            <TextView
+                android:layout_width="70pt"
+                android:layout_height="wrap_content"
+                android:textSize="16pt"
+                android:layout_marginTop="8pt"
+                android:text="ID"/>
 
-    <Button
-        android:id="@+id/btn_changePass"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="비밀번호 변경"
-        />
+            <EditText
+                android:id="@+id/edtID"
+                android:layout_width="200pt"
+                android:layout_height="wrap_content"
+                android:textSize="16pt"
+                android:layout_marginTop="8pt"
+                android:background="@drawable/edit_text"/>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_margin="5dp">
+        </LinearLayout>
 
-        <TextView
-            android:layout_width="80dp"
-            android:layout_height="30dp"
-            android:text="메모"/>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_margin="5dp">
 
-        <EditText
-            android:id="@+id/edtMemo"
-            android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:background="@drawable/edit_text"/>
+            <TextView
+                android:layout_width="70pt"
+                android:layout_height="wrap_content"
+                android:textSize="16pt"
+                android:layout_marginTop="8pt"
+                android:text="전화번호"/>
+
+            <EditText
+                android:id="@+id/edtPhoneNum"
+                android:layout_width="200pt"
+                android:layout_height="wrap_content"
+                android:textSize="16pt"
+                android:layout_marginTop="8pt"
+                android:background="@drawable/edit_text"/>
+        </LinearLayout>
+
+        <RadioGroup
+            android:id="@+id/rg_Gender"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+            <RadioButton
+                android:id="@+id/radio_btnWoman"
+                android:layout_width="70pt"
+                android:layout_height="wrap_content"
+                android:textSize="16pt"
+                android:layout_marginTop="8pt"
+                android:checked="false"
+                android:text="여성"/>
+
+            <RadioButton
+                android:id="@+id/radio_btnMan"
+                android:layout_width="70pt"
+                android:layout_height="wrap_content"
+                android:textSize="16pt"
+                android:layout_marginTop="8pt"
+                android:checked="false"
+                android:text="남성"/>
+
+        </RadioGroup>
+
+        <Button
+            android:id="@+id/btn_changePass"
+            android:layout_width="280pt"
+            android:layout_height="40pt"
+            android:layout_marginBottom="6pt"
+            android:layout_marginTop="10pt"
+            android:text="비밀번호 변경"
+            android:textSize="20pt"
+            android:background="#86c9f9"
+            android:textColor="#ffffff"
+            />
 
     </LinearLayout>
+
+    <EditText
+        android:id="@+id/edtMemo"
+        android:layout_width="300pt"
+        android:layout_height="80pt"
+        android:layout_gravity="center"
+        android:textSize="16pt"
+        android:layout_marginTop="8pt"
+        android:layout_marginBottom="10pt"
+        android:background="@drawable/edit_text"
+        android:hint="메모"/>
 
     <Button
         android:id="@+id/customer_btnModiify"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="수정"
-        android:textSize="20dp"
+        android:layout_width="300pt"
+        android:layout_height="57pt"
+        android:layout_gravity="center"
+        android:text="수정완료"
+        android:textSize="24pt"
+        android:background="#a259ff"
+        android:textColor="#ffffff"
         />
-
 
 </LinearLayout>

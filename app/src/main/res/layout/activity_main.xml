@@ -175,7 +175,7 @@
             android:text="환경설정"/>
     </LinearLayout>
 
-<!--    <LinearLayout
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
         <Button
@@ -183,6 +183,6 @@
             android:layout_width="90pt"
             android:layout_height="90pt"
             android:text="히스토리"/>
-    </LinearLayout>-->
+    </LinearLayout>
 
 </LinearLayout>

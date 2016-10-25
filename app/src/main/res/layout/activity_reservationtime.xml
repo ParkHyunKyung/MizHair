@@ -9,6 +9,25 @@
     android:gravity="center_horizontal"
     >
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="50pt"
+            android:background="@drawable/actionbar"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_marginTop="10pt"
+            android:layout_height="30pt"
+            android:textColor="#ffffff"
+            android:textSize="25pt"
+            android:gravity="center"
+            android:text="예약등록"/>
+    </RelativeLayout>
+
     <TextView
         android:id="@+id/txt_date"
         android:layout_marginTop="20pt"

@@ -61,6 +61,7 @@ public class HistoryActivity extends Activity {
                     LinearLayout.LayoutParams.WRAP_CONTENT,
                     LinearLayout.LayoutParams.WRAP_CONTENT));
             ImageDownloader.download(URL, imageView[i]);
+            imageView[i].setBackgroundResource(R.drawable.image_border);
             layout.addView(imageView[i]);
         }
     }

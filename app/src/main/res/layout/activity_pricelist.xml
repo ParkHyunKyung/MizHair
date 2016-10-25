@@ -3,6 +3,25 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:id="@+id/relativeLayout">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="50pt"
+            android:background="@drawable/actionbar"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_marginTop="10pt"
+            android:layout_height="30pt"
+            android:textColor="#ffffff"
+            android:textSize="25pt"
+            android:gravity="center"
+            android:text="요금표"/>
+    </RelativeLayout>
 
     <LinearLayout
         android:orientation="vertical"
@@ -68,82 +87,139 @@
             android:text="수정"/>
     </LinearLayout>
 
+
     <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10pt"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/relativeLayout"
         android:layout_above="@+id/pricelist_btnLayout">
+
 
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <TextView
-                android:layout_marginBottom="5dp"
-                android:background="#d4d2cb"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="20dp"
-                android:text="Cut/컷"/>
+            android:layout_height="wrap_content"
+            >
+            <LinearLayout
+                android:orientation="vertical"
+                android:background="#FF7D9F"
+                android:layout_width="336pt"
+                android:layout_height="30pt">
+
+                <TextView
+                    android:layout_marginTop="5pt"
+                    android:layout_marginLeft="18pt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20pt"
+                    android:textColor="#FFFFFF"
+                    android:textSize="18pt"
+                    android:text="Cut/컷"/>
+            </LinearLayout>
             <ListView
                 android:id="@+id/list_cut"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="14pt"
                 >
             </ListView>
-            <TextView
-                android:layout_marginBottom="5dp"
-                android:background="#d4d2cb"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="20dp"
-                android:text="Color/컬러염색"/>
+            <LinearLayout
+                android:orientation="vertical"
+                android:background="#FF7D9F"
+                android:layout_width="336pt"
+                android:layout_height="30pt"
+                android:layout_marginTop="10pt"
+                >
+
+                <TextView
+                    android:layout_marginTop="5pt"
+                    android:layout_marginLeft="18pt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20pt"
+                    android:textColor="#FFFFFF"
+                    android:textSize="18pt"
+                    android:text="Color/컬러염색"/>
+            </LinearLayout>
             <ListView
                 android:id="@+id/list_color"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="14pt"
                 >
             </ListView>
 
-            <TextView
-                android:layout_marginBottom="5dp"
-                android:background="#d4d2cb"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="20dp"
-                android:text="Perm/펌"/>
+            <LinearLayout
+                android:orientation="vertical"
+                android:background="#FF7D9F"
+                android:layout_width="336pt"
+                android:layout_height="30pt"
+                android:layout_marginTop="10pt">
+
+                <TextView
+                    android:layout_marginTop="5pt"
+                    android:layout_marginLeft="18pt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20pt"
+                    android:textColor="#FFFFFF"
+                    android:textSize="18pt"
+                    android:text="Perm/펌"/>
+            </LinearLayout>
             <ListView
                 android:id="@+id/list_perm"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="14pt"
                 >
             </ListView>
 
-            <TextView
-                android:layout_marginBottom="5dp"
-                android:background="#d4d2cb"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="17dp"
-                android:text="Magic and Straight/매직 또는 스트레이트"/>
+            <LinearLayout
+                android:orientation="vertical"
+                android:background="#FF7D9F"
+                android:layout_width="336pt"
+                android:layout_height="30pt"
+                android:layout_marginTop="10pt">
+
+                <TextView
+                    android:layout_marginTop="5pt"
+                    android:layout_marginLeft="18pt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20pt"
+                    android:textColor="#FFFFFF"
+                    android:textSize="18pt"
+                    android:text="Magic and Straight/매직 또는 스트레이트"
+                    />
+            </LinearLayout>
+
             <ListView
                 android:id="@+id/list_magic"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                >
+                android:layout_marginBottom="14pt">
             </ListView>
 
-            <TextView
-                android:layout_marginBottom="5dp"
-                android:background="#d4d2cb"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="20dp"
-                android:text="Clinic/클리닉"/>
+            <LinearLayout
+                android:orientation="vertical"
+                android:background="#FF7D9F"
+                android:layout_width="336pt"
+                android:layout_height="30pt"
+                android:layout_marginTop="10pt">
+
+                <TextView
+                    android:layout_marginTop="5pt"
+                    android:layout_marginLeft="18pt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20pt"
+                    android:textColor="#FFFFFF"
+                    android:textSize="18pt"
+                    android:text="Clinic/클리닉"
+                    />
+            </LinearLayout>
             <ListView
                 android:id="@+id/list_clinic"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                >
+                android:layout_marginBottom="14pt">
             </ListView>
 
         </LinearLayout>
