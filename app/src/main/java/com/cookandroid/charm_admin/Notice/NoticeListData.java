@@ -7,10 +7,7 @@ public class NoticeListData {
     private String tvNum;
     private String tvNoticeTitle;
     private String tvNoticeContent;
-
-    public String getTvNoticeTItle() {
-        return tvNoticeTitle;
-    }
+    private String tvNoticeDate;
 
     public void setTvNoticeTitle(String tvNoticeTitle) {
         this.tvNoticeTitle = tvNoticeTitle;
@@ -30,5 +27,17 @@ public class NoticeListData {
 
     public void setTvNum(String tvNum) {
         this.tvNum = tvNum;
+    }
+
+    public String getTvNoticeTitle() {
+        return tvNoticeTitle;
+    }
+
+    public String getTvNoticeDate() {
+        return tvNoticeDate;
+    }
+
+    public void setTvNoticeDate(String tvNoticeDate) {
+        this.tvNoticeDate = tvNoticeDate;
     }
 }

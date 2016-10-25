@@ -2,8 +2,7 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item android:color="@android:color/darker_gray" android:state_enabled="false" />
-    <item android:color="?attr/colorPrimary" android:state_enabled="true" android:state_pressed="true" />
-    <item android:color="#a259ff" android:state_enabled="true" android:state_selected="true" />
-    <item android:color="#6e6e6e" android:state_enabled="true" />
+    <item android:color="@android:color/white" android:state_enabled="true" android:state_selected="true" />
+    <item android:color="#6e6e6e" android:state_enabled="true" android:state_selected="false" />
 
 </selector>

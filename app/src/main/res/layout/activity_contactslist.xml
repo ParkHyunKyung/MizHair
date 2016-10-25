@@ -3,6 +3,7 @@
 	android:orientation="vertical"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
+	android:background="#efefef"
 	>
 	<RelativeLayout
 		android:layout_width="match_parent"
@@ -42,6 +43,7 @@
 		<ListView
 			android:id="@+id/android:list"
 			android:layout_marginTop="10pt"
+			android:background="#ffffff"
 			android:layout_width="300pt"
 			android:layout_height="340pt"
 			/>

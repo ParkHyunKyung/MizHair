@@ -2,22 +2,81 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:padding="3dip" android:orientation="vertical">
+    android:background="@drawable/notice_list"
+    android:padding="3dip"
+    android:orientation="vertical">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/tvNoticeTitle"
-        android:text="TextView"
-        android:textColor="#000000"
-        android:textSize="20dp" />
 
-    <TextView
+    <RelativeLayout
+        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        android:textColor="#000000"
-        android:id="@+id/tvNoticeContent"
-        android:textSize="13dp" />
+        android:layout_height="70pt">
+
+        <ImageView
+            android:layout_marginLeft="10pt"
+            android:layout_marginRight="5pt"
+            android:layout_marginTop="23pt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/icn_noticemini"
+            android:id="@+id/imageView" />
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/imageView"
+            android:layout_toEndOf="@+id/imageView">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/tvNoticeTitle"
+                android:text="TextView"
+                android:textColor="#000000"
+                android:textSize="20pt" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="TextView"
+                android:textColor="#000000"
+                android:id="@+id/Notice_txtDate"
+                android:textSize="13pt" />
+        </LinearLayout>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/Notice_imgBtn"
+            android:background="@drawable/icn_arrow"
+            android:layout_marginRight="20pt"
+            android:layout_alignBottom="@+id/imageView"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:id="@+id/notice_layout"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <View
+            android:layout_width="250pt"
+            android:layout_height="1dp"
+            android:background="#d1d1d1"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="15dp"
+            android:layout_marginLeft="20pt"/>
+
+        <TextView
+            android:layout_margin="10pt"
+            android:id="@+id/tvNoticeContent"
+            android:layout_width="250pt"
+            android:layout_gravity="center"
+            android:textSize="18pt"
+            android:layout_height="70pt" />
+    </LinearLayout>
 
 </LinearLayout>

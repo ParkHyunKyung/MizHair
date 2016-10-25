@@ -9,7 +9,7 @@
         android:id="@+id/tv_ItemName"
         android:layout_width="100pt"
         android:layout_height="25pt"
-        android:layout_marginLeft="30pt"
+        android:layout_marginLeft="18pt"
         android:layout_marginTop="10pt"
         android:layout_marginBottom="10pt"
         android:layout_marginRight="10dp"
@@ -18,7 +18,7 @@
 
     <TextView
         android:id="@+id/tv_ItemPrice"
-        android:layout_width="90pt"
+        android:layout_width="70pt"
         android:layout_height="25pt"
         android:layout_marginTop="10pt"
         android:layout_marginBottom="10pt"
@@ -32,8 +32,17 @@
         android:layout_height="25pt"
         android:layout_marginTop="10pt"
         android:layout_marginBottom="10pt"
-        android:layout_marginLeft="15pt"
+        android:layout_marginRight="10dp"
         android:textSize="18pt"
         android:text="TextView"/>
+    
+    <TextView
+        android:layout_width="49pt"
+        android:layout_height="49pt"
+        android:layout_marginTop="10pt"
+        android:layout_marginBottom="10pt"
+        android:background="@drawable/pricetime_text"
+        android:textSize="15pt"
+        android:text="등록"/>
 
 </LinearLayout>

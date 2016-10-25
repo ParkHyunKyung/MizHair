@@ -124,7 +124,7 @@
                     android:layout_height="20pt"
                     android:textColor="#FFFFFF"
                     android:textSize="18pt"
-                    android:text="Magic and Straight/매직 또는 스트레이트"
+                    android:text="Styling/스타일링"
                     />
             </LinearLayout>
 

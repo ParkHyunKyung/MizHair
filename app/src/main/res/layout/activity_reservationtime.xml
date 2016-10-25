@@ -48,7 +48,7 @@
         android:textSize="15pt"
         android:textColor="@color/date_picker_text_color"
         app:wdp_labelTextSize="15pt"
-        app:wdp_labelTextColor="@color/date_picker_text_color"
+        app:wdp_labelTextColor="@color/date_picker_label_text_color"
         app:wdp_labelPadding="5dp"
         app:wdp_dayBackground="@drawable/date_picker_day_bg"
         app:wdp_indicatorDrawable="@drawable/date_picker_indicator"

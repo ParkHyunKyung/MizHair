@@ -9,6 +9,8 @@ import android.widget.ListView;
 import com.cookandroid.charm_admin.PriceList.PriceListAdapter;
 import com.cookandroid.charm_admin.PriceList.PriceListData;
 import com.cookandroid.charm_admin.R;
+import com.cookandroid.charm_admin.ReservationList.ReservationAdapter;
+import com.cookandroid.charm_admin.ReservationList.ReservationData;
 import com.cookandroid.charm_admin.Server.URLConnector;
 
 import org.json.JSONArray;
@@ -19,7 +21,11 @@ import org.json.JSONObject;
  */
 public class ReservationActivity extends Activity {
     ListView listCut,listColor,listPerm,listMagic,listClinic;
-    PriceListAdapter adapterCut,adapterColor,adapterPerm,adapterMagic,adapterClinic;
+    ReservationItemListAdapter adapterCut;
+    ReservationItemListAdapter adapterColor;
+    ReservationItemListAdapter adapterPerm;
+    ReservationItemListAdapter adapterMagic;
+    ReservationItemListAdapter adapterClinic;
     int listviewPosition;
     String UserName,UserNum,UserPhone;
 
@@ -57,7 +63,8 @@ public class ReservationActivity extends Activity {
         listCut.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                PriceListData item = adapterCut.mPriceListData.get(i);
+
+                ReservationItemListData item = adapterCut.mReservationItemListData.get(i);
 
                 intentselectTime(item.getTv_ItemName().toString(),
                                 item.getTv_ItemPrice().toString(),
@@ -70,7 +77,7 @@ public class ReservationActivity extends Activity {
         listColor.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                PriceListData item = adapterColor.mPriceListData.get(i);
+                ReservationItemListData item = adapterColor.mReservationItemListData.get(i);
 
                 intentselectTime(item.getTv_ItemName().toString(),
                         item.getTv_ItemPrice().toString(),
@@ -83,7 +90,7 @@ public class ReservationActivity extends Activity {
         listPerm.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                PriceListData item = adapterPerm.mPriceListData.get(i);
+                ReservationItemListData item = adapterPerm.mReservationItemListData.get(i);
 
                 intentselectTime(item.getTv_ItemName().toString(),
                         item.getTv_ItemPrice().toString(),
@@ -96,7 +103,7 @@ public class ReservationActivity extends Activity {
         listMagic.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                PriceListData item = adapterMagic.mPriceListData.get(i);
+                ReservationItemListData item = adapterMagic.mReservationItemListData.get(i);
 
                 intentselectTime(item.getTv_ItemName().toString(),
                         item.getTv_ItemPrice().toString(),
@@ -109,7 +116,7 @@ public class ReservationActivity extends Activity {
         listClinic.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                PriceListData item = adapterClinic.mPriceListData.get(i);
+                ReservationItemListData item = adapterClinic.mReservationItemListData.get(i);
 
                 intentselectTime(item.getTv_ItemName().toString(),
                         item.getTv_ItemPrice().toString(),
@@ -122,7 +129,7 @@ public class ReservationActivity extends Activity {
 
     private void addCut(){
 
-        adapterCut = new PriceListAdapter();
+        adapterCut = new ReservationItemListAdapter();
 
         listCut = (ListView)findViewById(R.id.reservation_list_cut);
 
@@ -134,7 +141,7 @@ public class ReservationActivity extends Activity {
 
     private void addColor(){
 
-        adapterColor = new PriceListAdapter();
+        adapterColor = new ReservationItemListAdapter();
         listColor = (ListView)findViewById(R.id.reservation_list_color);
         listColor.setAdapter(adapterColor);  // 리스트 뷰에 adapter 를 등록한다
 
@@ -146,7 +153,7 @@ public class ReservationActivity extends Activity {
 
     private void addPerm(){
 
-        adapterPerm = new PriceListAdapter();
+        adapterPerm = new ReservationItemListAdapter();
         listPerm = (ListView)findViewById(R.id.reservation_list_perm);
         listPerm.setAdapter(adapterPerm);  // 리스트 뷰에 adapter 를 등록한다
 
@@ -158,7 +165,7 @@ public class ReservationActivity extends Activity {
 
     private void addMagic(){
 
-        adapterMagic = new PriceListAdapter();
+        adapterMagic = new ReservationItemListAdapter();
         listMagic = (ListView)findViewById(R.id.reservation_list_magic);
         listMagic.setAdapter(adapterMagic);  // 리스트 뷰에 adapter 를 등록한다
 
@@ -169,7 +176,7 @@ public class ReservationActivity extends Activity {
     }
 
     private void addClinlic(){
-        adapterClinic = new PriceListAdapter();
+        adapterClinic = new ReservationItemListAdapter();
 
         listClinic = (ListView)findViewById(R.id.reservation_list_clinic);
         listClinic.setAdapter(adapterClinic);  // 리스트 뷰에 adapter 를 등록한다
@@ -180,7 +187,7 @@ public class ReservationActivity extends Activity {
     }
 
     //리스트뷰에 높이를 계산하기 위한 메소드
-    public static void setListViewHeightBasedOnChildren(ListView listview, PriceListAdapter adapter) {
+    public static void setListViewHeightBasedOnChildren(ListView listview, ReservationItemListAdapter adapter) {
         ViewGroup.LayoutParams params = listview.getLayoutParams();
         int totalHeight = 305;
 
@@ -189,7 +196,7 @@ public class ReservationActivity extends Activity {
         listview.requestLayout();
     }
 
-    private void connection(String styleName,PriceListAdapter adapter) {
+    private void connection(String styleName,ReservationItemListAdapter adapter) {
 
         String LoginServer = "http://118.36.3.200/menu.php";
         URLConnector task = new URLConnector(LoginServer);

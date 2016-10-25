@@ -2,47 +2,82 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_margin="10dp">
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="50pt"
+            android:background="@drawable/actionbar"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_marginTop="10pt"
+            android:layout_height="30pt"
+            android:textColor="#ffffff"
+            android:textSize="25pt"
+            android:gravity="center"
+            android:text="공지사항"/>
+    </RelativeLayout>
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10pt"
+        android:layout_gravity="center">
         <EditText
             android:id="@+id/notice_title"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:hint="제목입력"/>
+            android:layout_width="300pt"
+            android:layout_height="50pt"
+            android:textSize="18pt"
+            android:background="@drawable/edit_text"
+            android:hint="제목을 입력하세요"/>
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center">
         <EditText
             android:id="@+id/notice_content"
-            android:layout_width="match_parent"
-            android:layout_height="400dp"
+            android:layout_width="300pt"
+            android:layout_height="250pt"
+            android:textSize="18pt"
+            android:background="@drawable/edit_text"
             android:gravity="top"
-            android:hint="내용입력"/>
+            android:hint="내용을 입력하세요"/>
     </LinearLayout>
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-
         <Button
-            android:id="@+id/btn_modify"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="수정"/>
-
-        <Button
-            android:id="@+id/btn_delete"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="삭제"
+            android:layout_width="90pt"
+            android:layout_height="34pt"
+            android:background="@drawable/notice_notify_button"
+            android:textSize="12pt"
+            android:textColor="#6e6e6e"
+            android:text="수정"
+            android:layout_margin="10pt"
             android:layout_alignParentTop="true"
+            android:id="@+id/notice_btnNotify"
             android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true" />
+            android:layout_alignParentEnd="true"/>
+
+        <Button
+            android:layout_width="90pt"
+            android:layout_height="34pt"
+            android:background="@drawable/notice_delete_button"
+            android:textSize="12pt"
+            android:textColor="#e1021d"
+            android:layout_margin="10pt"
+            android:text="삭제"
+            android:layout_toLeftOf="@+id/notice_btnNotify"
+            android:layout_toStartOf="@+id/notice_btnNotify"
+            android:id="@+id/notice_btnDelete" />
 
     </RelativeLayout>
 </LinearLayout>

@@ -1,4 +1,4 @@
-package com.cookandroid.charm_admin.PriceList;
+package com.cookandroid.charm_admin.Reservation;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -14,23 +14,23 @@ import java.util.ArrayList;
 /**
  * Created by HP on 2016-09-20.
  */
-public class PriceListAdapter extends BaseAdapter {
+public class ReservationItemListAdapter extends BaseAdapter {
     private Context mContext = null;
-    public ArrayList<PriceListData> mPriceListData = new ArrayList<PriceListData>();
+    public ArrayList<ReservationItemListData> mReservationItemListData = new ArrayList<ReservationItemListData>();
 
-    public PriceListAdapter() {
+    public ReservationItemListAdapter() {
 /*        super();
         this.mContext = mContext;*/
     }
 
     @Override
     public int getCount() {
-        return mPriceListData.size();
+        return mReservationItemListData.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return mPriceListData.get(position);
+        return mReservationItemListData.get(position);
     }
 
     @Override
@@ -39,16 +39,16 @@ public class PriceListAdapter extends BaseAdapter {
     }
 
     public void addItem(String ItemName, String ItemPrice, String ItemTime, String ItemNum){
-        PriceListData addInfo = new PriceListData();
+        ReservationItemListData addInfo = new ReservationItemListData();
         addInfo.setTv_ItemName(ItemName);
         addInfo.setTv_ItemPrice(ItemPrice);
         addInfo.setTv_ItemTime(ItemTime);
         addInfo.setTv_ItemNum(ItemNum);
-        mPriceListData.add(addInfo);
+        mReservationItemListData.add(addInfo);
     }
 
     public void remove(int position){
-        mPriceListData.remove(position);
+        mReservationItemListData.remove(position);
         dataChange();
     }
 /*
@@ -71,7 +71,7 @@ public class PriceListAdapter extends BaseAdapter {
             holder = new ViewHolder();
 
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = inflater.inflate(R.layout.price_list_row, parent, false);
+            convertView = inflater.inflate(R.layout.reservation_itemlist_row, parent, false);
 
             holder.tv_ItemName = (TextView) convertView.findViewById(R.id.tv_ItemName);
             holder.tv_ItemPrice = (TextView) convertView.findViewById(R.id.tv_ItemPrice);
@@ -82,7 +82,7 @@ public class PriceListAdapter extends BaseAdapter {
             holder = (ViewHolder) convertView.getTag();
         }
 
-        PriceListData mData = mPriceListData.get(position);
+        ReservationItemListData mData = mReservationItemListData.get(position);
 
         holder.tv_ItemName.setText(mData.getTv_ItemName());
         holder.tv_ItemPrice.setText(mData.getTv_ItemPrice());

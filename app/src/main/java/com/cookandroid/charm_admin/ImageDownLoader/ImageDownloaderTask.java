@@ -156,27 +156,29 @@ public class ImageDownloaderTask extends AsyncTask<String, Void, Bitmap>
 	}
 	public static Bitmap getCircleBitmap(Bitmap bitmap) {
 		Bitmap output = Bitmap.createBitmap(bitmap.getWidth(), bitmap.getHeight(), Bitmap.Config.ARGB_8888);
+		Bitmap resized = null;
+		resized = Bitmap.createScaledBitmap(bitmap, bitmap.getWidth()*700/bitmap.getHeight(), 700, true);
 		Canvas canvas = new Canvas(output);
 		final int color = 0xff424242;
 		final Paint paint = new Paint();
-		Rect rect = new Rect(0, 0, bitmap.getWidth(), bitmap.getHeight());
+		Rect rect = new Rect(0, 0, resized.getWidth(), resized.getHeight());
 		if(bitmap.getWidth()<bitmap.getHeight()){
-			rect = new Rect(0, 0, bitmap.getWidth(), bitmap.getHeight());
+			rect = new Rect(0, 0, resized.getWidth(), resized.getHeight());
 		}else {
-			rect = new Rect(0, 0, bitmap.getHeight(), bitmap.getWidth());
+			rect = new Rect(0, 0, resized.getHeight(), resized.getWidth());
 		}
 		paint.setAntiAlias(true);
 		canvas.drawARGB(0, 0, 0, 0);
 		paint.setColor(color);
-		int size = (bitmap.getWidth()/2);
-		if(bitmap.getWidth()<bitmap.getHeight()){
-			size = (bitmap.getWidth()/2);
+		int size = (resized.getWidth()/2);
+		if(resized.getWidth()<resized.getHeight()){
+			size = (resized.getWidth()/2);
 		}else {
-			size = (bitmap.getHeight()/2);
+			size = (resized.getHeight()/2);
 		}
 		canvas.drawCircle(size, size, size, paint);
 		paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
-		canvas.drawBitmap(bitmap, rect, rect, paint);
+		canvas.drawBitmap(resized, rect, rect, paint);
 		return output;
 	}
 }

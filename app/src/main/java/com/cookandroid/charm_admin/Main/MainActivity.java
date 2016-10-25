@@ -3,11 +3,8 @@ package com.cookandroid.charm_admin.Main;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
-import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -15,30 +12,26 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.cookandroid.charm_admin.CustomerManagement.ContactsListActivity;
+import com.cookandroid.charm_admin.Etc.EtcActivity;
 import com.cookandroid.charm_admin.History.HistoryActivity;
 import com.cookandroid.charm_admin.Notice.NoticeListActivity;
 import com.cookandroid.charm_admin.PriceList.PriceListActivity;
 import com.cookandroid.charm_admin.R;
 import com.cookandroid.charm_admin.Reservation.ReservationActivity;
-import com.cookandroid.charm_admin.ReservationList.ReservationAdapter;
 import com.cookandroid.charm_admin.ReservationList.ReservationListActivity;
 import com.cookandroid.charm_admin.Server.URLConnector;
-import com.cookandroid.charm_admin.User.LoginActivity;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
-import org.threeten.bp.LocalDate;
 
 import java.net.URLEncoder;
-import java.util.ArrayList;
 
 /**
  * 테스트용 주석
  */
 public class MainActivity extends AppCompatActivity {
     private Intent reservationIntent;
-    private ImageView btnReservation, btnNotice, btnPricelist, btnCustomerlist,btnReservationlist,btnSetting;
-    private Button btnHistory;
+    private ImageView btnReservation, btnNotice, btnPricelist, btnCustomerlist,btnReservationlist,btnSetting,btnHistory;
     private String UserId,UserPass,UserName,UserPhone,UserNum,UserGender,HisCount;
     private TextView txtReservation, txtNotice, txtPricelist, txtCustomerlist,txtReservationlist,txtSetting,
             txtReservationCount,txtTime,txtStyle;
@@ -48,7 +41,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        setTitle("메인화면");
 
         btnReservation = (ImageView)findViewById(R.id.main_btnReservation);
         btnReservationlist = (ImageView)findViewById(R.id.main_btnReservationlist);
@@ -56,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
         btnPricelist = (ImageView)findViewById(R.id.main_btnPricelist);
         btnCustomerlist = (ImageView)findViewById(R.id.main_btnCustomerlist);
         btnSetting = (ImageView)findViewById(R.id.main_btnSetting);
-        /*btnHistory = (Button)findViewById(R.id.main_btnHistory);*/
+        btnHistory = (ImageView)findViewById(R.id.main_btnHistory);
 
         txtReservation = (TextView) findViewById(R.id.main_txtReservation);
         txtReservationlist = (TextView)findViewById(R.id.main_txtReservationlist);
@@ -123,21 +115,15 @@ public class MainActivity extends AppCompatActivity {
         btnSetting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent loginIntent = new Intent(getApplicationContext(), LoginActivity.class);
-                startActivity(loginIntent);
-                //자동로그인 캐시를 지운다.
-                SharedPreferences setting;
-                SharedPreferences.Editor editor;
-                setting = getSharedPreferences("setting", 0);
-                editor = setting.edit();
-                editor.clear();
-                editor.commit();
-                finish();
+
+
+                Intent etcIntent = new Intent(getApplicationContext(), EtcActivity.class);
+                startActivity(etcIntent);
+
             }
         });
 
         searchTodayRservation("20161022");
-/*
         btnHistory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -146,7 +132,7 @@ public class MainActivity extends AppCompatActivity {
                 historyIntent.putExtra("HisCount",HisCount);
                 startActivity(historyIntent);
             }
-        });*/
+        });
 
     }
 /*

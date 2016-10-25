@@ -27,8 +27,8 @@ public class NoticeActivity extends Activity {
         setContentView(R.layout.activity_notice);
         setTitle("세부공지");
 
-        btnModify = (Button)findViewById(R.id.btn_modify);
-        btnDelete = (Button)findViewById(R.id.btn_delete);
+        btnModify = (Button)findViewById(R.id.notice_btnNotify);
+        btnDelete = (Button)findViewById(R.id.notice_btnDelete);
 
         notice_title = (EditText)findViewById(R.id.notice_title);
         notice_content = (EditText)findViewById(R.id.notice_content);

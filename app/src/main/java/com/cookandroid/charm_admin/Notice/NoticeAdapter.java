@@ -1,11 +1,18 @@
 package com.cookandroid.charm_admin.Notice;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.cookandroid.charm_admin.R;
 
@@ -44,13 +51,30 @@ public class NoticeAdapter extends BaseAdapter {
         // 화면에 표시될 View(Layout이 inflate된)으로부터 위젯에 대한 참조 획득
         TextView titleTextView = (TextView) convertView.findViewById(R.id.tvNoticeTitle) ;
         TextView descTextView = (TextView) convertView.findViewById(R.id.tvNoticeContent) ;
+        TextView dateTextView = (TextView) convertView.findViewById(R.id.Notice_txtDate) ;
+        ImageView btnImageView = (ImageView)convertView.findViewById(R.id.Notice_imgBtn);
+        Button btnDelete = (Button)convertView.findViewById(R.id.notice_btnDelete);
+        Button btnNotify = (Button)convertView.findViewById(R.id.notice_btnNotify);
+        final LinearLayout layout = (LinearLayout)convertView.findViewById(R.id.notice_layout);
 
         // Data Set(listViewItemList)에서 position에 위치한 데이터 참조 획득
-        NoticeListData listViewItem = listViewItemList.get(position);
+        final NoticeListData listViewItem = listViewItemList.get(position);
 
+        //버튼 클릭 이벤트 넣기
+        btnImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (layout.getVisibility() == View.GONE) {
+                    layout.setVisibility(View.VISIBLE);
+                } else {
+                    layout.setVisibility(View.GONE);
+                }
+            }
+        });
         // 아이템 내 각 위젯에 데이터 반영
-        titleTextView.setText(listViewItem.getTvNoticeTItle());
+        titleTextView.setText(listViewItem.getTvNoticeTitle());
         descTextView.setText(listViewItem.getTvNoticeContent());
+        dateTextView.setText(listViewItem.getTvNoticeDate());
 
         return convertView;
     }
@@ -68,13 +92,15 @@ public class NoticeAdapter extends BaseAdapter {
     }
 
     // 아이템 데이터 추가를 위한 함수
-    public void addItem(String num, String title, String content) {
+    public void addItem(String num, String title, String content,String Date) {
         NoticeListData item = new NoticeListData();
         item.setTvNum(num);
         item.setTvNoticeTitle(title);
         item.setTvNoticeContent(content);
+        item.setTvNoticeDate(Date);
 
         listViewItemList.add(item);
     }
-
 }
+
+

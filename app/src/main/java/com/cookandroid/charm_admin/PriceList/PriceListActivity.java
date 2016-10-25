@@ -51,14 +51,14 @@ public class PriceListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pricelist);
-        setTitle("이용요금표");
 
         layout_modify=(LinearLayout)findViewById(R.id.layout_modify);
         btnLayout = (LinearLayout) findViewById(R.id.pricelist_btnLayout);
         btnEdit = (Button) findViewById(R.id.pricelist_btnEdit);
         sStyleKind = (Spinner)findViewById(R.id.styleKind);
-        sAdapter = ArrayAdapter.createFromResource(this,R.array.styleKind,android.R.layout.simple_spinner_dropdown_item);
+        sAdapter = ArrayAdapter.createFromResource(this,R.array.styleKind,R.layout.price_spinner);
         sStyleKind.setAdapter(sAdapter);
+
 
         sStyleKind.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -76,7 +76,7 @@ public class PriceListActivity extends AppCompatActivity {
         edtPrice = (EditText)findViewById(R.id.edtPrice);
         btnAdd = (Button)findViewById(R.id.btn_add);
         btnDelete = (Button)findViewById(R.id.btn_delete);
-        btnOK = (Button)findViewById(R.id.btn_Ok);
+       // btnOK = (Button)findViewById(R.id.btn_Ok);
 
         addCut();
         addColor();
@@ -87,7 +87,14 @@ public class PriceListActivity extends AppCompatActivity {
         btnEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                layout_modify.setVisibility(View.VISIBLE);
+
+                if (layout_modify.getVisibility() == View.GONE) {
+                    btnEdit.setText("완료");
+                    layout_modify.setVisibility(View.VISIBLE);
+                } else {
+                    btnEdit.setText("수정");
+                    layout_modify.setVisibility(View.GONE);
+                }
             }
         });
 
@@ -187,17 +194,17 @@ public class PriceListActivity extends AppCompatActivity {
             }
         });
 
-        btnOK.setOnClickListener(new View.OnClickListener() {
+       /* btnOK.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 layout_modify.setVisibility(View.INVISIBLE);
-/*                listCut.setClickable(false);
+*//*                listCut.setClickable(false);
                 listPerm.setClickable(false);
                 listMagic.setClickable(false);
                 listColor.setClickable(false);
-                listClinic.setClickable(false);*/
+                listClinic.setClickable(false);*//*
             }
-        });
+        });*/
 
         listCut.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -337,7 +344,7 @@ public class PriceListActivity extends AppCompatActivity {
     //리스트뷰에 높이를 계산하기 위한 메소드
     public static void setListViewHeightBasedOnChildren(ListView listview, PriceListAdapter adapter) {
         ViewGroup.LayoutParams params = listview.getLayoutParams();
-        int totalHeight = 305;
+        int totalHeight = 200;
 
         params.height = totalHeight*adapter.getCount();
         listview.setLayoutParams(params);

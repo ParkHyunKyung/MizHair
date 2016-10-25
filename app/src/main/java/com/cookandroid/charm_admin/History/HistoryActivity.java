@@ -1,11 +1,15 @@
 package com.cookandroid.charm_admin.History;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.Image;
 import android.os.Bundle;
+import android.support.v4.view.ViewPager;
+import android.support.v4.widget.DrawerLayout;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
@@ -53,6 +57,7 @@ public class HistoryActivity extends Activity {
     {
         final ImageView imageView[] = new ImageView[Integer.parseInt(HisCount)];
         for(int i = 0; i < Integer.parseInt(HisCount) ; i++){
+
             String URL = "http://118.36.3.200/Images/";
             URL += UserId+"/";
             URL += Integer.toString(i+1);
@@ -61,6 +66,10 @@ public class HistoryActivity extends Activity {
                     LinearLayout.LayoutParams.WRAP_CONTENT,
                     LinearLayout.LayoutParams.WRAP_CONTENT));
             ImageDownloader.download(URL, imageView[i]);
+            ViewGroup.LayoutParams params = (ViewGroup.LayoutParams)imageView[i].getLayoutParams();
+            params.width = 500;
+            params.height = 500;
+            imageView[i].setLayoutParams(params);
             imageView[i].setBackgroundResource(R.drawable.image_border);
             layout.addView(imageView[i]);
         }

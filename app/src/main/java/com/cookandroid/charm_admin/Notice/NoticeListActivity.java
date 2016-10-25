@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.cookandroid.charm_admin.R;
@@ -21,7 +22,8 @@ import org.json.JSONObject;
  */
 public class NoticeListActivity extends Activity {
 
-    private Button btnCencle, btnAdd;
+    private Button btnCencle;
+    private TextView btnAdd;
     private ListView noticeList;
     private NoticeAdapter adapter;
 
@@ -51,11 +53,11 @@ public class NoticeListActivity extends Activity {
 
                 Toast.makeText(getApplicationContext(),num,Toast.LENGTH_SHORT).show();
 
-                String title = item.getTvNoticeTItle();
+                String title = item.getTvNoticeTitle();
 
                 String content = item.getTvNoticeContent();
 
-                /*title과 contents를 intent로 NoticeActivity로 전송*/
+                //title과 contents를 intent로 NoticeActivity로 전송
                 intent.putExtra("Num",num);
                 intent.putExtra("Add","");
                 intent.putExtra("Title",title);
@@ -64,15 +66,15 @@ public class NoticeListActivity extends Activity {
             }
         });
 
-        btnCencle = (Button)findViewById(R.id.notice_btnCancle);
+/*        btnCencle = (Button)findViewById(R.id.notice_btnCancle);
         btnCencle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 finish();
             }
-        });
+        });*/
 
-        btnAdd = (Button)findViewById(R.id.btn_add);
+        btnAdd = (TextView) findViewById(R.id.btn_add);
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -101,7 +103,7 @@ public class NoticeListActivity extends Activity {
                 String NoticeTitle = varTest.getString("NoticeTitle");// NoticeTitle에 해당하는 이름 가져옴
                 String NoticeComment = varTest.getString("NoticeComment");// NoticeComment에 해당하는 이름 가져옴
                 String NoticeDate = varTest.getString("NoticeDate");// NoticeDate에 해당하는 이름 가져옴
-                adapter.addItem(NoticeNum,NoticeTitle,NoticeComment);
+                adapter.addItem(NoticeNum,NoticeTitle,NoticeComment,NoticeDate);
             }
 
         } catch (Exception e) {

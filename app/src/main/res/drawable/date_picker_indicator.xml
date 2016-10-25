@@ -4,11 +4,12 @@
     <item android:state_selected="true">
         <color android:color="@android:color/transparent" />
     </item>
-        
+
     <item>
-        <shape android:shape="oval">
-            <solid android:color="#a259ff" />
-            <size android:height="10dp" android:width="10dp" />
+        <shape android:shape="oval" >
+            <solid android:color="@android:color/transparent" />
+            <stroke android:width="3dip" android:color="#a259ff"/>
+            <size android:height="28pt" android:width="28pt" />
         </shape>
     </item>
 

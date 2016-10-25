@@ -32,58 +32,90 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true">
         <LinearLayout
+            android:orientation="vertical"
             android:id="@+id/layout_modify"
-            android:visibility="invisible"
+            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-            <Spinner
-                android:id="@+id/styleKind"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-            </Spinner>
-            <EditText
-                android:id="@+id/edtName"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:hint="시술명"
-                />
-            <EditText
-                android:id="@+id/edtPrice"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:hint="가격"
-                />
-            <EditText
-                android:id="@+id/edtTime"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:hint="소요시간"
-                />
-            <Button
-                android:id="@+id/btn_add"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="추가"/>
-            <Button
-                android:id="@+id/btn_delete"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="삭제"/>
-            <Button
-                android:id="@+id/btn_Ok"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="완료"/>
+                <Spinner
+                    android:layout_marginLeft="15pt"
+                    android:id="@+id/styleKind"
+                    android:layout_width="70pt"
+                    android:layout_height="20pt">
+
+                </Spinner>
+                <EditText
+                    android:layout_marginLeft="10pt"
+                    android:id="@+id/edtName"
+                    android:layout_width="70pt"
+                    android:layout_height="wrap_content"
+                    android:textSize="15pt"
+                    android:hint="시술명"
+                    />
+                <EditText
+                    android:layout_marginLeft="10pt"
+                    android:id="@+id/edtPrice"
+                    android:layout_width="70pt"
+                    android:textSize="15pt"
+                    android:layout_height="wrap_content"
+                    android:hint="가격"
+                    />
+                <EditText
+                    android:layout_marginLeft="10pt"
+                    android:id="@+id/edtTime"
+                    android:layout_width="70pt"
+                    android:textSize="15pt"
+                    android:layout_height="wrap_content"
+                    android:hint="소요시간"
+                    />
+
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <Button
+                    android:layout_width="90pt"
+                    android:layout_height="34pt"
+                    android:background="@drawable/notice_notify_button"
+                    android:textSize="12pt"
+                    android:textColor="#6e6e6e"
+                    android:text="추가"
+                    android:layout_margin="10pt"
+                    android:layout_alignParentTop="true"
+                    android:id="@+id/btn_add"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"/>
+
+                <Button
+                    android:layout_width="90pt"
+                    android:layout_height="34pt"
+                    android:background="@drawable/notice_delete_button"
+                    android:textSize="12pt"
+                    android:textColor="#e1021d"
+                    android:layout_margin="10pt"
+                    android:text="삭제"
+                    android:layout_toLeftOf="@+id/btn_add"
+                    android:layout_toStartOf="@+id/btn_add"
+                    android:id="@+id/btn_delete" />
+
+            </RelativeLayout>
+
         </LinearLayout>
 
         <Button
-            android:layout_margin="3dp"
+            android:layout_gravity="center"
+            android:layout_margin="10pt"
             android:id="@+id/pricelist_btnEdit"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#3498DB"
+            android:layout_width="330pt"
+            android:layout_height="50pt"
+            android:background="#a259ff"
             android:textColor="#ffffff"
+            android:textSize="24pt"
             android:text="수정"/>
     </LinearLayout>
 
@@ -187,7 +219,7 @@
                     android:layout_height="20pt"
                     android:textColor="#FFFFFF"
                     android:textSize="18pt"
-                    android:text="Magic and Straight/매직 또는 스트레이트"
+                    android:text="Styling/스타일링"
                     />
             </LinearLayout>
 
@@ -202,8 +234,7 @@
                 android:orientation="vertical"
                 android:background="#FF7D9F"
                 android:layout_width="336pt"
-                android:layout_height="30pt"
-                android:layout_marginTop="10pt">
+                android:layout_height="30pt">
 
                 <TextView
                     android:layout_marginTop="5pt"

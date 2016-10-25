@@ -39,6 +39,7 @@
         <activity android:name=".Reservation.ReservationCheckActivity" android:label="ReservationCheckActivity"/>
         <activity android:name=".CustomerManagement.ChangePassActivity" android:label="ChangePassActivity"/>
         <activity android:name=".History.HistoryActivity" android:label="HistoryActivity"/>
+        <activity android:name=".Etc.EtcActivity" android:label="EtcActivity"/>
     </application>
 
 </manifest>

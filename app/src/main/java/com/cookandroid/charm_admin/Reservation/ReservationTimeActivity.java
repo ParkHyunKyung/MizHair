@@ -28,7 +28,7 @@ import solar.blaz.date.week.WeekDatePicker;
 public class ReservationTimeActivity extends Activity {
     //private WeekDatePicker datePicker;
     private com.cookandroid.charm_admin.DatePicker.WeekDatePicker datePicker;
-    private TextView txt_item,txt_price;
+    private TextView txt_item,txt_price,txt_date;
     private LinearLayout layout_time,layout_time2,layout_time3,layout_time4,layout_time5,layout_time6,layout_time7,layout_time8;
     String Date = LocalDate.now().toString();
     String Name,Price,StNum,UserNum,UserPhone,UserName;
@@ -40,6 +40,7 @@ public class ReservationTimeActivity extends Activity {
 
         txt_item = (TextView)findViewById(R.id.txt_item);
         txt_price = (TextView)findViewById(R.id.txt_price);
+        txt_date = (TextView)findViewById(R.id.txt_date);
         layout_time = (LinearLayout)findViewById(R.id.layout_time);
         layout_time2 = (LinearLayout)findViewById(R.id.layout_time2);
         layout_time3 = (LinearLayout)findViewById(R.id.layout_time3);
@@ -60,7 +61,7 @@ public class ReservationTimeActivity extends Activity {
         UserName = getIntent().getStringExtra("UserName");
         UserNum = getIntent().getStringExtra("UserNum");
         UserPhone = getIntent().getStringExtra("UserPhone");
-
+        txt_date.setText(LocalDate.now().toString().substring(0,4)+"년"+LocalDate.now().toString().substring(5,7)+"월"+LocalDate.now().toString().substring(8,10)+"일");
         txt_item.setText(Name);
         txt_price.setText(Price);
 
@@ -77,9 +78,10 @@ public class ReservationTimeActivity extends Activity {
                 layout_time8.removeAllViews();
                 Date = date.toString();
                 getTimeinServer(Date,StNum);
-                Toast.makeText(getApplicationContext(),date.toString(),Toast.LENGTH_SHORT).show();
+                txt_date.setText(Date.substring(0,4)+"년"+Date.substring(5,7)+"월"+Date.substring(8,10)+"일");
             }
         });
+
 
         getTimeinServer(Date,StNum);
     }
