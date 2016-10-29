@@ -43,7 +43,6 @@ public class LoginActivity extends Activity{
         setTitle("로그인");
 
         //Xml 변수들에 대입
-        txtLogo = (TextView)findViewById(R.id.login_txtLogo);
         edtId = (EditText) findViewById(R.id.login_edtId);
         edtPw = (EditText) findViewById(R.id.login_edtPw);
         btnLogin = (Button) findViewById(R.id.login_btnLogin);
@@ -58,16 +57,6 @@ public class LoginActivity extends Activity{
 
         //자동로그인 저장된 데이터가 있을 시 로그인
         autoLoginLoad();
-
-        //회원가입, 비밀번호 찾기 밑줄
-        /*SpannableString spanSignup = new SpannableString("회원가입");
-        spanSignup.setSpan(new UnderlineSpan(), 0, spanSignup.length(), 0);
-        tvLinktoSignup.setText(spanSignup);
-        SpannableString spanFindpw = new SpannableString("비밀번호 찾기");
-        spanFindpw.setSpan(new UnderlineSpan(), 0, spanFindpw.length(), 0);
-        tvLinktoFindPw.setText(spanFindpw);*/
-
-
 
         //로그인 버튼 클릭했을 때
         btnLogin.setOnClickListener(new View.OnClickListener() {

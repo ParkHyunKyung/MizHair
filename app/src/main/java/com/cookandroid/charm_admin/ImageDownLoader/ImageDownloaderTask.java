@@ -104,7 +104,7 @@ public class ImageDownloaderTask extends AsyncTask<String, Void, Bitmap>
 					inputStream = entity.getContent();
 					final Bitmap bitmap = BitmapFactory.decodeStream(new FlushedInputStream(inputStream));
 					//final Bitmap bitmap = BitmapFactory.decodeStream(new FlushedInputStream(inputStream), null, options);
-					return getCircleBitmap(bitmap);
+					return setSizeBitmap(bitmap);
 				}
 				finally
 				{
@@ -154,31 +154,65 @@ public class ImageDownloaderTask extends AsyncTask<String, Void, Bitmap>
 			return totalBytesSkipped;
 		}
 	}
+	public static Bitmap setSizeBitmap(Bitmap bitmap){
+		Bitmap result;
+		if(bitmap.getWidth()>bitmap.getHeight()){
+			result = Bitmap.createBitmap(bitmap
+					, (bitmap.getWidth()-bitmap.getHeight()) / 2 //X 시작위치
+					, 0 //Y 시작위치
+					, bitmap.getHeight() // 넓이
+					, bitmap.getHeight()); // 높이
+		}else{
+			result = Bitmap.createBitmap(bitmap
+					, 0 //X 시작위치
+					, (bitmap.getHeight()-bitmap.getWidth()) / 2  //Y 시작위치
+					, bitmap.getWidth() // 넓이
+					, bitmap.getWidth()); // 높이
+		}
+
+		if (result != bitmap) {
+			bitmap.recycle();
+		}
+
+		return resizeBitmap(result);
+	}
+
+	static public Bitmap resizeBitmap(Bitmap original) {
+
+		int resizeWidth = 700;
+
+		double aspectRatio = (double) original.getHeight() / (double) original.getWidth();
+		int targetHeight = (int) (resizeWidth * aspectRatio);
+		Bitmap result = Bitmap.createScaledBitmap(original, resizeWidth, targetHeight, false);
+		if (result != original) {
+			original.recycle();
+		}
+		return getCircleBitmap(result);
+	}
+
 	public static Bitmap getCircleBitmap(Bitmap bitmap) {
 		Bitmap output = Bitmap.createBitmap(bitmap.getWidth(), bitmap.getHeight(), Bitmap.Config.ARGB_8888);
-		Bitmap resized = null;
-		resized = Bitmap.createScaledBitmap(bitmap, bitmap.getWidth()*700/bitmap.getHeight(), 700, true);
 		Canvas canvas = new Canvas(output);
 		final int color = 0xff424242;
 		final Paint paint = new Paint();
-		Rect rect = new Rect(0, 0, resized.getWidth(), resized.getHeight());
+		Rect rect = new Rect(0, 0, bitmap.getWidth(), bitmap.getHeight());
 		if(bitmap.getWidth()<bitmap.getHeight()){
-			rect = new Rect(0, 0, resized.getWidth(), resized.getHeight());
+			rect = new Rect(0, 0, bitmap.getWidth(), bitmap.getHeight());
 		}else {
-			rect = new Rect(0, 0, resized.getHeight(), resized.getWidth());
+			rect = new Rect(0, 0, bitmap.getHeight(), bitmap.getWidth());
 		}
 		paint.setAntiAlias(true);
 		canvas.drawARGB(0, 0, 0, 0);
 		paint.setColor(color);
-		int size = (resized.getWidth()/2);
-		if(resized.getWidth()<resized.getHeight()){
-			size = (resized.getWidth()/2);
+		int size = (bitmap.getWidth()/2);
+		if(bitmap.getWidth()<bitmap.getHeight()){
+			size = (bitmap.getWidth()/2);
 		}else {
-			size = (resized.getHeight()/2);
+			size = (bitmap.getHeight()/2);
 		}
 		canvas.drawCircle(size, size, size, paint);
 		paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
-		canvas.drawBitmap(resized, rect, rect, paint);
+		canvas.drawBitmap(bitmap, rect, rect, paint);
 		return output;
 	}
 }

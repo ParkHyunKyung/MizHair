@@ -26,7 +26,7 @@
 
         <activity android:name=".Main.MainActivity" android:label="MainActivity"/>
         <activity android:name=".User.LoginActivity" android:label="LoginActivity"/>
-        <activity android:name=".User.JoinActivity" android:label="JoinActivity"/>
+        <activity android:name=".User.JoinActivity" android:label="JoinActivity" android:windowSoftInputMode="adjustPan"/>
         <activity android:name=".CustomerManagement.ContactsListActivity" android:label="ContactListActivity" android:windowSoftInputMode="adjustPan"/>
         <activity android:name=".CustomerManagement.CustomerActivity" android:label="CustomerActivity"/>
         <activity android:name=".Notice.NoticeActivity" android:label="NoticeActivity"/>

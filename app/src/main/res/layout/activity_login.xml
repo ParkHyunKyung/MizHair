@@ -14,17 +14,12 @@
         android:layout_marginBottom="40dp"
         android:layout_marginRight="35dp"
         android:layout_marginLeft="35dp">
-        <TextView
-            android:id="@+id/login_txtLogo"
-            android:layout_width="wrap_content"
-            android:layout_height="34pt"
-            android:layout_marginTop="30pt"
-            android:layout_marginBottom="25pt"
-            android:textSize="30pt"
-            android:textColor="#a259ff"
+        <ImageView
+            android:layout_margin="10dp"
             android:layout_gravity="center"
-            android:text="미즈헤어 로그인"
-            />
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@drawable/logo"/>
 
         <EditText
             android:id="@+id/login_edtId"

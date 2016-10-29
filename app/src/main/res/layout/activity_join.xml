@@ -2,52 +2,63 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#efefef"
     android:orientation="vertical"
-    android:layout_marginTop="10dp"
-    android:layout_marginBottom="10dp"
-    android:layout_marginRight="10dp"
-    android:layout_marginLeft="10dp"
     >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="50pt"
+            android:background="@drawable/actionbar"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_marginTop="10pt"
+            android:layout_height="30pt"
+            android:textColor="#ffffff"
+            android:textSize="25pt"
+            android:gravity="center"
+            android:text="회원가입"/>
+    </RelativeLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center"
         android:orientation="vertical">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
-            android:gravity="center"
-            android:text="회원가입"
-            android:textSize="25dp" />
 
         <EditText
             android:id="@+id/join_edtId"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginBottom="5dp"
-            android:layout_marginTop="5dp"
+            android:layout_width="200pt"
+            android:layout_height="wrap_content"
+            android:textSize="16pt"
+            android:layout_marginTop="8pt"
+            android:background="@drawable/edit_text"
             android:hint="아이디"
             android:maxLines="1"
             android:singleLine="true" />
 
         <EditText
             android:id="@+id/join_edtName"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginBottom="5dp"
-            android:layout_marginTop="5dp"
+            android:layout_width="200pt"
+            android:layout_height="wrap_content"
+            android:textSize="16pt"
+            android:layout_marginTop="8pt"
+            android:background="@drawable/edit_text"
             android:hint="이름"
             android:maxLines="1"
             android:singleLine="true" />
 
         <EditText
             android:id="@+id/join_edtPhone"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginBottom="5dp"
-            android:layout_marginTop="5dp"
+            android:layout_width="200pt"
+            android:layout_height="wrap_content"
+            android:textSize="16pt"
+            android:layout_marginTop="8pt"
+            android:background="@drawable/edit_text"
             android:hint="연락처"
             android:maxLines="1"
             android:singleLine="true" />
@@ -58,66 +69,89 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             >
+
             <RadioButton
                 android:id="@+id/join_radioWoman"
-                android:layout_width="wrap_content"
+                android:layout_width="70pt"
                 android:layout_height="wrap_content"
-                android:checked="true"
+                android:textSize="16pt"
+                android:layout_marginTop="8pt"
+                android:checked="false"
                 android:text="여성"/>
 
             <RadioButton
                 android:id="@+id/join_radioMan"
-                android:layout_width="wrap_content"
+                android:layout_width="70pt"
                 android:layout_height="wrap_content"
-                android:checked="true"
+                android:textSize="16pt"
+                android:layout_marginTop="8pt"
+                android:checked="false"
                 android:text="남성"/>
 
         </RadioGroup>
 
         <EditText
             android:id="@+id/join_edtPassword"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginBottom="5dp"
-            android:layout_marginTop="5dp"
+            android:layout_width="200pt"
+            android:layout_height="wrap_content"
+            android:textSize="16pt"
+            android:layout_marginTop="8pt"
+            android:background="@drawable/edit_text"
             android:hint="비밀번호"
             android:inputType="textPassword"
             android:maxLines="1"
             android:singleLine="true" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <EditText
+            android:id="@+id/join_edtPasswordCheck"
+            android:layout_width="200pt"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:textSize="16pt"
+            android:layout_marginTop="8pt"
+            android:layout_marginBottom="10pt"
+            android:background="@drawable/edit_text"
+            android:hint="비밀번호 확인"
+            android:imeOptions="actionUnspecified"
+            android:inputType="textPassword"
+            />
 
-            <EditText
-                android:id="@+id/join_edtPasswordCheck"
+        <CheckBox
+            android:id="@+id/join_checkboxPrivacy"
+            android:layout_width="250pt"
+            android:layout_height="wrap_content"
+            android:text="개인정보 수집 및 이용동의"/>
+        <ScrollView
+            android:layout_width="250pt"
+            android:layout_height="50pt"
+            android:background="#ffffff">
+            <TextView
+                android:id="@+id/join_txtPrivacy"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_weight="3"
-                android:layout_marginBottom="5dp"
-                android:layout_marginTop="5dp"
-                android:hint="비밀번호 확인"
-                android:imeOptions="actionUnspecified"
-                android:inputType="textPassword" />
-
-        </LinearLayout>
+                android:layout_height="match_parent"
+                />
+        </ScrollView>
 
         <Button
             android:id="@+id/join_btnOK"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:text="회원가입"
-            android:textSize="18dp"
-            android:textColor="@android:color/white" />
+            android:layout_width="250pt"
+            android:layout_height="40pt"
+            android:layout_margin="10pt"
+            android:layout_gravity="center"
+            android:text="가입하기"
+            android:textSize="20pt"
+            android:background="#a259ff"
+            android:textColor="#ffffff"/>
 
         <Button
             android:id="@+id/join_btnCancel"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="250pt"
+            android:layout_height="40pt"
+            android:layout_margin="10pt"
+            android:layout_gravity="center"
             android:text="취소"
-            android:textSize="18dp"/>
+            android:textSize="20pt"
+            android:background="#ff7d9f"
+            android:textColor="#ffffff"/>
 
     </LinearLayout>
 </LinearLayout>
