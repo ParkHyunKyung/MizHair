@@ -158,7 +158,7 @@ public class ReservationTimeActivity extends Activity {
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
-        String LoginServer = "http://118.36.3.200/availableTime.php?";
+        String LoginServer = "http://mizhair.ga/availableTime.php?";
         LoginServer += "ReserveDate";
         LoginServer += ReserveDate;
         LoginServer += "&StNum";

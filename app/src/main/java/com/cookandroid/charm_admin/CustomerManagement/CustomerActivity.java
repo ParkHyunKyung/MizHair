@@ -92,7 +92,7 @@ public class CustomerActivity extends Activity{
     }
 
     private void connection(String UserNum,String UserName,String UserPhone,String UserGender) {
-        String LoginServer = "http://118.36.3.200/updateUser.php?";
+        String LoginServer = "http://mizhair.ga/updateUser.php?";
         LoginServer += "UserNum=";
         LoginServer += UserNum;
         LoginServer += "&UserName=";
@@ -102,7 +102,6 @@ public class CustomerActivity extends Activity{
         LoginServer += "&UserGender=";
         LoginServer += UserGender;
 
-        Toast.makeText(getApplicationContext(),"서버",Toast.LENGTH_SHORT).show();
         URLConnector task = new URLConnector(LoginServer);
         task.start();
 
@@ -112,10 +111,10 @@ public class CustomerActivity extends Activity{
             JSONObject state = new JSONObject(result);
 
             if (state.getString("STATE").equals("1")) {
-                Toast.makeText(getApplicationContext(), "1", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getApplicationContext(), "1", Toast.LENGTH_SHORT).show();
                 return;
             } else if (state.getString("STATE").equals("0")) {
-                Toast.makeText(getApplicationContext(), "0", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getApplicationContext(), "0", Toast.LENGTH_SHORT).show();
                 finish();
                 return;
             }

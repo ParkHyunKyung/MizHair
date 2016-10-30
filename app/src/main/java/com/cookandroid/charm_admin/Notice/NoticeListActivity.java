@@ -88,7 +88,7 @@ public class NoticeListActivity extends Activity {
 
     private void connection() {
 
-        String LoginServer = "http://118.36.3.200/notice.php";
+        String LoginServer = "http://mizhair.ga/notice.php";
         URLConnector task = new URLConnector(LoginServer);
         task.start();
 

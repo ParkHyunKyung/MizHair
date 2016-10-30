@@ -198,7 +198,7 @@ public class ReservationActivity extends Activity {
 
     private void connection(String styleName,ReservationItemListAdapter adapter) {
 
-        String LoginServer = "http://118.36.3.200/menu.php";
+        String LoginServer = "http://mizhair.ga/menu.php";
         URLConnector task = new URLConnector(LoginServer);
         task.start();
 

@@ -258,7 +258,7 @@ public class JoinActivity extends Activity {
 
     private void signUp(String name,String phone,String gender, String id, String pw) {
         try {
-            String SingupServer = "http://118.36.3.200/SignUp.php?";
+            String SingupServer = "http://mizhair.ga/SignUp.php?";
             name = URLEncoder.encode(name, "UTF-8");
             id = URLEncoder.encode(id, "UTF-8");
             pw = URLEncoder.encode(pw, "UTF-8");

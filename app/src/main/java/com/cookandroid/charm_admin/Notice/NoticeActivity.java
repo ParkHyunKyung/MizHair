@@ -60,10 +60,10 @@ public class NoticeActivity extends Activity {
             public void onClick(View view) {
 
                 if(btnModify.getText().toString().equals("수정")){
-                    Toast.makeText(getApplicationContext(),"수정",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(),"수정되었습니다",Toast.LENGTH_SHORT).show();
                     modifyInServer(notice_title.getText().toString(),notice_content.getText().toString(),num);
                 }else if(btnModify.getText().toString().equals("저장")){
-                    Toast.makeText(getApplicationContext(),"저장",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(),"저장되었습니다",Toast.LENGTH_SHORT).show();
                     insertInServer(notice_title.getText().toString(),notice_content.getText().toString());
                 }
                 finish();
@@ -95,8 +95,6 @@ public class NoticeActivity extends Activity {
             task.join();
             String result = task.getResult();
 
-                Toast.makeText(getApplicationContext(),"3"+result.toString(),Toast.LENGTH_SHORT).show();
-
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -118,7 +116,6 @@ public class NoticeActivity extends Activity {
         try {
             task.join();
             String result = task.getResult();
-            Toast.makeText(getApplicationContext(),"1"+result.toString(),Toast.LENGTH_SHORT).show();
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -132,7 +129,7 @@ public class NoticeActivity extends Activity {
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
-        String LoginServer = "http://118.36.3.200/changeNotice.php?NoticeChange=0&NoticeTitle="+title+"&NoticeComment="+comment;
+        String LoginServer = "http://mizhair.ga/changeNotice.php?NoticeChange=0&NoticeTitle="+title+"&NoticeComment="+comment;
 
         URLConnector task = new URLConnector(LoginServer);
         task.start();
@@ -140,8 +137,6 @@ public class NoticeActivity extends Activity {
         try {
             task.join();
             String result = task.getResult();
-
-            Toast.makeText(getApplicationContext(),"6"+result.toString(),Toast.LENGTH_SHORT).show();
 
         } catch (Exception e) {
             e.printStackTrace();

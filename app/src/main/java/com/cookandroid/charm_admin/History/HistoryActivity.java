@@ -81,7 +81,7 @@ public class HistoryActivity extends Activity {
     {
         final ImageView imageView[] = new ImageView[Integer.parseInt(HisCount)];
         try {
-            String ImageDateServer = "http://118.36.3.200/imgInfo.php?UserNum=";
+            String ImageDateServer = "http://mizhair.ga/imgInfo.php?UserNum=";
             ImageDateServer += UserNum;
             UserNum = URLEncoder.encode(UserNum, "UTF-8");
             URLConnector task = new URLConnector(ImageDateServer);

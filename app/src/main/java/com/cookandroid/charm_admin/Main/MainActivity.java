@@ -23,6 +23,7 @@ import com.cookandroid.charm_admin.Server.URLConnector;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.threeten.bp.LocalDate;
 
 import java.net.URLEncoder;
 
@@ -35,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
     private String UserId,UserPass,UserName,UserPhone,UserNum,UserGender,HisCount;
     private TextView txtReservation, txtNotice, txtPricelist, txtCustomerlist,txtReservationlist,txtSetting,
             txtReservationCount,txtTime,txtStyle;
+    private String Date = LocalDate.now().toString();
 
 
     @Override
@@ -48,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
         btnPricelist = (ImageView)findViewById(R.id.main_btnPricelist);
         btnCustomerlist = (ImageView)findViewById(R.id.main_btnCustomerlist);
         btnSetting = (ImageView)findViewById(R.id.main_btnSetting);
-        btnHistory = (ImageView)findViewById(R.id.main_btnHistory);
+        /*btnHistory = (ImageView)findViewById(R.id.main_btnHistory);*/
 
         txtReservation = (TextView) findViewById(R.id.main_txtReservation);
         txtReservationlist = (TextView)findViewById(R.id.main_txtReservationlist);
@@ -116,15 +118,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-
                 Intent etcIntent = new Intent(getApplicationContext(), EtcActivity.class);
                 startActivity(etcIntent);
 
             }
         });
 
-        searchTodayRservation("20161022");
-        btnHistory.setOnClickListener(new View.OnClickListener() {
+        searchTodayRservation(Date.substring(0,4)+Date.substring(5,7)+Date.substring(8,10));
+        /*btnHistory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent historyIntent = new Intent(getApplicationContext(), HistoryActivity.class);
@@ -133,7 +134,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(historyIntent);
             }
         });
-
+*/
     }
 /*
 
@@ -180,13 +181,13 @@ public class MainActivity extends AppCompatActivity {
         String date = dateArray[0]+dateArray[1]+dateArray[2];*/
 
         try {
-            String SingupServer = "http://118.36.3.200/showReservation.php?";
+            String SingupServer = "http://mizhair.ga/showReservation.php?";
             date = URLEncoder.encode(date, "UTF-8");
             SingupServer += "ReserveDate="; // 10월20일 = 20161020
             SingupServer += date;
             URLConnector task = new URLConnector(SingupServer);
             task.start();
-            Toast.makeText(getApplicationContext(),date,Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getApplicationContext(),date,Toast.LENGTH_SHORT).show();
             task.join();
             String result = task.getResult();
             JSONArray var = new JSONArray(result);

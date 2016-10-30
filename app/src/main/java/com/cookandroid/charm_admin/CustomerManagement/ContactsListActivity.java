@@ -197,7 +197,7 @@ public class ContactsListActivity extends ListActivity {
 
 	private void connection(List<CustomerAdapter> contactsList) {
 
-		String LoginServer = "http://118.36.3.200/showUsers.php?Pass=12345";
+		String LoginServer = "http://mizhair.ga/showUsers.php?Pass=12345";
 		URLConnector task = new URLConnector(LoginServer);
 		task.start();
 

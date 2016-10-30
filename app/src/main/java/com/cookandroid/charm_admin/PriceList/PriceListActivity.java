@@ -105,7 +105,7 @@ public class PriceListActivity extends AppCompatActivity {
                 String price = edtPrice.getText().toString();
                 String time = edtTime.getText().toString();
 
-                Toast.makeText(getApplicationContext(),"추가",Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getApplicationContext(),"추가",Toast.LENGTH_SHORT).show();
                 if(name.equals("")||price.equals("")||time.equals("")){
                     Toast.makeText(getApplicationContext(),"모두 입력해주세요",Toast.LENGTH_SHORT).show();
                 }else {
@@ -153,7 +153,7 @@ public class PriceListActivity extends AppCompatActivity {
                 String price = edtPrice.getText().toString();
                 String time = edtTime.getText().toString();
 
-                Toast.makeText(getApplicationContext(),"삭제",Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getApplicationContext(),"삭제",Toast.LENGTH_SHORT).show();
                 if(name.equals("")||price.equals("")||time.equals("")){
                     Toast.makeText(getApplicationContext(),"모두 입력해주세요",Toast.LENGTH_SHORT).show();
                 }else {
@@ -188,7 +188,7 @@ public class PriceListActivity extends AppCompatActivity {
                         setListViewHeightBasedOnChildren(listClinic, adapterClinic);
 
                     } else {
-                        Toast.makeText(getApplicationContext(), "없는 정보입니다 실패", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "없는 정보입니다", Toast.LENGTH_SHORT).show();
                     }
                 }
             }
@@ -388,7 +388,7 @@ public class PriceListActivity extends AppCompatActivity {
             task.join();
             String result = task.getResult();
 
-            Toast.makeText(getApplicationContext(),result.toString(),Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getApplicationContext(),result.toString(),Toast.LENGTH_SHORT).show();
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -418,7 +418,7 @@ public class PriceListActivity extends AppCompatActivity {
 
     private void deleteInServer(String StCategory, String StName,String StPrice,String StTime ) {
 
-        String LoginServer = "http://118.36.3.200/changeMenu.php?";
+        String LoginServer = "http://mizhair.ga/changeMenu.php?";
         LoginServer += "&StName="+StName;
         URLConnector task = new URLConnector(LoginServer);
         task.start();

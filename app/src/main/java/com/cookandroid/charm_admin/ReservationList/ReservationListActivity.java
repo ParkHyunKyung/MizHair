@@ -76,7 +76,7 @@ public class ReservationListActivity extends Activity{
         reservationlist.setAdapter(adapter);  // 리스트 뷰에 adapter 를 등록한다
 
         try {
-            String SingupServer = "http://118.36.3.200/showReservation.php?";
+            String SingupServer = "http://mizhair.ga/showReservation.php?";
             date = URLEncoder.encode(date, "UTF-8");
             SingupServer += "ReserveDate="; // 10월20일 = 20161020
             SingupServer += date;

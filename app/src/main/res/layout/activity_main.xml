@@ -161,7 +161,7 @@
             android:layout_width="90pt"
             android:layout_height="90pt"
             android:background="@drawable/icn_setting"
-            android:text="환경설정"/>
+            android:text="기타사항"/>
 
     </LinearLayout>
 
@@ -192,7 +192,7 @@
             android:text="환경설정"/>
     </LinearLayout>
 
-    <LinearLayout
+    <!--<LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
         <ImageView
@@ -200,6 +200,6 @@
             android:layout_width="90pt"
             android:layout_height="90pt"
             android:background="@drawable/icn_consumercopy"/>
-    </LinearLayout>
+    </LinearLayout>-->
 
 </LinearLayout>

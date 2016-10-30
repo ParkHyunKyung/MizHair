@@ -48,7 +48,7 @@ public class ReservationCheckActivity extends Activity{
         edt_Memo = (EditText) findViewById(R.id.edt_reservationCheckMemo);
         reservationOK = (Button)findViewById(R.id.btn_reservatioinOK);
 
-        Toast.makeText(getApplicationContext(),Item.toString(),Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getApplicationContext(),Item.toString(),Toast.LENGTH_SHORT).show();
 
 
         txt_Name.setText(UserName);
@@ -72,7 +72,7 @@ public class ReservationCheckActivity extends Activity{
 
         //5개의 값(ReserveDate ReserveTime ReserveMemo UserNum StNum)
         try {
-            String SingupServer = "http://118.36.3.200/reservation.php?";
+            String SingupServer = "http://mizhair.ga/reservation.php?";
             UserNum = URLEncoder.encode(UserNum, "UTF-8");
             StNum = URLEncoder.encode(StNum, "UTF-8");
             ReserveDate = URLEncoder.encode(ReserveDate, "UTF-8");
@@ -95,10 +95,10 @@ public class ReservationCheckActivity extends Activity{
             String result = task.getResult();
             JSONObject state = new JSONObject(result);
             if (state.getString("STATE").equals("1")) {
-                Toast.makeText(getApplicationContext(), "1.", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getApplicationContext(), "1.", Toast.LENGTH_SHORT).show();
                 return;
             } else if (state.getString("STATE").equals("0")) {
-                Toast.makeText(getApplicationContext(), "0", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getApplicationContext(), "0", Toast.LENGTH_SHORT).show();
                 finish();
                 return;
             }

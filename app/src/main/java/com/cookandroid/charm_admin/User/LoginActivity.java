@@ -92,7 +92,7 @@ public class LoginActivity extends Activity{
 
     private boolean isLoginCheck(String id, String pw) {
 
-        String LoginServer = "http://118.36.3.200/Login.php?UserID=";
+        String LoginServer = "http://mizhair.ga/Login.php?UserID=";
         LoginServer += id;
         LoginServer += "&UserPass=";
         LoginServer += pw;
@@ -104,7 +104,7 @@ public class LoginActivity extends Activity{
             String result = task.getResult();
             JSONObject state = new JSONObject(result);
 
-            Toast.makeText(getApplicationContext(), state.getString("State"), Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getApplicationContext(), state.getString("State"), Toast.LENGTH_SHORT).show();
             if (state.getString("State").equals("0")) {
                 return false;
             } else {

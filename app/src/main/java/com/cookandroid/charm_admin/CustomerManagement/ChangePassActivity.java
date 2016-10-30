@@ -48,7 +48,7 @@ public class ChangePassActivity extends Activity {
     }
 
     private void connection(String UserNum,String UserPass) {
-        String LoginServer = "http://118.36.3.200/passChange.php?";
+        String LoginServer = "http://mizhair.ga/passChange.php?";
         LoginServer += "UserNum=";
         LoginServer += UserNum;
         LoginServer += "&UserPass=";
@@ -63,10 +63,10 @@ public class ChangePassActivity extends Activity {
             JSONObject state = new JSONObject(result);
 
             if (state.getString("STATE").equals("1")) {
-                Toast.makeText(getApplicationContext(), "1", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getApplicationContext(), "1", Toast.LENGTH_SHORT).show();
                 return;
             } else if (state.getString("STATE").equals("0")) {
-                Toast.makeText(getApplicationContext(), "0", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getApplicationContext(), "0", Toast.LENGTH_SHORT).show();
                 finish();
                 return;
             }
