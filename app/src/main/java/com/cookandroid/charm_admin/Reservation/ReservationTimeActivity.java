@@ -159,9 +159,9 @@ public class ReservationTimeActivity extends Activity {
             e.printStackTrace();
         }
         String LoginServer = "http://mizhair.ga/availableTime.php?";
-        LoginServer += "ReserveDate";
+        LoginServer += "ReserveDate=";
         LoginServer += ReserveDate;
-        LoginServer += "&StNum";
+        LoginServer += "&StNum=";
         LoginServer += StNum;
 
         URLConnector task = new URLConnector(LoginServer);
