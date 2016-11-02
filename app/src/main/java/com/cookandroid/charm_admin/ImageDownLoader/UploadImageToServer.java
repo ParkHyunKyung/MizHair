@@ -27,13 +27,14 @@ public class UploadImageToServer extends AsyncTask<String, String, String> {
     String lineEnd = "\r\n";
     String twoHyphens = "--";
     String boundary = "*****";
+    String UserID;
     int bytesRead, bytesAvailable, bufferSize, user_num;
     byte[] buffer;
     int maxBufferSize = 1 * 10240 * 10240;
     File sourceFile;
 
-    public UploadImageToServer(String sourceFileUri, int user_num) {
-        this.user_num = user_num;
+    public UploadImageToServer(String sourceFileUri, String UserID) {
+        this.UserID = UserID;
         fileName = sourceFileUri;
         sourceFile = new File(sourceFileUri);
     }
@@ -47,8 +48,8 @@ public class UploadImageToServer extends AsyncTask<String, String, String> {
             try {
                 // open a URL connection to the Servlet
                 FileInputStream fileInputStream = new FileInputStream(sourceFile);
-                String strurl = "http://118.36.3.200/main/UserImg.php?USER_NUM=";
-                strurl += user_num;
+                String strurl = "http://mizhair.ga/ImgUpload.php?UserID=";
+                strurl += UserID;
                 Log.i(TAGLOG, strurl);
                 URL url = new URL(strurl);
 

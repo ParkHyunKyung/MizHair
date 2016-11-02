@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
         btnPricelist = (ImageView)findViewById(R.id.main_btnPricelist);
         btnCustomerlist = (ImageView)findViewById(R.id.main_btnCustomerlist);
         btnSetting = (ImageView)findViewById(R.id.main_btnSetting);
-        /*btnHistory = (ImageView)findViewById(R.id.main_btnHistory);*/
+        btnHistory = (ImageView)findViewById(R.id.main_btnHistory);
 
         txtReservation = (TextView) findViewById(R.id.main_txtReservation);
         txtReservationlist = (TextView)findViewById(R.id.main_txtReservationlist);
@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
         txtReservationCount = (TextView)findViewById(R.id.main_txtReservationCount);
         txtTime = (TextView)findViewById(R.id.main_txtTime);
         txtStyle = (TextView)findViewById(R.id.main_txtStyle);
-        //txtHistory = (TextView)findViewById(R.id.main_btnHistory);
+/*        txtHistory = (TextView)findViewById(R.id.main_btnHistory);*/
 
         UserId = getIntent().getStringExtra("LoginId");
         UserPass = getIntent().getStringExtra("LoginPass");
@@ -125,7 +125,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         searchTodayRservation(Date.substring(0,4)+Date.substring(5,7)+Date.substring(8,10));
-        /*btnHistory.setOnClickListener(new View.OnClickListener() {
+        btnHistory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent historyIntent = new Intent(getApplicationContext(), HistoryActivity.class);
@@ -134,7 +134,6 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(historyIntent);
             }
         });
-*/
     }
 /*
 

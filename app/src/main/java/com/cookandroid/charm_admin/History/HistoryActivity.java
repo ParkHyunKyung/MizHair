@@ -3,12 +3,14 @@ package com.cookandroid.charm_admin.History;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
@@ -43,10 +45,16 @@ import java.net.URLEncoder;
  * Created by HP on 2016-10-15.
  */
 public class HistoryActivity extends Activity {
+    static final int EDIT_PASSWORD = 0;
+    static final int PICK_FROM_CAMERA = 1;
+    static final int PICK_FROM_GALLERY = 2;
+    static final int CROP_FROM_CAMERA = 3;
     private LinearLayout layout;
     private String HisCount,UserId,UserNum,ImageDate;
+    private Bitmap bitmapEditPhoto;
     private ImageView AddImage;
     private Uri mImageUri;
+    private File photo;
     private UploadImageToServer uploadImageToServer;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,9 +71,8 @@ public class HistoryActivity extends Activity {
         AddImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent GalleryIntent = new Intent(Intent.ACTION_PICK);
-                GalleryIntent.setType(MediaStore.Images.Media.CONTENT_TYPE);
-                startActivityForResult(GalleryIntent,0);
+                Intent GalleryIntent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                startActivityForResult(GalleryIntent,PICK_FROM_GALLERY);
 
             }
         });
@@ -75,7 +82,7 @@ public class HistoryActivity extends Activity {
             imageDownLoad(UserId,HisCount);
         }*/
 
-        imageDownLoad("ninehundred","5","2");
+        imageDownLoad("ninehundred","6","2");
     }
     public void imageDownLoad(String UserId, String HisCount,String UserNum)
     {
@@ -94,7 +101,7 @@ public class HistoryActivity extends Activity {
             for (int i=0;i<date.length();i++){
 
                 //이미지 넣기
-                String URL = "http://118.36.3.200/Images/";
+                String URL = "http://mizhair.ga/Images/";
                 URL += UserId+"/";
                 URL += Integer.toString(i+1);
                 imageView[i] = new ImageView(this);
@@ -138,15 +145,120 @@ public class HistoryActivity extends Activity {
         }
 
         switch (requestCode) {
-
-            //앨범 가져오기
-            case 0: {
-                mImageUri = data.getData();
-                String uri = mImageUri.getPath();
-                uploadImageToServer = new UploadImageToServer(uri,2);
-                uploadImageToServer.execute();
+            case EDIT_PASSWORD: {
+                /*//새 비밀번호 받아오기
+                strEditPw = data.getStringExtra("newpassword");
+                //에디트텍스트에 출력
+                edtEditPw.setText(String.valueOf(strEditPw));*/
+                break;
             }
 
+            //앨범 가져오기
+            case PICK_FROM_GALLERY: {
+                mImageUri = data.getData();
+                Log.i("NR", mImageUri.getPath().toString());
+                Toast.makeText(getApplicationContext(),"Gallery",Toast.LENGTH_SHORT).show();
+                // 이후의 처리가 카메라 부분과 같아 break 없이 진행
+            }
+
+            //카메라에서 사진 가져오기
+            case PICK_FROM_CAMERA: {
+                photo = getImageFile(mImageUri);
+                Intent intent = new Intent("com.android.camera.action.CROP");
+                intent.setDataAndType(mImageUri, "image/*");
+                Toast.makeText(getApplicationContext(),mImageUri.getPath().toString(),Toast.LENGTH_SHORT).show();
+                //photo 경로추가 *수정
+                Toast.makeText(getApplicationContext(),"Camera",Toast.LENGTH_SHORT).show();
+                uploadImageToServer = new UploadImageToServer(photo.getPath(), "ninehundred");
+                Toast.makeText(getApplicationContext(),photo.getPath(),Toast.LENGTH_SHORT).show();
+                uploadImageToServer.execute();
+
+                //crop한 이미지를 저장할 때 크기 및 비율 조정
+                intent.putExtra("outputX", 120);
+                intent.putExtra("outputY", 120);
+                intent.putExtra("aspectX", 0);
+                intent.putExtra("aspectY", 0);
+
+                intent.putExtra("scale", true);
+                intent.putExtra("return-data", true);
+                startActivityForResult(intent, CROP_FROM_CAMERA);
+                break;
+            }
+
+            //crop완료 후 프로필 사진 설정
+            case CROP_FROM_CAMERA: {
+                final Bundle extras = data.getExtras();
+                if (extras != null) {
+                    bitmapEditPhoto = extras.getParcelable("data");
+                    String SDCARD = Environment.getExternalStorageDirectory().getPath();
+                    Toast.makeText(getApplicationContext(),"SDCARD:"+SDCARD,Toast.LENGTH_SHORT).show();
+                    String TEMP_FOLDER = SDCARD + File.separator + "MizHair" + File.separator;
+                    Toast.makeText(getApplicationContext(),"TEMP_FOLDER:"+TEMP_FOLDER,Toast.LENGTH_SHORT).show();
+                    saveBitmapToFileCache(bitmapEditPhoto, TEMP_FOLDER, "temp.jpg");
+                }
+            }
         }
+    }
+
+    // Bitmap to File
+    public  void saveBitmapToFileCache(Bitmap bitmap, String strFilePath,
+                                       String filename) {
+
+        File file = new File(strFilePath);
+        Log.i("NR", file.toString());
+
+        // If no folders
+        if (!file.exists()) {
+            file.mkdirs();
+        }
+
+        File fileCacheItem = new File(strFilePath +"/"+ filename);
+
+        OutputStream out = null;
+
+        try {
+            fileCacheItem.createNewFile();
+            out = new FileOutputStream(fileCacheItem);
+
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, out);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            //try {
+            //    out.close();
+            //} catch (IOException e) {
+            //    e.printStackTrace();
+            //}
+        }
+    }
+
+    /**
+     * 선택된 uri의 사진 Path를 가져온다.
+     * uri 가 null 경우 마지막에 저장된 사진을 가져온다.
+     *
+     * @param uri
+     * @return
+     */
+    private File getImageFile(Uri uri) {
+        String[] projection = {MediaStore.Images.Media.DATA};
+        if (uri == null) {
+            uri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
+        }
+
+        Cursor mCursor = getContentResolver().query(uri, projection, null, null,
+                MediaStore.Images.Media.DATE_MODIFIED + " desc");
+        if (mCursor == null || mCursor.getCount() < 1) {
+            return null; // no cursor or no record
+        }
+        int column_index = mCursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+        mCursor.moveToFirst();
+
+        String path = mCursor.getString(column_index);
+
+        if (mCursor != null) {
+            mCursor.close();
+        }
+
+        return new File(path);
     }
 }

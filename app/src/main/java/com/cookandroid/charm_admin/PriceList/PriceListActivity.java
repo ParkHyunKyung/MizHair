@@ -353,7 +353,7 @@ public class PriceListActivity extends AppCompatActivity {
 
     private void connection(String styleName,PriceListAdapter adapter) {
 
-        String LoginServer = "http://118.36.3.200/menu.php";
+        String LoginServer = "http://mizhair.ga/menu.php";
         URLConnector task = new URLConnector(LoginServer);
         task.start();
 
@@ -380,7 +380,7 @@ public class PriceListActivity extends AppCompatActivity {
 
     private void deleteInServer(String num) {
 
-        String LoginServer = "http://118.36.3.200/changeNotice.php?NoticeChange=1&NoticeNum="+num;
+        String LoginServer = "http://mizhair.ga/changeNotice.php?NoticeChange=1&NoticeNum="+num;
         URLConnector task = new URLConnector(LoginServer);
         task.start();
 
@@ -397,7 +397,7 @@ public class PriceListActivity extends AppCompatActivity {
 
     private void insertInServer(String StCategory, String StName,String StPrice,String StTime ) {
 
-        String LoginServer = "http://118.36.3.200/changeMenu.php?";
+        String LoginServer = "http://mizhair.ga/changeMenu.php?";
         LoginServer += "StCategory="+StCategory;
         LoginServer += "&StName="+StName;
         LoginServer += "&StPrice="+StPrice;
@@ -436,7 +436,7 @@ public class PriceListActivity extends AppCompatActivity {
 
     private void modifyInServer(String StCategory, String StName,String StPrice,String StTime ) {
 
-        String LoginServer = "http://118.36.3.200/changeMenu.php?";
+        String LoginServer = "http://mizhair.ga/changeMenu.php?";
         LoginServer += "StCategory="+StCategory;
         LoginServer += "&StName="+StName;
         LoginServer += "&StPrice="+StPrice;

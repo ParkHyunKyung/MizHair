@@ -87,7 +87,7 @@ public class NoticeActivity extends Activity {
             e.printStackTrace();
         }
 
-        String LoginServer = "http://118.36.3.200/changeNotice.php?NoticeChange=1&NoticeNum="+num;
+        String LoginServer = "http://mizhair.ga/changeNotice.php?NoticeChange=1&NoticeNum="+num;
         URLConnector task = new URLConnector(LoginServer);
         task.start();
 
@@ -109,7 +109,7 @@ public class NoticeActivity extends Activity {
             e.printStackTrace();
         }
 
-        String LoginServer = "http://118.36.3.200/changeNotice.php?NoticeChange=2&NoticeNum="+num+"&NoticeTitle="+title+"&NoticeComment="+comment;
+        String LoginServer = "http://mizhair.ga/changeNotice.php?NoticeChange=2&NoticeNum="+num+"&NoticeTitle="+title+"&NoticeComment="+comment;
         URLConnector task = new URLConnector(LoginServer);
         task.start();
 
