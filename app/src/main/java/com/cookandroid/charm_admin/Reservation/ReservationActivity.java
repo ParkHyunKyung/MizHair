@@ -6,11 +6,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import com.cookandroid.charm_admin.PriceList.PriceListAdapter;
-import com.cookandroid.charm_admin.PriceList.PriceListData;
+
 import com.cookandroid.charm_admin.R;
-import com.cookandroid.charm_admin.ReservationList.ReservationAdapter;
-import com.cookandroid.charm_admin.ReservationList.ReservationData;
 import com.cookandroid.charm_admin.Server.URLConnector;
 
 import org.json.JSONArray;

@@ -23,6 +23,18 @@
             android:text="기타사항"/>
     </RelativeLayout>
 
+
+
+    <TextView
+        android:layout_gravity="center"
+        android:layout_margin="10pt"
+        android:id="@+id/etc_txtCustomerModify"
+        android:layout_width="300pt"
+        android:layout_height="60pt"
+        android:background="@drawable/notice_list"
+        android:textSize="20pt"
+        android:text="회원정보 수정"/>
+
     <TextView
         android:layout_gravity="center"
         android:layout_margin="10pt"
@@ -42,7 +54,5 @@
         android:background="@drawable/notice_list"
         android:textSize="20pt"
         android:text="로그아웃"/>
-
-
 
 </LinearLayout>

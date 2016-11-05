@@ -1,12 +1,10 @@
 package com.cookandroid.charm_admin.Main;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -32,10 +30,10 @@ import java.net.URLEncoder;
  */
 public class MainActivity extends AppCompatActivity {
     private Intent reservationIntent;
-    private ImageView btnReservation, btnNotice, btnPricelist, btnCustomerlist,btnReservationlist,btnSetting,btnHistory;
+    private ImageView btnReservation, btnNotice, btnPricelist, btnCustomerlist,btnReservationlist,btnSetting;
     private String UserId,UserPass,UserName,UserPhone,UserNum,UserGender,HisCount;
     private TextView txtReservation, txtNotice, txtPricelist, txtCustomerlist,txtReservationlist,txtSetting,
-            txtReservationCount,txtTime,txtStyle;
+            txtReservationCount,txtTime,txtStyle,refresh;
     private String Date = LocalDate.now().toString();
 
 
@@ -50,7 +48,6 @@ public class MainActivity extends AppCompatActivity {
         btnPricelist = (ImageView)findViewById(R.id.main_btnPricelist);
         btnCustomerlist = (ImageView)findViewById(R.id.main_btnCustomerlist);
         btnSetting = (ImageView)findViewById(R.id.main_btnSetting);
-        btnHistory = (ImageView)findViewById(R.id.main_btnHistory);
 
         txtReservation = (TextView) findViewById(R.id.main_txtReservation);
         txtReservationlist = (TextView)findViewById(R.id.main_txtReservationlist);
@@ -61,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
         txtReservationCount = (TextView)findViewById(R.id.main_txtReservationCount);
         txtTime = (TextView)findViewById(R.id.main_txtTime);
         txtStyle = (TextView)findViewById(R.id.main_txtStyle);
-/*        txtHistory = (TextView)findViewById(R.id.main_btnHistory);*/
+        refresh = (TextView)findViewById(R.id.refresh);
 
         UserId = getIntent().getStringExtra("LoginId");
         UserPass = getIntent().getStringExtra("LoginPass");
@@ -71,6 +68,13 @@ public class MainActivity extends AppCompatActivity {
         UserGender = getIntent().getStringExtra("LoginGender");
         HisCount  = getIntent().getStringExtra("HisCount");
 
+        refresh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                isLoginCheck(UserId,UserPass);
+                searchTodayRservation(Date.substring(0,4)+Date.substring(5,7)+Date.substring(8,10));
+            }
+        });
         btnReservation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -119,21 +123,18 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 Intent etcIntent = new Intent(getApplicationContext(), EtcActivity.class);
+                etcIntent.putExtra("UserName",UserName);
+                etcIntent.putExtra("UserNum",UserNum);
+                etcIntent.putExtra("UserId",UserId);
+                etcIntent.putExtra("UserPass",UserPass);
+                etcIntent.putExtra("UserPhone",UserPhone);
+                etcIntent.putExtra("UserGender",UserGender);
                 startActivity(etcIntent);
 
             }
         });
 
         searchTodayRservation(Date.substring(0,4)+Date.substring(5,7)+Date.substring(8,10));
-        btnHistory.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent historyIntent = new Intent(getApplicationContext(), HistoryActivity.class);
-                historyIntent.putExtra("UserId",UserId);
-                historyIntent.putExtra("HisCount",HisCount);
-                startActivity(historyIntent);
-            }
-        });
     }
 /*
 
@@ -205,6 +206,42 @@ public class MainActivity extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
             return;
+        }
+    }
+
+    private boolean isLoginCheck(String id, String pw) {
+
+        String LoginServer = "http://mizhair.ga/Login.php?UserID=";
+        LoginServer += id;
+        LoginServer += "&UserPass=";
+        LoginServer += pw;
+        URLConnector task = new URLConnector(LoginServer);
+        task.start();
+
+        try {
+            task.join();
+            String result = task.getResult();
+            JSONObject state = new JSONObject(result);
+
+            //Toast.makeText(getApplicationContext(), state.getString("State"), Toast.LENGTH_SHORT).show();
+            if (state.getString("State").equals("0")) {
+                Toast.makeText(getApplicationContext(),"!",Toast.LENGTH_SHORT).show();
+                return false;
+            } else {
+                JSONObject info = new JSONObject(state.getString("Info"));
+                UserId = info.getString("UserID");
+                UserPass = info.getString("UserPass");
+                UserName = info.getString("UserName");
+                UserPhone = info.getString("UserPhone");
+                UserNum = info.getString("UserNum");
+                UserGender = info.getString("UserGender");
+                HisCount = info.getString("HisCount");
+                Toast.makeText(getApplicationContext(),HisCount+"!",Toast.LENGTH_SHORT).show();
+                return true;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
         }
     }
 }

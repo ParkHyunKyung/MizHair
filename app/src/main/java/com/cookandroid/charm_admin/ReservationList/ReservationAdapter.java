@@ -7,7 +7,6 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.cookandroid.charm_admin.Notice.NoticeListData;
 import com.cookandroid.charm_admin.R;
 
 import java.util.ArrayList;

@@ -8,15 +8,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.Toast;
 
 import com.cookandroid.charm_admin.R;
 import com.cookandroid.charm_admin.Server.URLConnector;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
-
-import java.util.List;
 
 /**
  * Created by HP on 2016-08-19.

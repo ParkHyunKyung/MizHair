@@ -1,19 +1,14 @@
 package com.cookandroid.charm_admin.History;
 
-import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Color;
-import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.support.v4.view.ViewPager;
-import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,18 +22,11 @@ import com.cookandroid.charm_admin.ImageDownLoader.UploadImageToServer;
 import com.cookandroid.charm_admin.R;
 import com.cookandroid.charm_admin.Server.URLConnector;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.InputStream;
 import java.io.OutputStream;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URI;
-import java.net.URL;
-import java.net.URLConnection;
 import java.net.URLEncoder;
 
 /**
@@ -261,4 +249,5 @@ public class HistoryActivity extends Activity {
 
         return new File(path);
     }
+
 }

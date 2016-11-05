@@ -45,6 +45,6 @@
         android:layout_margin="10pt"
         android:layout_width="300pt"
         android:layout_gravity="center"
-        android:layout_height="300pt"/>
+        android:layout_height="350pt"/>
 
 </LinearLayout>

@@ -42,6 +42,7 @@
         <activity android:name=".CustomerManagement.ChangePassActivity" android:label="ChangePassActivity"/>
         <activity android:name=".History.HistoryActivity" android:label="HistoryActivity"/>
         <activity android:name=".Etc.EtcActivity" android:label="EtcActivity"/>
+        <activity android:name=".Etc.PlaceActivity" android:label="PlaceActivity"/>
     </application>
 
 </manifest>

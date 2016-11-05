@@ -2,7 +2,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	android:layout_width="wrap_content"
 	android:layout_height="wrap_content"
-	android:gravity="center"
 	android:padding="3dip" android:orientation="horizontal">
 
 	<LinearLayout
@@ -23,7 +22,7 @@
 				android:textSize="15pt" />
 
 			<TextView
-				android:layout_width="wrap_content"
+				android:layout_width="370dp"
 				android:layout_height="20pt"
 				android:layout_marginTop="6pt"
 				android:id="@+id/tvPhoneNum"

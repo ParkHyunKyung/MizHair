@@ -21,7 +21,6 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.cookandroid.charm_admin.PriceList.PriceListAdapter;
 import com.cookandroid.charm_admin.R;
 import com.cookandroid.charm_admin.Server.URLConnector;
 

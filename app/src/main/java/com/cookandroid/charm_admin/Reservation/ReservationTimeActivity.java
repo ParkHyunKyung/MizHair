@@ -2,15 +2,11 @@ package com.cookandroid.charm_admin.Reservation;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
-import android.widget.TableLayout;
-import android.widget.TableRow;
 import android.widget.TextView;
-import android.widget.Toast;
+
 import com.cookandroid.charm_admin.R;
 import com.cookandroid.charm_admin.Server.URLConnector;
 
@@ -19,8 +15,6 @@ import org.threeten.bp.LocalDate;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
-
-import solar.blaz.date.week.WeekDatePicker;
 
 /**
  * Created by HP on 2016-09-21.

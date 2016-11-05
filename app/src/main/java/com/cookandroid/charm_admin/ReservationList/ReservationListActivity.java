@@ -1,21 +1,12 @@
 package com.cookandroid.charm_admin.ReservationList;
 
 import android.app.Activity;
-import android.app.ListActivity;
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.cookandroid.charm_admin.CustomerManagement.HangulUtils;
-import com.cookandroid.charm_admin.Notice.NoticeAdapter;
 import com.cookandroid.charm_admin.R;
 import com.cookandroid.charm_admin.Server.URLConnector;
 
@@ -24,8 +15,6 @@ import org.json.JSONObject;
 import org.threeten.bp.LocalDate;
 
 import java.net.URLEncoder;
-import java.util.ArrayList;
-import java.util.List;
 
 import solar.blaz.date.week.WeekDatePicker;
 

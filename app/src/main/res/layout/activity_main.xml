@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="#efefef"
-    tools:context=".Main.MainActivity"
+    tools:context="com.cookandroid.charm_admin.Main.MainActivity"
     android:weightSum="1">
 
     <RelativeLayout
@@ -24,12 +24,27 @@
             android:textColor="#ffffff"
             android:textSize="25pt"
             android:gravity="center"
+            android:id="@+id/textView"
             android:text="미즈헤어"/>
+
+        <TextView
+            android:id="@+id/refresh"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#ffffff"
+            android:textSize="20pt"
+            android:text="새로고침"
+            android:background="@drawable/whitelabel_text"
+            android:layout_alignTop="@+id/textView"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginRight="20dp"/>
     </RelativeLayout>
 
     <LinearLayout
         android:orientation="vertical"
         android:background="#FF7D9F"
+        android:layout_gravity="center"
         android:layout_marginTop="10pt"
         android:layout_width="330pt"
         android:layout_height="30pt">
@@ -47,6 +62,8 @@
     </LinearLayout>
 
     <ScrollView
+        android:layout_gravity="center"
+        android:background="#ffffff"
         android:layout_width="330pt"
         android:layout_height="80pt">
 
@@ -79,6 +96,7 @@
     </ScrollView>
 
     <LinearLayout
+        android:layout_gravity="center"
         android:layout_marginTop="20pt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
@@ -108,6 +126,7 @@
 
     </LinearLayout>
     <LinearLayout
+        android:layout_gravity="center"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10pt">
@@ -136,6 +155,7 @@
     </LinearLayout>
 
     <LinearLayout
+        android:layout_gravity="center"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
@@ -165,6 +185,7 @@
     </LinearLayout>
 
     <LinearLayout
+        android:layout_gravity="center"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
         <TextView
@@ -189,16 +210,6 @@
             android:layout_height="22pt"
             android:textSize="18pt"
             android:text="환경설정"/>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-        <ImageView
-            android:id="@+id/main_btnHistory"
-            android:layout_width="90pt"
-            android:layout_height="90pt"
-            android:background="@drawable/icn_consumercopy"/>
     </LinearLayout>
 
 </LinearLayout>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools" tools:context=".Main.MainActivity">
+    xmlns:tools="http://schemas.android.com/tools" tools:context="com.cookandroid.charm_admin.Main.MainActivity">
     <item android:id="@+id/action_button_right"
         android:icon="@drawable/return_back"
         android:title="액션버튼"

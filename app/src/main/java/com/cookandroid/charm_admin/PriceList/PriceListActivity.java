@@ -2,7 +2,6 @@ package com.cookandroid.charm_admin.PriceList;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -10,10 +9,8 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.cookandroid.charm_admin.R;
@@ -21,8 +18,6 @@ import com.cookandroid.charm_admin.Server.URLConnector;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
-
-import java.util.ArrayList;
 
 /**
  * Created by HK on 2016-07-07.

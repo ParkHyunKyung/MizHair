@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:background="#efefef"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="50pt"
+            android:background="@drawable/actionbar"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_marginTop="10pt"
+            android:layout_height="30pt"
+            android:textColor="#ffffff"
+            android:textSize="25pt"
+            android:gravity="center"
+            android:text="미즈헤어 매장정보"/>
+    </RelativeLayout>
+
+
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center">
+
+                <ImageView
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10pt"
+                    android:layout_width="300pt"
+                    android:layout_height="250pt"
+                    android:background="@drawable/mizhair_place"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10pt"
+                    android:layout_marginRight="10pt"
+                    android:layout_marginTop="10pt"
+                    android:text="위치 : 경기도 부천시 원종동"
+                    android:background="@drawable/place_text"
+                    />
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_marginLeft="10pt"
+                    android:layout_marginRight="10pt"
+                    android:layout_marginTop="5pt"
+                    android:background="@drawable/place_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="주변 버스정류장"
+                        />
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1pt"
+                        android:background="#d1d1d1"
+                        android:layout_marginTop="5pt"
+                        android:layout_marginBottom="5pt"
+                        android:layout_marginLeft="5pt"
+                        android:layout_marginRight="5pt"/>
+                    <TextView
+                        android:layout_gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="15pt"
+                        android:text="복지교회.여월성당 (13-311) | 복지교회.여월성당 (13-313) | 원종초등학교 (13-244) "/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_marginLeft="10pt"
+                    android:layout_marginRight="10pt"
+                    android:layout_marginTop="5pt"
+                    android:layout_marginBottom="10pt"
+                    android:background="@drawable/place_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="홈페이지"
+                        />
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1pt"
+                        android:background="#d1d1d1"
+                        android:layout_marginTop="5pt"
+                        android:layout_marginBottom="5pt"
+                        android:layout_marginLeft="5pt"
+                        android:layout_marginRight="5pt"/>
+                    <TextView
+                        android:id="@+id/place_txtHomePage"
+                        android:layout_gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="15pt"
+                        android:text="http://mizhair2016.modoo.at"/>
+                </LinearLayout>
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>
